@@ -1,0 +1,333 @@
+<!-- Panel 5: Instruções e Ajuda -->
+<div class="tab-panel" id="tab-instructions">
+  <div class="config-two-columns">
+    
+    <!-- Coluna da Esquerda: Navegação por Tópicos -->
+    <aside class="panel-section" style="padding: 1rem !important; height: fit-content; position: sticky; top: 1rem;">
+      <div class="panel-header" style="padding-bottom: 0.5rem !important; margin-bottom: 0.5rem;">
+        <h3>Tópicos</h3>
+      </div>
+      <div class="doc-menu" style="display: flex; flex-direction: column; gap: 0.4rem;">
+        <button type="button" class="doc-menu-btn active" data-target="section-intro" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-primary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Introdução ao Pulse
+        </button>
+        <button type="button" class="doc-menu-btn" data-target="section-bluesky" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Conectar ao Bluesky
+        </button>
+        <button type="button" class="doc-menu-btn" data-target="section-twitter" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Conectar ao X / Twitter
+        </button>
+        <button type="button" class="doc-menu-btn" data-target="section-ollama" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Setup do Ollama Local
+        </button>
+        <button type="button" class="doc-menu-btn" data-target="section-prompt-persona" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Persona e Diretrizes
+        </button>
+        <button type="button" class="doc-menu-btn" data-target="section-ia-practices" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Evitar Clichês de IA
+        </button>
+        <button type="button" class="doc-menu-btn" data-target="section-scheduler" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Fila e Agendamentos
+        </button>
+      </div>
+    </aside>
+
+    <!-- Coluna da Direita: Conteúdo da Documentação -->
+    <div class="doc-content-container" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      
+      <!-- Introdução -->
+      <section id="section-intro" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>O que é o Pulse?</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O <strong>Pulse</strong> é um agente editorial auto-hospedado de código aberto projetado especificamente para o <strong>Bluesky</strong>. Ele ajuda criadores, desenvolvedores e marcas a manterem uma presença ativa e consistente sem abrir mão do controle dos seus dados.
+          </p>
+          <p>
+            Diferente de ferramentas proprietárias SaaS, o Pulse roda localmente ou em sua própria infraestrutura virtual, oferecendo:
+          </p>
+          <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem;">
+            <li><strong>Geração local de ideias</strong> e posts usando IAs open-source rodando na sua própria máquina via Ollama.</li>
+            <li><strong>Banco de temas e ideias</strong> para organização de linhas editoriais.</li>
+            <li><strong>Fila de agendamento automático</strong> com inteligência de horários otimizados.</li>
+            <li><strong>Análise de qualidade server-side</strong> para filtrar excesso de linguagem artificial e otimizar o engajamento.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Bluesky -->
+      <section id="section-bluesky" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>Como Conectar ao Bluesky</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O Pulse usa as APIs oficiais do protocolo AT (ATProto) do Bluesky para interagir com o seu perfil. Para conectar sua conta de maneira segura, você deve utilizar uma <strong>Senha de Aplicativo (App Password)</strong>. Siga as instruções:
+          </p>
+          
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+            <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+              <span style="background: var(--color-accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; flex-shrink: 0; margin-top: 2px;">1</span>
+              <div>
+                <strong>Identifique seu Handle:</strong> O handle é o seu identificador público no Bluesky (ex: <code>@usuario.bsky.social</code> ou seu domínio personalizado se configurado, ex: <code>@seunome.com</code>).
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+              <span style="background: var(--color-accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; flex-shrink: 0; margin-top: 2px;">2</span>
+              <div>
+                <strong>Acesse as Configurações do Bluesky:</strong> Faça login no <a href="https://bsky.app" target="_blank" style="color: var(--color-accent); text-decoration: underline;">bsky.app</a>, clique em <strong>Configurações (Settings)</strong> no menu lateral e selecione <strong>Senhas de aplicativo (App passwords)</strong>.
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+              <span style="background: var(--color-accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; flex-shrink: 0; margin-top: 2px;">3</span>
+              <div>
+                <strong>Gere uma nova App Password:</strong> Clique em "Adicionar senha de aplicativo", defina um nome identificador (ex: <code>Pulse Social</code>) e conclua. Copie a senha gerada (formato <code>xxxx-xxxx-xxxx-xxxx</code>) imediatamente.
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+              <span style="background: var(--color-accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; flex-shrink: 0; margin-top: 2px;">4</span>
+              <div>
+                <strong>Conecte no Pulse:</strong> No painel de Configurações do Pulse, insira seu email/usuário, seu handle e a senha de aplicativo criada. Clique em **Testar Conexão** para validar as credenciais.
+              </div>
+            </div>
+          </div>
+          
+          <p style="margin-top: 0.5rem;">
+            <strong>Nota de Segurança:</strong> Se você quiser revogar o acesso do Pulse a qualquer momento, basta acessar sua conta no Bluesky e excluir a senha de aplicativo correspondente nas configurações da plataforma.
+          </p>
+        </div>
+      </section>
+
+      <!-- X / Twitter -->
+      <section id="section-twitter" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>Como Conectar ao X / Twitter</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O Pulse oferece duas maneiras flexíveis de se integrar ao X/Twitter: por meio de <strong>OAuth 2.0 (recomendado para instâncias públicas/multiusuários)</strong> ou via <strong>Chaves de Desenvolvedor (ideal para desenvolvedores e instâncias de uso único local)</strong>.
+          </p>
+          
+          <h4 style="margin: 0.5rem 0 0.25rem 0; color: var(--text-primary); font-size: 0.9rem;">A. Usando Chaves de Desenvolvedor (Uso Local / Rápido)</h4>
+          <p style="margin: 0;">
+            Se você já tem uma conta no X Developer Portal, pode gerar as chaves e conectar seu Pulse imediatamente sem precisar configurar redirecionamentos de servidor:
+          </p>
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.5rem;">
+            <div>1. Acesse o <a href="https://developer.x.com" target="_blank" style="color: var(--color-accent); text-decoration: underline;">X Developer Portal</a> e crie um aplicativo.</div>
+            <div>2. Nas configurações do seu aplicativo, em <strong>User Authentication Settings</strong>, ative a autenticação <strong>OAuth 1.0a</strong> e defina o nível de acesso para <strong>Read and Write (Ler e Gravar)</strong>.</div>
+            <div>3. Na aba <strong>Keys and Tokens</strong>, gere e copie as seguintes 4 chaves/tokens:
+              <ul style="padding-left: 1.25rem; margin-top: 0.25rem; display: flex; flex-direction: column; gap: 0.15rem; font-size: 0.8rem; color: var(--text-muted);">
+                <li>Consumer Key (API Key)</li>
+                <li>Consumer Secret (API Secret)</li>
+                <li>Access Token</li>
+                <li>Access Token Secret</li>
+              </ul>
+            </div>
+            <div>4. No Pulse, selecione a aba <strong>Configurações</strong>, altere o Tipo de Conexão do Twitter para <strong>Chaves de Desenvolvedor (Manual)</strong>, preencha o handle (ex: <code>@seu_usuario</code>) e os quatro campos. Clique em <strong>Vincular Conta</strong>.</div>
+          </div>
+
+          <h4 style="margin: 0.75rem 0 0.25rem 0; color: var(--text-primary); font-size: 0.9rem;">B. Usando OAuth 2.0 (Uso Global / Multiusuário)</h4>
+          <p style="margin: 0; margin-bottom: 0.5rem;">
+            Permite conexões com um clique sem que cada usuário precise criar chaves. Exige que o administrador do Pulse registre as credenciais globais na aba <strong>Admin</strong> da aplicação. 
+            <span style="display: block; font-size: 0.8rem; margin-top: 0.25rem; color: var(--color-ai);">
+              💡 <strong>Nota:</strong> Estas credenciais são <strong>compartilhadas entre todos os administradores</strong> da instância (qualquer admin poderá visualizá-las e editá-las) e se aplicam globalmente para todos os usuários do sistema.
+            </span>
+          </p>
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.5rem;">
+            <div>1. No <a href="https://developer.x.com" target="_blank" style="color: var(--color-accent); text-decoration: underline;">X Developer Portal</a>, edite as <strong>User Authentication Settings</strong> do seu aplicativo e ative a autenticação <strong>OAuth 2.0</strong> como <strong>Web App / Automated</strong>.</div>
+            <div>2. Defina o <strong>Callback URL / Redirect URI</strong> para: <code style="color: var(--color-accent);">http://localhost:8000/api/social/twitter/callback</code> (se rodando localmente) ou substitua pelo seu domínio oficial. Defina Website URL como a URL da sua aplicação.</div>
+            <div>3. Salve e copie o <strong>Client ID</strong> e o <strong>Client Secret</strong> fornecidos pelo X.</div>
+            <div>4. Acesse a plataforma com uma conta administradora e navegue até a aba <strong>Admin</strong>.</div>
+            <div>5. Na seção <strong>Integração X / Twitter (OAuth 2.0)</strong>, insira o Client ID e Client Secret copiados e clique em <strong>Salvar Integração</strong>.</div>
+            <div>6. A partir de agora, qualquer usuário poderá conectar o X/Twitter clicando em <strong>Autorizar no Twitter / X 🔗</strong> na aba <strong>Configurações</strong>.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ollama -->
+      <section id="section-ollama" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>Configurando o Ollama Local</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O <strong>Ollama</strong> permite executar modelos de linguagem avançados diretamente no seu próprio computador. Isso garante privacidade, velocidade e elimina a necessidade de chaves de API externas.
+          </p>
+          
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+            <div>
+              <strong>1. Instalação:</strong>
+              <p style="margin: 0.25rem 0; font-size: 0.825rem; color: var(--text-muted);">
+                Acesse <a href="https://ollama.com" target="_blank" style="color: var(--color-accent); text-decoration: underline;">ollama.com</a> para baixar o instalador oficial do seu sistema operacional. Alternativamente, utilize a ferramenta de instalação embutida na aba de Configurações do Pulse.
+              </p>
+            </div>
+            
+            <div>
+              <strong>2. Download de Modelos:</strong>
+              <p style="margin: 0.25rem 0; font-size: 0.825rem; color: var(--text-muted);">
+                Execute um dos comandos abaixo no seu terminal para baixar e executar o modelo desejado, ou faça o download diretamente pelo modal de gerenciamento de modelos nas Configurações:
+              </p>
+              <div style="background: black; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.8rem; color: #a9ffb2; margin: 0.4rem 0; line-height: 1.4; border: 1px solid var(--border-color);">
+                # Modelo leve e rápido (Ideal para setups básicos)<br>
+                ollama run qwen2:1.5b<br><br>
+                # Modelo intermediário de alta qualidade (Ideal para setups médios)<br>
+                ollama run phi3:mini
+              </div>
+            </div>
+            
+            <div>
+              <strong>3. Integração com o Pulse:</strong>
+              <p style="margin: 0.25rem 0; font-size: 0.825rem; color: var(--text-muted);">
+                O endereço padrão de conexão do Ollama é <code>http://localhost:11434</code>. Adicione esse endereço nas configurações de servidores LLM do Pulse e utilize a função de teste de conexão para validar o funcionamento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Persona e Diretrizes -->
+      <section id="section-prompt-persona" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>Configurando sua Persona & Diretrizes</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O Pulse utiliza uma arquitetura modular para que você customize a voz do seu agente editorial sem misturar regras de formatação com a sua biografia. Na aba de <strong>Configurações</strong>, você define:
+          </p>
+          
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+            <div>
+              <strong>1. Persona do Usuário (Quem você representa):</strong>
+              <p style="margin: 0.25rem 0; font-size: 0.825rem; color: var(--text-muted);">
+                Descreva quem é a pessoa ou marca por trás das postagens. Especifique sua profissão, tom de voz (ex: técnico, casual, reflexivo), interesses e experiências do dia a dia.
+              </p>
+            </div>
+            <div>
+              <strong>2. Instruções Gerais (Prompt do Sistema):</strong>
+              <p style="margin: 0.25rem 0; font-size: 0.825rem; color: var(--text-muted);">
+                Defina as regras gerais de escrita que a IA deve seguir. Como o Pulse é voltado ao Bluesky, o padrão já inclui limitações de tamanho (máximo 280 caracteres), veto a hashtags, uso moderado de emojis e formatação fluida.
+              </p>
+            </div>
+          </div>
+          <p style="margin-top: 0.5rem;">
+            Se precisar voltar aos padrões originais genéricos da plataforma, basta clicar no botão <strong>Restaurar padrão</strong> disponível ao lado do cabeçalho de cada campo.
+          </p>
+        </div>
+      </section>
+
+      <!-- Evitar Clichês -->
+      <section id="section-ia-practices" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>Como Evitar a Semelhança com IA (Clichês)</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O Bluesky valoriza interações autênticas e naturais. Posts gerados artificialmente e sem revisão tendem a receber menos atenção e engajamento da comunidade.
+          </p>
+          <p>
+            O Pulse possui um analisador que calcula a "similaridade com IA" (métrica <code>generico</code>) identificando padrões típicos de modelos gerativos.
+          </p>
+          
+          <div style="background: rgba(244, 63, 94, 0.03); border-left: 4px solid var(--color-failed); padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-top: 0.5rem;">
+            <strong style="color: var(--text-primary);">Fatores que aumentam o índice de IA:</strong>
+            <ul style="padding-left: 1.25rem; margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.825rem; color: var(--text-secondary);">
+              <li><strong>Termos batidos e clichés:</strong> Palavras como <em>"jornada", "desvende", "revolucionário", "mergulho profundo", "desmitificando", "prepare-se", "em um mundo..."</em></li>
+              <li><strong>Excesso de Hashtags:</strong> O uso de 3 ou mais hashtags no mesmo post. O Bluesky prioriza postagens limpas com no máximo uma ou duas tags específicas.</li>
+              <li><strong>Excesso de Emojis:</strong> A utilização de 3 ou mais emojis em postagens curtas prejudica a legibilidade e eleva a pontuação de IA.</li>
+            </ul>
+          </div>
+          
+          <div style="background: rgba(16, 185, 129, 0.03); border-left: 4px solid var(--color-success); padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-top: 0.5rem;">
+            <strong style="color: var(--text-primary);">Boas práticas de escrita:</strong>
+            <ul style="padding-left: 1.25rem; margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.825rem; color: var(--text-secondary);">
+              <li>Seja direto e conciso. Escreva de forma conversacional e simplificada.</li>
+              <li>Adote parágrafos curtos ou quebras de linha estratégicas.</li>
+              <li>Apresente opiniões claras ou dados específicos em vez de adjetivos vagos.</li>
+              <li>Sempre revise e humanize as ideias sugeridas pelo assistente antes de agendá-las.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fila e Agendamentos -->
+      <section id="section-scheduler" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>Funcionamento da Fila & Agendamentos</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O Pulse gerencia o fluxo de publicação por meio de um sistema automatizado inteligente rodando em segundo plano.
+          </p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+            <div style="border: 1px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong>Processo de Publicação</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                O backend do Pulse executa uma varredura a cada 1 minuto. Ao encontrar publicações aprovadas cujos horários configurados já passaram, realiza a postagem assíncrona no canal correspondente.
+              </p>
+            </div>
+            
+            <div style="border: 1px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong>Fluxo de Aprovação</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Com a opção "Exigir Aprovação Manual" habilitada nas Configurações, novos posts criados pelo agente entram na fila como Rascunhos. Caso contrário, são agendados e publicados automaticamente no horário determinado.
+              </p>
+            </div>
+            
+            <div style="border: 1px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-sm); grid-column: span 2;">
+              <strong>Configuração de Canais e Regras de Data</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Ao agendar a partir de uma célula do calendário, a data é fixada automaticamente e o campo torna-se ineditável, restando a você escolher o horário. O agendamento livre pelo botão "Agendar Nova Postagem" mantém a data habilitada para seleção manual.
+              </p>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Você também pode direcionar seus rascunhos, posts imediatos e novas ideias no banco para canais específicos (Bluesky, Twitter/X, Threads) alternando entre os seletores visuais do painel.
+              </p>
+            </div>
+            
+            <div style="border: 1px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-sm); grid-column: span 2;">
+              <strong>Modo de Geração (IA vs Uso Manual)</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Ao criar ou editar um agendamento no Calendário, você pode usar o botão deslizante <strong>Modo de Geração</strong>.
+              </p>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                Quando o modo manual está ativo (Uso Manual), os campos de IA (Tema, Objetivo e CTA) são ocultados e você pode digitar diretamente o texto exato que deseja disparar, contando com um limite de 280 caracteres. No momento agendado, o Pulse publicará esse texto sem passar pela geração do modelo de IA.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<style>
+/* Custom stylesheet rules for documentation tab navigation items */
+.doc-menu-btn:hover {
+  background: var(--bg-surface-elevated) !important;
+  color: var(--text-primary) !important;
+}
+
+.doc-menu-btn.active {
+  background: rgba(56, 189, 248, 0.1) !important;
+  color: var(--color-accent) !important;
+  border-left: 3px solid var(--color-accent) !important;
+  padding-left: calc(0.8rem - 3px) !important;
+}
+
+.doc-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+
+/* Ensure anchor scroll doesn't get hidden behind any top headers */
+.tab-panel section {
+  scroll-margin-top: 2rem;
+}
+</style>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  {% include 'components/head_theme_loader.html' %}
+</head>
+<body>
+  {% include 'components/landing.html' %}
+
+  <div class="app-container hidden">
+    {% include 'components/header.html' %}
+    
+    {% include 'components/metrics.html' %}
+
+    {% include 'components/navigation.html' %}
+
+    <div class="tab-panels-container" style="max-width: 100%; overflow: hidden;">
+      {% include 'components/tab_overview.html' %}
+      {% include 'components/tab_editor.html' %}
+      {% include 'components/tab_library.html' %}
+      {% include 'components/tab_calendar.html' %}
+      {% include 'components/tab_config.html' %}
+      {% include 'components/tab_instructions.html' %}
+      {% include 'components/tab_admin.html' %}
+    </div>
+
+    {% include 'components/modal.html' %}
+  </div>
+
+  {% include 'components/auth.html' %}
+
+  <script type="module" src="/static/js/main.js?v=pulse-v18"></script>
+</body>
+</html>

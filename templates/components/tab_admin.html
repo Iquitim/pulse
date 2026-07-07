@@ -1,0 +1,144 @@
+<!-- Panel 5: Administração (Admin Only) -->
+<div class="tab-panel" id="tab-admin">
+  <div class="editor-two-columns">
+    
+    <!-- Coluna da Esquerda: Códigos de Convite & Configurações de Tiers -->
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      
+      <!-- Seção Códigos de Convite -->
+      <section class="panel-section">
+        <div class="panel-header">
+          <h3>Códigos de Convite</h3>
+        </div>
+        
+        <div class="panel-form" style="margin-bottom: 1.5rem;">
+          <form id="invite-code-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div class="form-group">
+              <label for="invite-code-input" class="input-label">Novo Código de Convite</label>
+              <input type="text" id="invite-code-input" required placeholder="EX: CONVITE-PRO-2026" class="clean-input" style="text-transform: uppercase;">
+            </div>
+            <div class="form-group">
+              <label for="invite-tier-select" class="input-label">Perfil de Cota (Tier)</label>
+              <div class="select-wrapper">
+                <select id="invite-tier-select" class="clean-select">
+                  <option value="free">Perfil Pessoal (Uso Moderado)</option>
+                  <option value="pro">Perfil Entusiasta (Uso Estendido)</option>
+                  <option value="desk">Perfil Coletivo (Uso Comunitário)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="invite-uses-input" class="input-label">Limite de Usos</label>
+              <input type="number" id="invite-uses-input" min="1" max="1000" value="1" required class="clean-input">
+            </div>
+            <button type="submit" class="btn-primary">Gerar Código</button>
+          </form>
+        </div>
+
+        <div class="library-wrapper" style="max-height: 200px; overflow-y: auto;">
+          <table class="library-table compact" style="font-size: 0.75rem;">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Tier</th>
+                <th>Usos</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="invite-codes-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Seção Tiers & Limites -->
+      <section class="panel-section">
+        <div class="panel-header">
+          <h3>Limites de Recursos dos Perfis</h3>
+        </div>
+        
+        <div class="panel-form">
+          <form id="tier-config-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div class="form-group">
+              <label for="config-tier-select" class="input-label">Selecionar Perfil para Editar</label>
+              <div class="select-wrapper">
+                <select id="config-tier-select" class="clean-select">
+                  <option value="free">Perfil Pessoal (Uso Moderado)</option>
+                  <option value="pro">Perfil Entusiasta (Uso Estendido)</option>
+                  <option value="desk">Perfil Coletivo (Uso Comunitário)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tier-max-themes" class="input-label">Limite de Temas</label>
+              <input type="number" id="tier-max-themes" min="1" required class="clean-input">
+            </div>
+            <div class="form-group">
+              <label for="tier-max-accounts" class="input-label">Limite de Contas Sociais</label>
+              <input type="number" id="tier-max-accounts" min="1" required class="clean-input">
+            </div>
+            <div class="form-group">
+              <label for="tier-max-calendar" class="input-label">Limite de Itens no Calendário</label>
+              <input type="number" id="tier-max-calendar" min="1" required class="clean-input">
+            </div>
+            <div class="form-group">
+              <label for="tier-daily-limit" class="input-label">Limite de Posts Diários</label>
+              <input type="number" id="tier-daily-limit" min="1" required class="clean-input">
+            </div>
+            <button type="submit" class="btn-primary">Salvar Limites</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Seção Integrações (Configurações Globais) -->
+      <section class="panel-section">
+        <div class="panel-header">
+          <h3>Integração X / Twitter (OAuth 2.0)</h3>
+        </div>
+        
+        <div class="panel-form">
+          <form id="global-settings-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div class="form-group">
+              <label for="global-twitter-client-id" class="input-label">Twitter Client ID</label>
+              <input type="text" id="global-twitter-client-id" placeholder="Ex: eFRLM2h... (Client ID OAuth 2.0)" class="clean-input">
+            </div>
+            <div class="form-group">
+              <label for="global-twitter-client-secret" class="input-label">Twitter Client Secret</label>
+              <input type="password" id="global-twitter-client-secret" placeholder="Client Secret OAuth 2.0" class="clean-input">
+            </div>
+            <p style="font-size: 0.7rem; color: var(--text-muted); margin: 0; line-height: 1.4;">
+              Essas chaves são usadas para habilitar a conexão por botão/redirecionamento de qualquer usuário da instância.
+            </p>
+            <button type="submit" class="btn-primary">Salvar Integração</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+    
+    <!-- Coluna da Direita: Usuários Cadastrados -->
+    <section class="panel-section">
+      <div class="panel-header">
+        <h3>Usuários Cadastrados</h3>
+      </div>
+      
+      <div class="library-wrapper" style="max-height: 600px; overflow-y: auto;">
+        <table class="library-table" style="font-size: 0.75rem;">
+          <thead>
+            <tr>
+              <th>E-mail</th>
+              <th>Perfil</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</div>

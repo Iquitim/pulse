@@ -1,0 +1,39 @@
+/* --- Top Metrics Grid --- */
+.metrics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem !important;
+}
+
+.metric-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.metric-label {
+  font-size: 0.8rem !important;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 1.85rem !important;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.metric-value.color-accent {
+  color: var(--color-accent);
+}
+
+.metric-desc {
+  font-size: 0.75rem !important;
+  color: var(--text-muted);
+}

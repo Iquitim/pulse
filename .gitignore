@@ -1,0 +1,37 @@
+# Ambientes Virtuais
+venv/
+ENV/
+env/
+.venv/
+.env/
+
+# Configurações Locais e Segredos
+.env
+*.env
+
+# Banco de Dados SQLite Local
+*.db
+pulse.db
+
+# Diretório de Exportação de Posts Gerados
+posts/
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Configurações de IDEs (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+.project
+.pydevproject
+.settings/
+
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
+
+# Modelos locais e arquivos binários grandes
+bin/

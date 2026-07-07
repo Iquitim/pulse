@@ -1,0 +1,62 @@
+<!-- Auth Screen Wrapper -->
+<div id="auth-container" class="auth-container hidden">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2 id="auth-title">Entrar no Pulse</h2>
+      <p id="auth-subtitle">Agente de IA para publicação social automatizada</p>
+    </div>
+    
+    <!-- Login Form -->
+    <form id="login-form" class="auth-form">
+      <div class="form-group">
+        <label for="login-email" class="input-label">E-mail</label>
+        <input type="email" id="login-email" required placeholder="seu@email.com" class="clean-input">
+      </div>
+      <div class="form-group">
+        <label for="login-password" class="input-label">Senha</label>
+        <input type="password" id="login-password" required placeholder="Sua senha" class="clean-input">
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Entrar</button>
+      <p class="auth-switch" id="switch-to-register-container">Não tem conta? <a href="#" id="go-to-register">Criar uma conta</a></p>
+    </form>
+
+    <!-- Register Form -->
+    <form id="register-form" class="auth-form hidden">
+      <div class="form-group">
+        <label for="register-email" class="input-label">E-mail</label>
+        <input type="email" id="register-email" required placeholder="seu@email.com" class="clean-input">
+      </div>
+      <div class="form-group">
+        <label for="register-password" class="input-label">Senha</label>
+        <input type="password" id="register-password" required placeholder="Crie uma senha" class="clean-input">
+      </div>
+      <div class="form-group" id="register-invite-group">
+        <label for="register-invite" class="input-label" id="register-invite-label">Código de Convite</label>
+        <input type="text" id="register-invite" placeholder="PULSE-XXXX-XXXX" class="clean-input" style="text-transform: uppercase;">
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Criar Conta</button>
+      <p class="auth-switch">Já tem conta? <a href="#" id="go-to-login">Fazer login</a></p>
+    </form>
+    
+    <!-- Change Password Form (Mandatory) -->
+    <form id="change-password-form" class="auth-form hidden">
+      <div class="form-group">
+        <label for="change-current-password" class="input-label">Senha Atual (Temporária)</label>
+        <input type="password" id="change-current-password" required placeholder="Digite a senha temporária" class="clean-input">
+      </div>
+      <div class="form-group">
+        <label for="change-new-password" class="input-label">Nova Senha</label>
+        <input type="password" id="change-new-password" required placeholder="Nova senha segura" class="clean-input">
+      </div>
+      <div class="form-group">
+        <label for="change-confirm-password" class="input-label">Confirmar Nova Senha</label>
+        <input type="password" id="change-confirm-password" required placeholder="Confirme a nova senha" class="clean-input">
+      </div>
+      <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Alterar Senha & Acessar Painel</button>
+    </form>
+    
+    <div id="auth-error" class="error-container hidden" style="margin-top: 1rem; padding: 0.75rem; border-radius: 6px;">
+      <p id="auth-error-msg" class="error-text"></p>
+    </div>
+  </div>
+</div>

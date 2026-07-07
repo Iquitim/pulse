@@ -1,0 +1,324 @@
+<!-- Panel 6: Calendário Editorial -->
+<style>
+/* Visual Channel Selector Styles */
+.channel-selector-group {
+  display: flex !important;
+  gap: 0.75rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  width: 100% !important;
+  flex-direction: row !important; /* Force horizontal alignment */
+}
+
+.channel-option-card {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.75rem 0.5rem !important;
+  background: var(--bg-surface-elevated, #18181B) !important;
+  border: 1px solid var(--border-color, #27272A) !important;
+  border-radius: var(--radius-md, 8px) !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  user-select: none !important;
+}
+
+.light-theme .channel-option-card {
+  background: #F4F4F5 !important;
+  border-color: #E4E4E7 !important;
+}
+
+.channel-option-card:hover {
+  border-color: var(--text-muted) !important;
+  transform: translateY(-1px) !important;
+}
+
+.channel-option-card.active {
+  background: rgba(56, 189, 248, 0.08) !important; /* Transparent Sky Blue */
+  border-color: var(--color-accent, #38BDF8) !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.15) !important;
+}
+
+.channel-option-card.active span {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.channel-option-card[data-value="twitter"].active {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: var(--text-primary, #F4F4F5) !important;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08) !important;
+}
+
+.channel-option-card[data-value="threads"].active {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border-color: var(--color-warning, #F59E0B) !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.15) !important;
+}
+
+.channel-option-card span {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  transition: color 0.2s !important;
+}
+
+.channel-option-card svg {
+  width: 20px !important;
+  height: 20px !important;
+  color: var(--text-secondary) !important;
+  transition: color 0.2s, transform 0.2s !important;
+}
+
+.channel-option-card:hover svg {
+  transform: scale(1.05) !important;
+}
+
+.channel-option-card.active svg {
+  color: inherit !important; /* Inherit active color */
+}
+
+.channel-option-card[data-value="bluesky"].active svg {
+  color: var(--color-accent, #38BDF8) !important;
+}
+
+.channel-option-card[data-value="twitter"].active svg {
+  color: var(--text-primary, #F4F4F5) !important;
+}
+
+.channel-option-card[data-value="threads"].active svg {
+  color: var(--color-warning, #F59E0B) !important;
+}
+
+/* Style for date and time input icons inside dark mode */
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) !important;
+  cursor: pointer !important;
+}
+.light-theme input[type="time"]::-webkit-calendar-picker-indicator,
+.light-theme input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: none !important;
+}
+</style>
+<div class="tab-panel" id="tab-calendar">
+  <div class="panel-section">
+    <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h3>Calendário & Agendamento</h3>
+        <p class="panel-subtitle" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+          Gerencie o cronograma de postagens automáticas por intervalo recorrente ou programações pontuais via calendário.
+        </p>
+      </div>
+      <button type="button" id="btn-open-calendar-form" class="btn-primary">Agendar Nova Postagem</button>
+    </div>
+
+    <!-- Scheduling Mode Toggle in Calendar Tab -->
+    <div class="scheduling-mode-section" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background-color: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md); margin-top: 1rem; margin-bottom: 1.5rem; gap: 1.5rem; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 200px;">
+        <h4 style="margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--text-primary);">Modo de Agendamento</h4>
+        <p style="margin: 0.15rem 0 0 0; font-size: 0.75rem; color: var(--text-muted);">Escolha como o Pulse programa a geração e publicação de posts.</p>
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 0; min-width: 200px;">
+        <div class="select-wrapper">
+          <select id="scheduling_mode" class="clean-select" style="font-size: 0.85rem; padding: 0.45rem 2rem 0.45rem 0.75rem;">
+            <option value="recorrente">Recorrente (Por Intervalo)</option>
+            <option value="personalizado">Personalizado (Calendário)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recurrent Config View -->
+    <div id="calendar-recurrent-view" class="hidden" style="margin-bottom: 1.5rem; padding: 1.5rem; background-color: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+      <h4 style="margin-top: 0; margin-bottom: 1.25rem; font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">Configurações do Intervalo Recorrente</h4>
+      
+      <!-- Recurrent Channel Selection -->
+      <div class="form-group" style="margin-bottom: 1.25rem; max-width: 500px;">
+        <label class="input-label" style="font-weight: 600; font-size: 0.8rem; margin-bottom: 0.5rem;">Canal / Rede de Destino</label>
+        <select id="recurrent-channel" style="display: none;">
+          <option value="bluesky">bluesky</option>
+          <option value="twitter">twitter</option>
+          <option value="threads">threads</option>
+        </select>
+        <div class="channel-selector-group recurrent-channel-selector">
+          <div class="channel-option-card active" data-value="bluesky" title="Bluesky">
+            <svg viewBox="0 0 512 512" fill="currentColor" style="width: 20px; height: 20px;"><path d="M111.8 42.2C188.4 98.9 237.4 179.6 256 211.5c18.6-31.9 67.6-112.6 144.2-169.3C449.6 5.8 512-16.3 512 25.2c0 9.1-4.7 93.9-8.4 135.9c-8.9 101.4-53.8 128.2-96.1 134.4c65.5 9.7 75.8 62.8 41 113.3c-42.3 61.4-150.3 35.8-192.5 12.3c-42.2 23.5-150.2 49.1-192.5-12.3c-34.8-50.5-24.5-103.6 41-113.3c-42.3-6.2-87.2-33-96.1-134.4C4.7 119.1 0 34.3 0 25.2C0-16.3 62.4 5.8 111.8 42.2z"/></svg>
+            <span>Bluesky</span>
+          </div>
+          <div class="channel-option-card" data-value="twitter" title="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>Twitter / X</span>
+          </div>
+          <div class="channel-option-card disabled" data-value="threads" title="Threads (Em Breve)">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.8 0 5.4-1.1 7.3-3.1l-1.4-1.4C16.3 19.1 14.2 20 12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8v1c0 1.1-.9 2-2 2s-2-.9-2-2v-5h-2v1.43c-.6-.82-1.6-1.43-2.73-1.43-2.35 0-4.27 1.92-4.27 4.27s1.92 4.27 4.27 4.27c1.13 0 2.13-.61 2.73-1.43V14c0 2.2 1.8 4 4 4s4-1.8 4-4v-2c0-5.52-4.48-10-10-10zm-1 12.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Threads 🚧</span>
+        </div>
+      </div>
+    </div>
+
+      <div class="form-group" id="interval-hours-group" style="margin-bottom: 0; max-width: 500px;">
+        <div class="slider-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <label class="input-label" style="font-weight: 600; font-size: 0.8rem; margin: 0;">Intervalo de Postagem</label>
+          <span id="interval-display" class="slider-val" style="font-weight: 700; color: var(--color-accent); font-size: 0.85rem;">A cada 6 horas</span>
+        </div>
+        <input type="range" id="interval_hours" min="1" max="24" step="1" value="6" class="clean-range" style="width: 100%;">
+        
+        <!-- Range Quick Presets -->
+        <div class="presets-row" style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+          <button type="button" class="btn-preset" data-value="1" style="flex: 1; padding: 6px 0; font-size: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-surface); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">1h</button>
+          <button type="button" class="btn-preset" data-value="3" style="flex: 1; padding: 6px 0; font-size: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-surface); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">3h</button>
+          <button type="button" class="btn-preset" data-value="6" style="flex: 1; padding: 6px 0; font-size: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-surface); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">6h</button>
+          <button type="button" class="btn-preset" data-value="12" style="flex: 1; padding: 6px 0; font-size: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-surface); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">12h</button>
+          <button type="button" class="btn-preset" data-value="24" style="flex: 1; padding: 6px 0; font-size: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-surface); color: var(--text-secondary); cursor: pointer; transition: all 0.2s;">24h</button>
+        </div>
+        
+        <p id="frequency-estimate" class="estimate-text" style="font-size: 0.75rem; margin: 0.75rem 0 0 0; color: var(--text-secondary);">O Pulse publicará cerca de 4 posts por dia.</p>
+      </div>
+    </div>
+
+    <!-- Custom Calendar View -->
+    <div id="calendar-custom-view" class="hidden">
+      <!-- Toolbar with year nav and legends -->
+      <div class="calendar-board-toolbar" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap;">
+        <div class="calendar-year-nav" style="display: flex; align-items: center; gap: 0.75rem; background-color: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 0.35rem 0.75rem; border-radius: var(--radius-sm);">
+          <button type="button" id="btn-prev-year" class="btn-year-nav" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; outline: none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <span id="calendar-year-display" style="font-weight: 700; font-family: var(--font-display); font-size: 1.1rem; min-width: 60px; text-align: center; color: var(--text-primary);">2026</span>
+          <button type="button" id="btn-next-year" class="btn-year-nav" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; outline: none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+        
+        <div class="calendar-legend" style="display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-secondary);">
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <span class="legend-color-dot" style="background-color: var(--color-accent); width: 8px; height: 8px; border-radius: 50%;"></span>
+            <span>Bluesky</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <span class="legend-color-dot" style="background-color: var(--text-muted); width: 8px; height: 8px; border-radius: 50%;"></span>
+            <span>Twitter / X</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.4rem; opacity: 0.6;">
+            <span class="legend-color-dot" style="background-color: var(--color-warning, #F59E0B); width: 8px; height: 8px; border-radius: 50%;"></span>
+            <span>Threads 🚧</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scrollable container for the board table, acts as the delegation target for clicks -->
+      <div id="calendar-timeline" class="calendar-grid-scroll-container" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: var(--radius-md); background-color: var(--bg-surface); max-width: 100%;">
+        <table class="calendar-board-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 3880px;">
+          <thead>
+            <tr id="calendar-header-weekdays">
+              <!-- Dynamically populated weekdays -->
+            </tr>
+          </thead>
+          <tbody id="calendar-board-tbody">
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sliding Panel/Modal for Creating/Editing Calendar Items -->
+<div id="calendar-form-modal" class="modal-overlay hidden">
+  <div class="modal-card" style="max-width: 480px; width: 100%;">
+    <div class="modal-header">
+      <h3 id="calendar-form-title">Agendar Nova Postagem</h3>
+      <button type="button" id="btn-close-calendar-form" class="btn-close">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <form id="calendar-item-form" style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1rem;">
+        <input type="hidden" id="calendar-item-id">
+        
+        <div class="form-group">
+          <label class="input-label">Canal / Rede de Destino</label>
+          <select id="calendar-channel" style="display: none;" required>
+            <option value="bluesky">bluesky</option>
+            <option value="twitter">twitter</option>
+            <option value="threads">threads</option>
+          </select>
+          <div class="channel-selector-group calendar-channel-selector">
+            <div class="channel-option-card active" data-value="bluesky" title="Bluesky">
+              <svg viewBox="0 0 512 512" fill="currentColor" style="width: 20px; height: 20px;"><path d="M111.8 42.2C188.4 98.9 237.4 179.6 256 211.5c18.6-31.9 67.6-112.6 144.2-169.3C449.6 5.8 512-16.3 512 25.2c0 9.1-4.7 93.9-8.4 135.9c-8.9 101.4-53.8 128.2-96.1 134.4c65.5 9.7 75.8 62.8 41 113.3c-42.3 61.4-150.3 35.8-192.5 12.3c-42.2 23.5-150.2 49.1-192.5-12.3c-34.8-50.5-24.5-103.6 41-113.3c-42.3-6.2-87.2-33-96.1-134.4C4.7 119.1 0 34.3 0 25.2C0-16.3 62.4 5.8 111.8 42.2z"/></svg>
+              <span>Bluesky</span>
+            </div>
+            <div class="channel-option-card" data-value="twitter" title="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span>Twitter / X</span>
+            </div>
+            <div class="channel-option-card disabled" data-value="threads" title="Threads (Em Breve)">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.8 0 5.4-1.1 7.3-3.1l-1.4-1.4C16.3 19.1 14.2 20 12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8v1c0 1.1-.9 2-2 2s-2-.9-2-2v-5h-2v1.43c-.6-.82-1.6-1.43-2.73-1.43-2.35 0-4.27 1.92-4.27 4.27s1.92 4.27 4.27 4.27c1.13 0 2.13-.61 2.73-1.43V14c0 2.2 1.8 4 4 4s4-1.8 4-4v-2c0-5.52-4.48-10-10-10zm-1 12.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>Threads 🚧</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="display: flex; gap: 0.75rem;">
+          <div style="flex: 1;">
+            <label for="calendar-date-display" class="input-label">Data de Publicação</label>
+            <input type="date" id="calendar-date-display" class="clean-input" required>
+          </div>
+          <div style="width: 140px;">
+            <label for="calendar-scheduled-time" class="input-label">Horário</label>
+            <input type="time" id="calendar-scheduled-time" class="clean-input" required>
+          </div>
+        </div>
+
+        <!-- Toggle for IA or Manual publication -->
+        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+          <div>
+            <span class="input-label" style="display: block; margin-bottom: 2px;">Modo de Geração</span>
+            <span class="toggle-subtitle" id="calendar-mode-subtitle">Disparar post escrito manualmente (sem IA)</span>
+          </div>
+          <label class="switch-container">
+            <input type="checkbox" id="calendar-is-manual">
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <!-- AI Generated Post fields -->
+        <div id="calendar-ai-group" class="calendar-fields-group">
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label for="calendar-theme" class="input-label">Tema da Postagem</label>
+            <input type="text" id="calendar-theme" class="clean-input" placeholder="Ex: Novidades sobre o Gemini 2.5" required autocomplete="off">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.85rem;">
+            <label for="calendar-objective" class="input-label">Objetivo do Post (Opcional)</label>
+            <textarea id="calendar-objective" class="clean-input clean-textarea" placeholder="Ex: Chamar atenção dos desenvolvedores sobre IA" rows="3" style="resize: vertical;"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="calendar-cta" class="input-label">Call to Action / CTA (Opcional)</label>
+            <input type="text" id="calendar-cta" class="clean-input" placeholder="Ex: O que você achou? Deixe nos comentários">
+          </div>
+        </div>
+
+        <!-- Manual Post fields -->
+        <div id="calendar-manual-group" class="calendar-fields-group hidden">
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+              <label for="calendar-manual-content" class="input-label" style="margin-bottom: 0;">Conteúdo da Postagem</label>
+              <div id="calendar-manual-char-counter" class="char-badge limit-green" style="font-size: 0.65rem; font-weight: 700; border-radius: 4px; padding: 0.05rem 0.2rem;">0/280</div>
+            </div>
+            <textarea id="calendar-manual-content" class="clean-input clean-textarea" placeholder="Escreva o texto exato do post que será publicado..." rows="5" style="resize: vertical;"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          <span id="calendar-form-submit-text">Salvar Agendamento</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

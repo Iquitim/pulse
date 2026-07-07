@@ -1,0 +1,208 @@
+      <!-- Panel 2: Criador de Posts -->
+      <div class="tab-panel" id="tab-editor">
+        <div class="editor-two-columns">
+          
+          <!-- Coluna da Esquerda: Rascunho & Criação -->
+          <section class="panel-section">
+            <div class="panel-header">
+              <h3>Rascunho & Criação</h3>
+            </div>
+
+            <div class="draft-workspace">
+              <!-- Selection & Setup -->
+              <div class="draft-controls-top">
+                <div class="select-wrapper flex-grow">
+                  <select id="draft-theme-select" class="clean-select compact-select">
+                    <option value="random">🎲 Aleatório (Sorteado)</option>
+                    <!-- Populate dynamically -->
+                  </select>
+                </div>
+                
+                <button type="button" id="btn-generate-draft" class="btn-secondary compact-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-svg"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  <span>Gerar Rascunho</span>
+                </button>
+              </div>
+              
+              <!-- Target Channel Selector -->
+              <div class="form-group" style="margin-top: 0.75rem; margin-bottom: 0.75rem;">
+                <label class="input-label" style="font-size: 0.7rem; font-weight: 600;">Rede Social de Destino</label>
+                <select id="draft-channel" style="display: none;">
+                  <option value="bluesky">bluesky</option>
+                  <option value="twitter">twitter</option>
+                  <option value="threads">threads</option>
+                </select>
+                <div class="channel-selector-group draft-channel-selector" style="margin-top: 0.25rem;">
+                  <div class="channel-option-card active" data-value="bluesky" title="Bluesky">
+                    <svg viewBox="0 0 512 512" fill="currentColor" style="width: 18px; height: 18px;"><path d="M111.8 42.2C188.4 98.9 237.4 179.6 256 211.5c18.6-31.9 67.6-112.6 144.2-169.3C449.6 5.8 512-16.3 512 25.2c0 9.1-4.7 93.9-8.4 135.9c-8.9 101.4-53.8 128.2-96.1 134.4c65.5 9.7 75.8 62.8 41 113.3c-42.3 61.4-150.3 35.8-192.5 12.3c-42.2 23.5-150.2 49.1-192.5-12.3c-34.8-50.5-24.5-103.6 41-113.3c-42.3-6.2-87.2-33-96.1-134.4C4.7 119.1 0 34.3 0 25.2C0-16.3 62.4 5.8 111.8 42.2z"/></svg>
+                    <span>Bluesky</span>
+                  </div>
+                  <div class="channel-option-card" data-value="twitter" title="Twitter / X">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    <span>Twitter / X</span>
+                  </div>
+                  <div class="channel-option-card disabled" data-value="threads" title="Threads (Em Breve)">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.8 0 5.4-1.1 7.3-3.1l-1.4-1.4C16.3 19.1 14.2 20 12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8v1c0 1.1-.9 2-2 2s-2-.9-2-2v-5h-2v1.43c-.6-.82-1.6-1.43-2.73-1.43-2.35 0-4.27 1.92-4.27 4.27s1.92 4.27 4.27 4.27c1.13 0 2.13-.61 2.73-1.43V14c0 2.2 1.8 4 4 4s4-1.8 4-4v-2c0-5.52-4.48-10-10-10zm-1 12.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Threads 🚧</span>
+                  </div>
+                </div>
+              </div>
+ 
+              <!-- Rich Editor -->
+              <div class="editor-container">
+                <div class="editor-header">
+                  <span class="editor-title">Editor de Texto</span>
+                  <span id="calendar-active-indicator" class="badge-count hidden" style="background-color: var(--color-warning-bg); color: var(--color-warning); border: 1px solid var(--color-warning); font-size: 0.7rem;">Vinculado ao Calendário</span>
+                  <span id="draft-active-indicator" class="badge-count hidden" style="background-color: rgba(16, 185, 129, 0.15); color: rgb(16, 185, 129); border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.7rem; margin-right: 0.5rem; display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.1rem 0.4rem; border-radius: 4px;">
+                    <span>Rascunho Ativo</span>
+                    <button type="button" id="btn-unlink-draft" style="background: none; border: none; color: inherit; font-weight: bold; cursor: pointer; padding: 0 2px; line-height: 1; font-size: 0.75rem;">&times;</button>
+                  </span>
+                  <span id="idea-active-indicator" class="badge-count hidden" style="background-color: rgba(59, 130, 246, 0.15); color: rgb(59, 130, 246); border: 1px solid rgba(59, 130, 246, 0.3); font-size: 0.7rem; margin-right: 0.5rem; display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.1rem 0.4rem; border-radius: 4px;">
+                    <span>Ideia Vinculada</span>
+                    <button type="button" id="btn-unlink-idea" style="background: none; border: none; color: inherit; font-weight: bold; cursor: pointer; padding: 0 2px; line-height: 1; font-size: 0.75rem;">&times;</button>
+                  </span>
+                  <span id="draft-char-counter" class="char-badge limit-green">0/280</span>
+                </div>
+                <textarea id="draft-text" placeholder="Gere um rascunho com o Gemini acima ou escreva seu próprio post aqui..." maxlength="280" class="clean-textarea editor-textarea"></textarea>
+                
+                <!-- Quick AI Assistant Helpers -->
+                <div class="editor-helpers">
+                  <button type="button" class="btn-helper" id="helper-improve" title="Melhorar texto">Melhorar</button>
+                  <button type="button" class="btn-helper" id="helper-shorten" title="Encurtar texto">Encurtar</button>
+                  <button type="button" class="btn-helper" id="helper-technical" title="Deixar mais profissional">Mais Técnico</button>
+                  <button type="button" class="btn-helper" id="helper-funny" title="Deixar mais leve/divertido">Mais Casual</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Coluna da Direita: Mockup e Envio -->
+          <section class="panel-section">
+            <div class="panel-header">
+              <h3>Visualização & Envio</h3>
+            </div>
+
+            <div class="draft-workspace">
+              <!-- Bluesky Post Mockup Preview -->
+              <div class="bluesky-preview-card">
+                <div class="preview-header">
+                  <span class="preview-tag">Mockup do Post (Bluesky)</span>
+                  <button type="button" id="btn-copy-draft" class="btn-text-action compact">Copiar Texto</button>
+                </div>
+                <div class="bsky-post">
+                  <div class="bsky-avatar">P</div>
+                  <div class="bsky-body">
+                    <div class="bsky-meta">
+                      <span class="bsky-display-name">Pulse Agent</span>
+                      <span class="bsky-handle" id="preview-handle">@usuario.bsky.social</span>
+                      <span class="bsky-dot">·</span>
+                      <span class="bsky-time">agora</span>
+                    </div>
+                    <div class="bsky-content" id="preview-content">Digite ou gere algo no editor acima...</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quality Score & Analysis -->
+              <div class="quality-analysis-card" style="margin-top: 1rem; margin-bottom: 1rem; background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <span style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary);">Análise de Qualidade IA</span>
+                  <button type="button" id="btn-analyze-quality" class="btn-text-action compact" style="color: var(--color-accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 13px; height: 13px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <span>Avaliar Post</span>
+                  </button>
+                </div>
+                
+                <!-- Loading indicator -->
+                <div id="quality-loading" class="spinner-container hidden" style="padding: 1rem;">
+                  <div class="spinner"></div>
+                  <p style="margin: 0; color: var(--text-secondary); font-size: 0.75rem;">Analisando estrutura do post...</p>
+                </div>
+                
+                <div id="quality-analysis-container" class="hidden">
+                  <!-- Global score and visual progress bars -->
+                  <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="position: relative; width: 50px; height: 50px; border-radius: 50%; border: 3px solid var(--color-accent); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: var(--color-accent);" id="quality-overall-score">
+                      85
+                    </div>
+                    <div>
+                      <div style="font-weight: 600; font-size: 0.8rem;" id="quality-overall-label">Boa Qualidade</div>
+                      <div style="font-size: 0.7rem; color: var(--text-muted);">Pontuação Geral IA</div>
+                    </div>
+                  </div>
+                  
+                  <!-- Quality criteria progress bars -->
+                  <div class="quality-criteria" style="display: flex; flex-direction: column; gap: 0.65rem; font-size: 0.75rem; margin-bottom: 1rem;">
+                    <!-- Clareza -->
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 0.15rem; color: var(--text-secondary);">
+                        <span>Clareza & Leitura</span>
+                        <span id="score-clareza" style="font-weight: 600; color: var(--text-primary);">85%</span>
+                      </div>
+                      <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                        <div id="progress-clareza" style="width: 85%; height: 100%; background: var(--color-accent); border-radius: 3px; transition: width 0.3s ease;"></div>
+                      </div>
+                    </div>
+                    <!-- Gancho -->
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 0.15rem; color: var(--text-secondary);">
+                        <span>Força do Gancho (Intro)</span>
+                        <span id="score-gancho" style="font-weight: 600; color: var(--text-primary);">90%</span>
+                      </div>
+                      <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                        <div id="progress-gancho" style="width: 90%; height: 100%; background: var(--color-accent); border-radius: 3px; transition: width 0.3s ease;"></div>
+                      </div>
+                    </div>
+                    <!-- Especificidade -->
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 0.15rem; color: var(--text-secondary);">
+                        <span>Especificidade</span>
+                        <span id="score-especificidade" style="font-weight: 600; color: var(--text-primary);">80%</span>
+                      </div>
+                      <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                        <div id="progress-especificidade" style="width: 80%; height: 100%; background: var(--color-accent); border-radius: 3px; transition: width 0.3s ease;"></div>
+                      </div>
+                    </div>
+                    <!-- Clichês/Genérico -->
+                    <div>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 0.15rem; color: var(--text-secondary);">
+                        <span>Semelhança com IA (Baixo é Melhor)</span>
+                        <span id="score-generico" style="font-weight: 600; color: var(--text-primary);">15%</span>
+                      </div>
+                      <div style="height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                        <div id="progress-generico" style="width: 15%; height: 100%; background: var(--color-accent); border-radius: 3px; transition: width 0.3s ease;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Suggestions list -->
+                  <div style="border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+                    <div style="font-weight: 600; font-size: 0.75rem; margin-bottom: 0.4rem; color: var(--text-secondary);">Sugestões de Melhoria:</div>
+                    <ul id="quality-suggestions" style="margin: 0; padding-left: 1.1rem; font-size: 0.75rem; line-height: 1.35; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.25rem;">
+                      <!-- Populated dynamically -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Direct Posting Grid -->
+              <div class="publishing-actions">
+                <button type="button" id="btn-publish-draft" class="btn-primary flex-grow" disabled>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-svg"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  <span>Publicar Rascunho</span>
+                </button>
+              </div>
+
+              <div class="dangerous-separator">
+                <span>Ação Imediata</span>
+              </div>
+
+              <button type="button" id="btn-post-now" class="btn-secondary warning-border">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-svg text-warning"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <span>Gerar & Postar Agora (Sem Revisão)</span>
+              </button>
+            </div>
+          </section>
+
+        </div>
+      </div>

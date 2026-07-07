@@ -1,0 +1,216 @@
+<div id="landing-page" class="landing-container">
+  <!-- Header -->
+  <header class="landing-header">
+    <div class="landing-logo">
+      <span class="pulse-dot"></span>
+      <span>Pulse</span>
+      <span class="open-source-badge">Open Source</span>
+    </div>
+    <div class="landing-nav-actions">
+      <button class="btn-theme-toggle" id="landing-theme-toggle" title="Alternar Tema">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+      </button>
+      <a href="https://github.com" target="_blank" class="btn-github-link" title="Acessar Código-Fonte" style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary); hover: var(--text-primary); transition: color 0.2s;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+        </svg>
+      </a>
+      <button class="btn-landing-secondary" id="btn-landing-login">Entrar</button>
+      <button class="btn-landing-primary" id="btn-landing-register">Criar Conta</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="landing-hero">
+    <div class="hero-badge">Agente Editorial Open-Source & Self-Hosted</div>
+    <h1>Agende e Publique no Bluesky e Twitter/X de forma <span>Inteligente</span></h1>
+    <p class="hero-subtitle">
+      Ferramenta autônoma de código aberto que combina IA (Ollama local, Gemini, OpenAI) com calendário editorial e controle de cotas para organizar sua presença digital.
+    </p>
+    <div class="hero-cta-group">
+      <button class="btn-hero-primary" id="btn-hero-start">Iniciar Agora</button>
+      <button class="btn-hero-secondary" id="btn-hero-plans">Ver Cotas de Recursos</button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="landing-features">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+        </svg>
+      </div>
+      <h3>Calendário Editorial</h3>
+      <p>Planeje posts visualmente em um mural interativo estilo post-its. Organize por temas, datas e horários.</p>
+    </div>
+    <div class="feature-card feature-ai">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 21l-.813-5.096L3 15l5.096-.813L9 9l.813 5.187L15 15l-5.187.904ZM18 10.5l-.375 2.25L15.375 13l2.25.375.375 2.25.375-2.25L21 13l-2.25-.375-.375-2.25Z" />
+        </svg>
+      </div>
+      <h3>Múltiplos Provedores de IA</h3>
+      <p>Alterne entre Ollama local, Google Gemini e APIs compatíveis com OpenAI (DeepSeek, Groq) com um clique.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+        </svg>
+      </div>
+      <h3>Logs de Auditoria</h3>
+      <p>Registros completos de cada ação crítica na plataforma para segurança e rastreabilidade total.</p>
+    </div>
+  </section>
+
+  <!-- Manual Section -->
+  <section class="landing-manual" id="manual-section">
+    <h2>Como Funciona?</h2>
+    <p class="manual-subtitle">Configure e gerencie seu agente editorial em poucos minutos</p>
+
+    <div class="manual-steps">
+      <!-- Passo 1 -->
+      <div class="manual-card">
+        <div class="manual-num">01</div>
+        <div class="manual-content">
+          <h3>Conexão Segura</h3>
+          <p>
+            Em <strong>Configurações</strong>, conecte suas contas do Bluesky e Twitter/X (via OAuth 2.0 ou Chaves de Desenvolvedor). Credenciais criptografadas localmente via Fernet.
+          </p>
+        </div>
+      </div>
+
+      <!-- Passo 2 -->
+      <div class="manual-card">
+        <div class="manual-num">02</div>
+        <div class="manual-content">
+          <h3>Servidores de IA</h3>
+          <p>
+            Cadastre seus provedores de IA na biblioteca. Defina o <strong>Tom de Voz</strong>, a <strong>Persona do Usuário</strong> e as <strong>Instruções Gerais de Escrita</strong>, selecione o servidor ativo e comece a gerar posts.
+          </p>
+        </div>
+      </div>
+
+      <!-- Passo 3 -->
+      <div class="manual-card">
+        <div class="manual-num">03</div>
+        <div class="manual-content">
+          <h3>Banco de Ideias</h3>
+          <p>
+            Salve rascunhos livres no <strong>Banco de Ideias</strong>. Ao criar um post a partir de uma ideia, a IA foca no seu texto original com a tag <em>"💡 Ideia do Usuário"</em>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Passo 4 -->
+      <div class="manual-card">
+        <div class="manual-num">04</div>
+        <div class="manual-content">
+          <h3>Agendamento</h3>
+          <p>
+            Escolha o modo de publicação na aba <strong>Calendário</strong>:
+          </p>
+          <ul class="manual-list">
+            <li><strong>Recorrente</strong>: Publica automaticamente a cada X horas com tema aleatório.</li>
+            <li><strong>Personalizado</strong>: Planeje posts para datas e horas específicas no mural interativo, com opção de alternar entre <strong>Modo IA</strong> e <strong>Uso Manual</strong> (escreva o texto exato diretamente).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Passo 5 -->
+      <div class="manual-card">
+        <div class="manual-num">05</div>
+        <div class="manual-content">
+          <h3>Score de Qualidade</h3>
+          <p>
+            Antes de publicar, avalie o post com a IA. O sistema analisa clareza, gancho, especificidade e detecta clichês de IA automaticamente, com sugestões de melhoria.
+          </p>
+        </div>
+      </div>
+
+      <!-- Passo 6 -->
+      <div class="manual-card">
+        <div class="manual-num">06</div>
+        <div class="manual-content">
+          <h3>Insights de Métricas</h3>
+          <p>
+            Na <strong>Visão Geral</strong>, a IA analisa curtidas, reposts e respostas do seu histórico e recomenda variações de posts com melhor potencial de engajamento.
+          </p>
+        </div>
+      </div>
+
+      <!-- Passo 7 -->
+      <div class="manual-card">
+        <div class="manual-num">07</div>
+        <div class="manual-content">
+          <h3>Cotas e Auditoria</h3>
+          <p>
+            O administrador gerencia perfis de cotas (limites de posts, temas e conexões) para controlar custos de API. Todas as ações ficam registradas nos logs de auditoria.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quotas & Resource Section -->
+  <section id="pricing-section" class="landing-pricing">
+    <h2>Níveis de Uso & Limites de Cotas</h2>
+    <p class="pricing-subtitle">Como um projeto open-source e auto-hospedado, o Pulse gerencia recursos por cotas para controle de consumo de APIs e custos de infraestrutura local.</p>
+    
+    <div class="pricing-grid">
+      <!-- Pessoal -->
+      <div class="price-card">
+        <h3>Uso Pessoal</h3>
+        <p class="price-value" style="font-size: 1.5rem; font-weight: 600; margin: 0.5rem 0;">Cota Pessoal</p>
+        <ul class="price-features">
+          <li>Até 3 temas ativos</li>
+          <li>1 conta social conectada</li>
+          <li>Até 5 itens no calendário</li>
+          <li>2 publicações por dia</li>
+          <li>Voltado para criadores individuais e testes locais</li>
+        </ul>
+        <button class="btn-price-action" data-tier="free">Configurar Uso Pessoal</button>
+      </div>
+
+      <!-- Entusiasta -->
+      <div class="price-card featured">
+        <h3>Uso Entusiasta</h3>
+        <p class="price-value" style="font-size: 1.5rem; font-weight: 600; margin: 0.5rem 0;">Cota Expandida</p>
+        <ul class="price-features">
+          <li>Até 15 temas ativos</li>
+          <li>3 contas sociais conectadas</li>
+          <li>Até 50 itens no calendário</li>
+          <li>10 publicações por dia</li>
+          <li>Ideal para publicações regulares e múltiplos canais</li>
+        </ul>
+        <button class="btn-price-action" data-tier="pro">Configurar Uso Entusiasta</button>
+      </div>
+
+      <!-- Coletivo -->
+      <div class="price-card">
+        <h3>Uso Coletivo</h3>
+        <p class="price-value" style="font-size: 1.5rem; font-weight: 600; margin: 0.5rem 0;">Cota Comunitária</p>
+        <ul class="price-features">
+          <li>Até 100 temas ativos</li>
+          <li>10 contas sociais conectadas</li>
+          <li>Até 1000 itens no calendário</li>
+          <li>50 publicações por dia</li>
+          <li>Planejado para instâncias compartilhadas por equipes</li>
+        </ul>
+        <button class="btn-price-action" data-tier="desk">Configurar Uso Coletivo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <p>&copy; 2026 Pulse Editorial Agent. Licença MIT. Desenvolvido de forma aberta pela comunidade.</p>
+  </footer>
+
+</div>

@@ -1,0 +1,125 @@
+      <!-- Panel 3: Biblioteca & Ideias -->
+      <div class="tab-panel" id="tab-library">
+        <!-- Sub-tab Navigation -->
+        <div class="sub-tab-navigation" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+          <button type="button" class="sub-tab-btn active" data-subtab="history" style="background: none; border: none; color: var(--text-primary); font-weight: 600; padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid var(--color-accent); transition: all var(--transition-fast); display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans); font-size: 0.85rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 14px; height: 14px;"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Histórico de Publicados</span>
+          </button>
+          <button type="button" class="sub-tab-btn" data-subtab="ideas" style="background: none; border: none; color: var(--text-secondary); font-weight: 500; padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid transparent; transition: all var(--transition-fast); display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans); font-size: 0.85rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 14px; height: 14px;"><path d="M9.663 17h4.673M12 3v1m6.364.364l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 113.536 0V21h-3v-3.757z"></path></svg>
+            <span>Banco de Ideias Brutas</span>
+          </button>
+        </div>
+
+        <!-- Sub-tab Panel: History -->
+        <div class="sub-tab-panel-content active" id="subpanel-history">
+          <section class="panel-section history-section full-width-library">
+            <div class="panel-header">
+              <h3>Histórico de Publicações</h3>
+              <div class="panel-header-actions">
+                <button type="button" id="btn-refresh-metrics" class="btn-text-action compact" style="color: var(--color-accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 13px; height: 13px;"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                  <span>Atualizar Métricas</span>
+                </button>
+              </div>
+            </div>
+            <div class="library-wrapper">
+              <div id="history-loading" class="spinner-container">
+                <div class="spinner"></div>
+                <p>Carregando histórico...</p>
+              </div>
+              <div id="history-empty" class="empty-state hidden">
+                <p>Nenhuma publicação ou rascunho na biblioteca.</p>
+              </div>
+              <div id="history-table-container" class="table-responsive hidden">
+                <table class="library-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 15%">Data/Hora</th>
+                      <th style="width: 12%">Tema</th>
+                      <th style="width: 10%">Status</th>
+                      <th style="width: 18%">Engajamento</th>
+                      <th style="width: 30%">Conteúdo do Post</th>
+                      <th style="width: 15%">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="history-tbody">
+                    <!-- Dynamically populated -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sub-tab Panel: Ideas -->
+        <div class="sub-tab-panel-content hidden" id="subpanel-ideas">
+          <div class="ideas-layout">
+            <!-- Left: Capture Idea Form -->
+            <section class="panel-section">
+              <div class="panel-header">
+                <h3>Capturar Nova Ideia</h3>
+              </div>
+              <form id="form-new-idea" style="display: flex; flex-direction: column; gap: 1rem; padding-top: 0.5rem;">
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 0.35rem;">
+                  <label for="idea-title" style="font-size: 0.8rem; font-weight: 500; color: var(--text-secondary);">Título / Tema da Ideia</label>
+                  <input type="text" id="idea-title" placeholder="Ex: Uso prático de LLMs sem hype" required style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem; color: var(--text-primary); font-family: var(--font-sans); font-size: 0.85rem;" />
+                </div>
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 0.35rem;">
+                  <label for="idea-description" style="font-size: 0.8rem; font-weight: 500; color: var(--text-secondary);">Explicação / Rascunho Rápido</label>
+                  <textarea id="idea-description" placeholder="Digite seus insights, pontos-chave ou rascunho bruto aqui. A IA usará isso para criar o post final no Criador." required rows="6" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem; color: var(--text-primary); font-family: var(--font-sans); font-size: 0.85rem; line-height: 1.4; resize: vertical;"></textarea>
+                </div>
+                
+                <!-- Target Channel Selector for Idea -->
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 0.35rem;">
+                  <label class="input-label" style="font-size: 0.7rem; font-weight: 600;">Rede Social de Destino</label>
+                  <select id="idea-channel" style="display: none;">
+                    <option value="bluesky">bluesky</option>
+                    <option value="twitter">twitter</option>
+                    <option value="threads">threads</option>
+                  </select>
+                  <div class="channel-selector-group idea-channel-selector" style="margin-top: 0.25rem;">
+                    <div class="channel-option-card active" data-value="bluesky" title="Bluesky">
+                      <svg viewBox="0 0 512 512" fill="currentColor" style="width: 18px; height: 18px;"><path d="M111.8 42.2C188.4 98.9 237.4 179.6 256 211.5c18.6-31.9 67.6-112.6 144.2-169.3C449.6 5.8 512-16.3 512 25.2c0 9.1-4.7 93.9-8.4 135.9c-8.9 101.4-53.8 128.2-96.1 134.4c65.5 9.7 75.8 62.8 41 113.3c-42.3 61.4-150.3 35.8-192.5 12.3c-42.2 23.5-150.2 49.1-192.5-12.3c-34.8-50.5-24.5-103.6 41-113.3c-42.3-6.2-87.2-33-96.1-134.4C4.7 119.1 0 34.3 0 25.2C0-16.3 62.4 5.8 111.8 42.2z"/></svg>
+                      <span>Bluesky</span>
+                    </div>
+                    <div class="channel-option-card" data-value="twitter" title="Twitter / X">
+                      <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                      <span>Twitter / X</span>
+                    </div>
+                    <div class="channel-option-card disabled" data-value="threads" title="Threads (Em Breve)">
+                      <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.8 0 5.4-1.1 7.3-3.1l-1.4-1.4C16.3 19.1 14.2 20 12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8v1c0 1.1-.9 2-2 2s-2-.9-2-2v-5h-2v1.43c-.6-.82-1.6-1.43-2.73-1.43-2.35 0-4.27 1.92-4.27 4.27s1.92 4.27 4.27 4.27c1.13 0 2.13-.61 2.73-1.43V14c0 2.2 1.8 4 4 4s4-1.8 4-4v-2c0-5.52-4.48-10-10-10zm-1 12.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                      <span>Threads 🚧</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.65rem; font-weight: 600; border-radius: var(--radius-sm); font-size: 0.85rem; margin-top: 0.5rem;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 14px; height: 14px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  <span>Salvar Ideia no Banco</span>
+                </button>
+              </form>
+            </section>
+
+            <!-- Right: Ideas List -->
+            <section class="panel-section">
+              <div class="panel-header">
+                <h3>Banco de Ideias Brutas</h3>
+              </div>
+              <div class="ideas-wrapper" style="margin-top: 0.5rem;">
+                <div id="ideas-loading" class="spinner-container hidden">
+                  <div class="spinner"></div>
+                  <p>Carregando ideias...</p>
+                </div>
+                <div id="ideas-empty" class="empty-state">
+                  <p>Nenhuma ideia capturada no momento. Use o painel ao lado para registrar.</p>
+                </div>
+                <div id="ideas-list" style="display: flex; flex-direction: column; gap: 1rem; max-height: 500px; overflow-y: auto; padding-right: 0.25rem;">
+                  <!-- Dynamic idea cards populate here -->
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>

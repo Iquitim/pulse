@@ -1,0 +1,136 @@
+/* --- Tab Navigation & Modular Layout Extensions --- */
+.tab-navigation {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.5rem;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-surface-elevated);
+}
+
+.tab-btn.active {
+  color: var(--color-accent);
+  background-color: var(--bg-surface);
+  border-bottom: 2px solid var(--color-accent);
+  font-weight: 600;
+}
+
+.tab-btn svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  transition: opacity 0.2s var(--ease-out);
+}
+
+.tab-btn.active svg {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+/* Tab Panel visibility controller */
+.tab-panels-container {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tab-panel {
+  display: none;
+  min-width: 0;
+}
+
+.tab-panel.active {
+  display: block;
+  animation: tabFadeIn 0.25s var(--ease-out);
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Dashboard Section Layout --- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr 0.9fr;
+  gap: 1.5rem !important;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Layout modifications for specific tabs */
+.dashboard-overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 800px) {
+  .dashboard-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Centered forms for clean reading on focus screens */
+.editor-panel-centered,
+.config-panel-centered {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.full-width-library {
+  width: 100%;
+}
+
+/* Responsive side-by-side grids for Editor and Config tabs */
+.editor-two-columns,
+.config-two-columns {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.editor-two-columns > *,
+.config-two-columns > * {
+  min-width: 0;
+}
+
+@media (max-width: 950px) {
+  .editor-two-columns,
+  .config-two-columns {
+    grid-template-columns: 1fr;
+  }
+}

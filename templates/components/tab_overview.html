@@ -1,0 +1,88 @@
+      <!-- Panel 1: Dashboard (Visão Geral) -->
+      <div class="tab-panel active" id="tab-dashboard">
+        <div class="dashboard-overview-grid">
+          <!-- Section: Queue -->
+          <section class="panel-section">
+            <div class="panel-header">
+              <h3>Fila de Publicações Estimada</h3>
+            </div>
+            <div class="queue-container">
+              <div id="queue-list" class="queue-list">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </section>
+
+          <!-- Section: Terminal Logs -->
+          <section class="panel-section">
+            <div class="panel-header">
+              <h3>Logs do Sistema</h3>
+              <div class="panel-header-actions">
+                <button type="button" id="btn-copy-logs" class="btn-text-action compact">Copiar</button>
+                <button type="button" id="btn-clear-logs" class="btn-text-action compact text-danger">Limpar</button>
+              </div>
+            </div>
+            <div class="terminal-wrapper">
+              <div id="console-output" class="terminal-content">
+                <!-- Log lines populated here -->
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Section: IA Insights Editoriais -->
+        <section class="panel-section" style="margin-top: 1.25rem;">
+          <div class="panel-header">
+            <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 16px; height: 16px; color: var(--color-accent);"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              <span>IA Insights Editoriais</span>
+            </h3>
+            <div class="panel-header-actions">
+              <button type="button" id="btn-refresh-insights" class="btn-text-action compact" style="color: var(--color-accent); font-weight: 600; display: inline-flex; align-items: center; gap: 0.25rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 13px; height: 13px;"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                <span>Recalcular Insights</span>
+              </button>
+            </div>
+          </div>
+          <div class="insights-wrapper" style="padding: 1rem; background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 1rem; min-height: 100px;">
+            <div id="insights-loading" class="spinner-container hidden" style="padding: 1rem;">
+              <div class="spinner"></div>
+              <p style="margin: 0; color: var(--text-secondary); font-size: 0.75rem;">Gerando insights baseados no engajamento...</p>
+            </div>
+            
+            <div id="insights-content">
+              <p id="insights-text" style="font-size: 0.85rem; line-height: 1.45; color: var(--text-secondary); margin: 0; margin-bottom: 0.75rem;">
+                Nenhum insight disponível no momento. Clique em "Recalcular Insights" para analisar seu histórico de publicações.
+              </p>
+              
+              <div id="insights-suggestions-container" class="hidden" style="border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+                <div style="font-weight: 600; font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--text-primary);">Variações de Conteúdo Recomendadas:</div>
+                <div id="insights-suggestions-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem;">
+                  <!-- Dynamically populated suggested posts -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Atividades Recentes (Audit Logs) -->
+        <section class="panel-section" style="margin-top: 1.25rem;">
+          <div class="panel-header">
+            <h3>Histórico de Atividades Recentes</h3>
+          </div>
+          <div class="library-wrapper" style="max-height: 250px; overflow-y: auto;">
+            <table class="library-table" style="font-size: 0.8rem;">
+              <thead>
+                <tr>
+                  <th>Data/Hora</th>
+                  <th>Ação</th>
+                  <th>Detalhes</th>
+                </tr>
+              </thead>
+              <tbody id="user-activities-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>

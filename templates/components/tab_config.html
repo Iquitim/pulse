@@ -1,0 +1,345 @@
+      <!-- Panel 4: Configurações -->
+      <div class="tab-panel" id="tab-config">
+        <form id="config-form" class="config-two-columns">
+          
+          <!-- Coluna da Esquerda: Configurações do Agente -->
+          <section class="panel-section">
+            <div class="panel-header">
+              <h3>Agendamento & Identidade</h3>
+            </div>
+
+            <div class="panel-form">
+              <!-- Toggle: Active -->
+              <div class="form-toggle-row">
+                <div class="toggle-info">
+                  <label for="is_active" class="toggle-title">Agente Ativo</label>
+                  <p class="toggle-subtitle">O Pulse publicará automaticamente nos canais conectados conforme o cronograma.</p>
+                </div>
+                <div class="switch-container">
+                  <input type="checkbox" id="is_active">
+                  <label for="is_active" class="switch-slider"></label>
+                </div>
+              </div>
+
+              <!-- Toggle: Requires Approval -->
+              <div class="form-toggle-row">
+                <div class="toggle-info">
+                  <label for="requires_approval" class="toggle-title">Exigir Aprovação Manual</label>
+                  <p class="toggle-subtitle">Os posts agendados serão salvos como rascunhos em vez de irem direto ao ar.</p>
+                </div>
+                <div class="switch-container">
+                  <input type="checkbox" id="requires_approval">
+                  <label for="requires_approval" class="switch-slider"></label>
+                </div>
+              </div>
+
+              <!-- Select: Voice Tone -->
+              <div class="form-group">
+                <label for="tone" class="input-label">Tom de Voz (Personalidade)</label>
+                <div class="select-wrapper">
+                  <select id="tone" class="clean-select">
+                    <option value="informativo">Informativo & Educacional</option>
+                    <option value="profissional">Profissional & Técnico</option>
+                    <option value="divertido">Divertido & Casual</option>
+                    <option value="entusiasta">Entusiasta & Motivador</option>
+                    <option value="filosofico">Reflexivo & Filosófico</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Themes chip manager -->
+              <div class="form-group">
+                <div class="slider-header">
+                  <label class="input-label">Temas Ativos</label>
+                  <span id="themes-count-badge" class="badge-count">0 temas</span>
+                </div>
+                <p class="toggle-subtitle" style="font-size: 0.725rem; color: var(--text-muted); margin-top: 0.25rem; margin-bottom: 0.5rem; line-height: 1.3;">
+                  ℹ️ Os temas ativos são válidos apenas para o <strong>Modo Recorrente</strong>. A cada rodada, o Pulse selecionará 1 tema aleatoriamente para gerar a publicação.
+                </p>
+                <div class="tag-input-row">
+                  <input type="text" id="new-theme-input" placeholder="Adicionar tema..." autocomplete="off">
+                  <button type="button" id="btn-add-theme" class="btn-add-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  </button>
+                </div>
+                <div id="themes-container" class="themes-flex-container">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Coluna da Direita: Prompt & Envio -->
+          <section class="panel-section" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="panel-header">
+              <h3>Diretrizes & Persona</h3>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem; flex-grow: 1;">
+              
+              <!-- Campo: Persona -->
+              <div class="system-prompt-container" style="display: flex; flex-direction: column; gap: 0.25rem;">
+                <div class="prompt-header-row" style="display: flex; justify-content: space-between; align-items: center;">
+                  <label for="persona_description" class="input-label" style="color: var(--color-ai); font-weight: 600; margin: 0;">Persona do Usuário (Biografia / Tom)</label>
+                  <button type="button" id="btn-restore-persona" class="btn-text-action" style="font-size: 0.75rem; background: none; border: none; color: var(--color-accent); cursor: pointer;">Restaurar padrão</button>
+                </div>
+                <p class="toggle-subtitle" style="margin: 0 0 0.25rem 0; font-size: 0.725rem; color: var(--text-muted);">Descreva a persona que a IA irá assumir (biografia, tom e quem você é).</p>
+                <textarea id="persona_description" class="clean-textarea prompt-box" rows="5" placeholder="Descreva sua persona (ex: Desenvolvedor de software focado em IA, tom casual e direto...)" style="font-family: var(--font-body); font-size: 0.75rem; min-height: 120px; width: 100%; box-sizing: border-box;"></textarea>
+              </div>
+
+              <!-- Campo: Prompt do Sistema -->
+              <div class="system-prompt-container" style="display: flex; flex-direction: column; gap: 0.25rem;">
+                <div class="prompt-header-row" style="display: flex; justify-content: space-between; align-items: center;">
+                  <label for="system_prompt" class="input-label" style="color: var(--color-ai); font-weight: 600; margin: 0;">Instruções Gerais (Prompt do Sistema)</label>
+                  <button type="button" id="btn-restore-prompt" class="btn-text-action" style="font-size: 0.75rem; background: none; border: none; color: var(--color-accent); cursor: pointer;">Restaurar padrão</button>
+                </div>
+                <p class="toggle-subtitle" style="margin: 0 0 0.25rem 0; font-size: 0.725rem; color: var(--text-muted);">Regras de formatação. Use os placeholders <code>{theme}</code> e <code>{tone}</code>.</p>
+                <textarea id="system_prompt" class="clean-textarea prompt-box" rows="5" placeholder="Digite as diretrizes de sistema..." style="font-family: monospace; font-size: 0.75rem; min-height: 120px; width: 100%; box-sizing: border-box;"></textarea>
+              </div>
+
+            </div>
+
+            <button type="submit" id="btn-save-config" class="btn-primary" style="width: 100%;">
+              <span>Salvar Configurações</span>
+            </button>
+          </section>
+          
+        </form>
+
+        <!-- Módulo: Provedores de Inteligência Artificial (LLM) -->
+        <section class="panel-section" style="margin-top: 1.5rem;">
+          <!-- Special embedded Ollama Banner for lay users -->
+          <div id="ollama-installer-banner" class="info-container hidden" style="border: 1px solid var(--color-ai); background-color: rgba(59, 130, 246, 0.05); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem; border-radius: var(--radius-md);">
+            <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-inline" style="width: 20px; height: 20px; color: var(--color-ai); flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div>
+                <h4 style="margin: 0; font-size: 0.875rem; font-weight: 600; color: var(--text-primary);">Deseja rodar inteligência artificial local de graça?</h4>
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.75rem; color: var(--text-muted); line-height: 1.3;">Não detectamos servidores de IA ativos. Você pode diagnosticar seu computador e instalar o Ollama de forma 100% automatizada e privada.</p>
+              </div>
+            </div>
+            <button type="button" id="btn-open-ollama-installer" class="btn-primary" style="padding: 0.45rem 1rem; font-size: 0.75rem; white-space: nowrap; border-color: var(--color-ai); background-color: var(--color-ai);">
+              Instalar Assistente IA
+            </button>
+          </div>
+
+          <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <div style="flex-grow: 1;">
+              <h3>Servidores de Inteligência Artificial (LLM)</h3>
+              <p class="toggle-subtitle" style="margin: 0; font-size: 0.8rem;">
+                Gerencie múltiplos provedores de LLM. O servidor selecionado como <strong>Ativo</strong> será usado para gerar os posts e insights.
+              </p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.25rem;">
+              <button type="button" id="btn-quick-ollama-installer" class="btn-secondary" style="font-size: 0.75rem; padding: 0.4rem 0.75rem; border-color: var(--color-ai); color: var(--color-ai);">
+                Instalar Ollama (Do Zero)
+              </button>
+              <button type="button" id="btn-quick-ollama-models" class="btn-secondary" style="font-size: 0.75rem; padding: 0.4rem 0.75rem; border-color: var(--color-ai); color: var(--color-ai);">
+                Gerenciar Modelos (Já Instalado)
+              </button>
+            </div>
+          </div>
+          
+          <div class="config-two-columns" style="margin-top: 0.5rem; align-items: start;">
+            <!-- Coluna da Esquerda: Servidores Salvos -->
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <h4 class="input-label" style="margin-bottom: 0.25rem;">Servidores Configurados</h4>
+              <div id="llm-servers-list" class="queue-list" style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; padding-right: 0.25rem;">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Coluna da Direita: Adicionar/Editar Servidor -->
+            <div style="background-color: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+              <h4 id="llm-server-form-title" style="margin: 0 0 1rem 0; font-size: 0.9rem; font-weight: 600; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                Adicionar Servidor
+              </h4>
+              
+              <form id="llm-server-form" style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <input type="hidden" id="llm_server_id" value="">
+                
+                <div class="form-group">
+                  <label for="llm_server_name" class="input-label">Nome do Servidor</label>
+                  <input type="text" id="llm_server_name" required placeholder="Ex: Ollama Local, Gemini Pro Cloud" class="clean-input">
+                </div>
+
+                <div class="form-group">
+                  <label for="llm_provider" class="input-label">Provedor</label>
+                  <div class="select-wrapper">
+                    <select id="llm_provider" class="clean-select">
+                      <option value="ollama" selected>Ollama (Local)</option>
+                      <option value="gemini">Google Gemini (Nativo)</option>
+                      <option value="openai_compatible">OpenAI / Compatível (DeepSeek, Groq, OpenRouter)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="llm_model" class="input-label">Modelo (Model ID)</label>
+                  <input type="text" id="llm_model" required placeholder="Ex: gemini-2.5-flash-lite, llama3, gpt-4o" class="clean-input">
+                </div>
+
+                <div class="form-group" id="llm-base-url-group">
+                  <label for="llm_base_url" class="input-label">Base URL (API Endpoint)</label>
+                  <input type="text" id="llm_base_url" placeholder="Ex: http://localhost:11434/v1" class="clean-input">
+                </div>
+
+                <div class="form-group" id="llm-api-key-group">
+                  <label for="llm_api_key" class="input-label">Chave de API (API Key)</label>
+                  <input type="password" id="llm_api_key" placeholder="Insira a API Key (opcional se local)" class="clean-input">
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; justify-content: flex-end;">
+                  <button type="button" id="btn-test-llm-server" class="btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem; flex-grow: 1;">
+                    Testar Conexão
+                  </button>
+                  <button type="submit" id="btn-save-llm-server" class="btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.8rem; flex-grow: 1;">
+                    Salvar
+                  </button>
+                  <button type="button" id="btn-cancel-llm-edit" class="btn-secondary hidden" style="padding: 0.5rem 1rem; font-size: 0.8rem; color: var(--color-failed);">
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- Connected Social Accounts Section -->
+        <section class="panel-section" style="margin-top: 1.5rem;">
+          <div class="panel-header">
+            <h3>Conectar Redes Sociais</h3>
+          </div>
+          
+          <div class="config-two-columns-equal" style="margin-top: 1rem;">
+            <!-- Form to Add Account -->
+            <div>
+              <form id="social-connect-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <div class="form-group">
+                  <label class="input-label">Plataforma</label>
+                  <select id="social-platform-select" style="display: none;">
+                    <option value="bluesky" selected>bluesky</option>
+                    <option value="twitter">twitter</option>
+                    <option value="threads">threads</option>
+                  </select>
+                  <div class="channel-selector-group social-platform-selector" style="margin-top: 0.25rem;">
+                    <div class="channel-option-card active" data-value="bluesky" title="Bluesky">
+                      <svg viewBox="0 0 512 512" fill="currentColor" style="width: 18px; height: 18px;"><path d="M111.8 42.2C188.4 98.9 237.4 179.6 256 211.5c18.6-31.9 67.6-112.6 144.2-169.3C449.6 5.8 512-16.3 512 25.2c0 9.1-4.7 93.9-8.4 135.9c-8.9 101.4-53.8 128.2-96.1 134.4c65.5 9.7 75.8 62.8 41 113.3c-42.3 61.4-150.3 35.8-192.5 12.3c-42.2 23.5-150.2 49.1-192.5-12.3c-34.8-50.5-24.5-103.6 41-113.3c-42.3-6.2-87.2-33-96.1-134.4C4.7 119.1 0 34.3 0 25.2C0-16.3 62.4 5.8 111.8 42.2z"/></svg>
+                      <span>Bluesky</span>
+                    </div>
+                    <div class="channel-option-card" data-value="twitter" title="Twitter / X">
+                      <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                      <span>Twitter / X</span>
+                    </div>
+                    <div class="channel-option-card disabled" data-value="threads" title="Threads (Em Breve)">
+                      <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.8 0 5.4-1.1 7.3-3.1l-1.4-1.4C16.3 19.1 14.2 20 12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8v1c0 1.1-.9 2-2 2s-2-.9-2-2v-5h-2v1.43c-.6-.82-1.6-1.43-2.73-1.43-2.35 0-4.27 1.92-4.27 4.27s1.92 4.27 4.27 4.27c1.13 0 2.13-.61 2.73-1.43V14c0 2.2 1.8 4 4 4s4-1.8 4-4v-2c0-5.52-4.48-10-10-10zm-1 12.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                      <span>Threads 🚧</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="social-handle-input" class="input-label">Handle / Identificador da Conta</label>
+                  <input type="text" id="social-handle-input" required placeholder="Ex: @seu_usuario" class="clean-input">
+                </div>
+
+                <!-- Credentials Group (Changes depending on platform, default is Bluesky) -->
+                <div id="credentials-group-bluesky" class="credentials-fields">
+                  <div class="form-group">
+                    <label for="bsky-username-input" class="input-label">Usuário/Email</label>
+                    <input type="text" id="bsky-username-input" placeholder="usuario.bsky.social" class="clean-input">
+                  </div>
+                  <div class="form-group" style="margin-top: 0.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                      <label for="bsky-password-input" class="input-label" style="margin: 0;">Senha de Aplicativo (App Password)</label>
+                      <a href="#" id="btn-bsky-tutorial" style="font-size: 0.725rem; color: var(--color-accent); text-decoration: underline; cursor: pointer;">Como obter?</a>
+                    </div>
+                    <input type="password" id="bsky-password-input" placeholder="xxxx-xxxx-xxxx-xxxx" class="clean-input">
+                  </div>
+                </div>
+
+                <div id="credentials-group-twitter" class="credentials-fields hidden">
+                  <div class="form-group" style="margin-bottom: 0.75rem;">
+                    <label for="twitter-conn-type" class="input-label">Tipo de Conexão</label>
+                    <div class="select-wrapper">
+                      <select id="twitter-conn-type" class="clean-select">
+                        <option value="oauth2">OAuth 2.0 (Recomendado - Popup)</option>
+                        <option value="developer">Chaves de Desenvolvedor (Manual)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Twitter OAuth 2.0 Sub-group -->
+                  <div id="twitter-sub-oauth2" class="twitter-sub-fields">
+                    <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); text-align: center; margin-bottom: 0.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+                      <svg viewBox="0 0 24 24" fill="currentColor" style="width: 32px; height: 32px; color: var(--text-primary);"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                      <div style="font-size: 0.825rem; color: var(--text-secondary); line-height: 1.4;">
+                        A conexão com o Twitter / X requer autorização segura via OAuth 2.0. Uma janela pop-up será aberta para você autorizar o acesso.
+                      </div>
+                      <button type="button" id="btn-connect-twitter" class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.6rem 1rem;">
+                        <span>Autorizar no Twitter / X 🔗</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Twitter Developer Keys Sub-group -->
+                  <div id="twitter-sub-developer" class="twitter-sub-fields hidden" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div class="form-group">
+                      <label for="twitter-key-input" class="input-label">API Key (Consumer Key)</label>
+                      <input type="text" id="twitter-key-input" class="clean-input" placeholder="Cole a API Key">
+                    </div>
+                    <div class="form-group">
+                      <label for="twitter-secret-input" class="input-label">API Secret (Consumer Secret)</label>
+                      <input type="password" id="twitter-secret-input" class="clean-input" placeholder="Cole a API Secret">
+                    </div>
+                    <div class="form-group">
+                      <label for="twitter-token-input" class="input-label">Access Token</label>
+                      <input type="text" id="twitter-token-input" class="clean-input" placeholder="Cole o Access Token">
+                    </div>
+                    <div class="form-group">
+                      <label for="twitter-token-secret-input" class="input-label">Access Token Secret</label>
+                      <input type="password" id="twitter-token-secret-input" class="clean-input" placeholder="Cole o Access Token Secret">
+                    </div>
+                  </div>
+                </div>
+
+                <div id="credentials-group-threads" class="credentials-fields hidden">
+                  <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 32px; height: 32px; color: var(--color-warning);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c2.8 0 5.4-1.1 7.3-3.1l-1.4-1.4C16.3 19.1 14.2 20 12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8v1c0 1.1-.9 2-2 2s-2-.9-2-2v-5h-2v1.43c-.6-.82-1.6-1.43-2.73-1.43-2.35 0-4.27 1.92-4.27 4.27s1.92 4.27 4.27 4.27c1.13 0 2.13-.61 2.73-1.43V14c0 2.2 1.8 4 4 4s4-1.8 4-4v-2c0-5.52-4.48-10-10-10zm-1 12.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <div style="font-size: 0.825rem; font-weight: 600; color: var(--text-primary);">Integração em Desenvolvimento</div>
+                    <div style="font-size: 0.725rem; color: var(--text-muted); line-height: 1.3;">
+                      A conexão direta com o Threads está sendo implementada e estará disponível em breve.
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" id="btn-submit-social-connect" class="btn-secondary" style="margin-top: 0.5rem;">Vincular Conta</button>
+              </form>
+              <div id="social-connect-error" class="error-container hidden" style="margin-top: 0.5rem; padding: 0.5rem;">
+                <p id="social-connect-error-msg" class="error-text" style="font-size: 0.75rem;"></p>
+              </div>
+            </div>
+
+            <!-- List of Connected Accounts -->
+            <div>
+              <h4 class="input-label" style="margin-bottom: 0.5rem;">Contas Ativas</h4>
+              <div id="connected-accounts-list" class="queue-list" style="max-height: 250px; overflow-y: auto;">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Segurança Section -->
+        <section class="panel-section" style="margin-top: 1.5rem;">
+          <div class="panel-header">
+            <h3>Segurança da Conta</h3>
+          </div>
+          <div style="margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; padding: 1rem; background-color: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md); flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h4 style="margin: 0; font-size: 0.85rem; font-weight: 600; color: var(--text-primary);">Alterar Senha do Usuário</h4>
+              <p style="margin: 0.15rem 0 0 0; font-size: 0.725rem; color: var(--text-muted);">Mantenha sua conta segura alterando sua senha de acesso periodicamente.</p>
+            </div>
+            <button type="button" id="btn-open-change-password-modal" class="btn-secondary" style="font-size: 0.8rem; padding: 0.45rem 1rem;">Alterar Senha</button>
+          </div>
+        </section>
+      </div>

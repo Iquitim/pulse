@@ -1,0 +1,133 @@
+/* --- Light Mode Colors Override --- */
+:root.light-theme {
+  --bg-main: #F4F4F5;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #E4E4E7;
+  --border-color: #D4D4D8;
+  --border-focus: #A1A1AA;
+
+  --text-primary: #09090B;
+  --text-secondary: #3F3F46;
+  --text-muted: #71717A;
+
+  --color-accent: #0284C7;
+  --color-accent-hover: #0369A1;
+}
+
+/* Light-theme specific adjustments for clean contrast */
+.light-theme .clean-textarea,
+.light-theme .clean-select,
+.light-theme .tag-input-row input,
+.light-theme .btn-preset,
+.light-theme .btn-add-icon {
+  background-color: #FFFFFF !important;
+}
+
+.light-theme .system-prompt-container {
+  background-color: rgba(139, 92, 246, 0.05) !important;
+}
+
+.light-theme .btn-primary {
+  background-color: #09090B !important;
+  color: #FFFFFF !important;
+}
+
+.light-theme .btn-primary:hover:not(:disabled) {
+  background-color: #27272A !important;
+}
+
+.light-theme .terminal-wrapper {
+  background-color: #18181B !important;
+  --text-primary: #F4F4F5 !important;
+  --text-secondary: #A1A1AA !important;
+  --text-muted: #71717A !important;
+  --bg-surface-elevated: #27272A !important;
+}
+
+/* Theme Toggle Button Styling */
+.btn-theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.btn-theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+  background-color: var(--bg-surface-elevated);
+}
+
+.btn-theme-toggle svg {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+}
+
+/* Toggle visibility of sun/moon icons based on class */
+.btn-theme-toggle .icon-sun {
+  display: block;
+}
+.btn-theme-toggle .icon-moon {
+  display: none;
+}
+.light-theme .btn-theme-toggle .icon-sun {
+  display: none;
+}
+.light-theme .btn-theme-toggle .icon-moon {
+  display: block;
+}
+
+/* Light Mode adjustments for Bluesky Mockup Preview */
+.light-theme .bluesky-preview-card {
+  background-color: #FFFFFF !important;
+  border-color: #D4D4D8 !important;
+}
+
+.light-theme .preview-header {
+  background-color: #FAFAFA !important;
+  border-bottom-color: #D4D4D8 !important;
+}
+
+.light-theme .preview-tag {
+  color: #71717A !important;
+}
+
+.light-theme .btn-copy-draft {
+  color: #0284C7 !important;
+}
+
+.light-theme .btn-copy-draft:hover {
+  background-color: #F4F4F5 !important;
+  border-color: #D4D4D8 !important;
+  color: #0369A1 !important;
+}
+
+.light-theme .bsky-avatar {
+  background-color: #F4F4F5 !important;
+  border-color: #D4D4D8 !important;
+}
+
+/* Calendar/Clock picker indicator style for dark theme */
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.85) !important;
+  cursor: pointer !important;
+}
+
+/* Calendar/Clock picker indicator style for light theme */
+.light-theme input[type="time"]::-webkit-calendar-picker-indicator,
+.light-theme input[type="date"]::-webkit-calendar-picker-indicator,
+.light-theme input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: none !important;
+}

@@ -1,0 +1,338 @@
+<!-- Detailed Post Modal Mockup -->
+<div id="post-modal" class="modal-overlay hidden">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Detalhes da Publicação</h3>
+      <button id="btn-close-modal" class="btn-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-info-row">
+        <div>
+          <span class="info-label">Tema:</span>
+          <span id="modal-theme" class="theme-badge">IA</span>
+        </div>
+        <div>
+          <span class="info-label">Data:</span>
+          <span id="modal-date" class="info-value">17/06/2026 23:00</span>
+        </div>
+        <div>
+          <span class="info-label">Status:</span>
+          <span id="modal-status" class="status-pill">Sucesso</span>
+        </div>
+      </div>
+
+      <!-- Metrics section inside modal -->
+      <div id="modal-metrics-container" class="hidden" style="margin: 1rem 0; border-top: 1px dashed var(--border-color); border-bottom: 1px dashed var(--border-color); padding: 0.75rem 0; display: flex; gap: 1.5rem; font-size: 0.825rem; justify-content: center;">
+        <div>
+          <span class="info-label">Curtidas:</span>
+          <span id="modal-likes" class="info-value" style="font-weight: 600; color: #F43F5E; margin-left: 0.25rem;">0</span>
+        </div>
+        <div>
+          <span class="info-label">Reposts:</span>
+          <span id="modal-reposts" class="info-value" style="font-weight: 600; color: #10B981; margin-left: 0.25rem;">0</span>
+        </div>
+        <div>
+          <span class="info-label">Respostas:</span>
+          <span id="modal-replies" class="info-value" style="font-weight: 600; color: #3B82F6; margin-left: 0.25rem;">0</span>
+        </div>
+      </div>
+      <div class="modal-post-box">
+        <div class="modal-post-header">
+          <div class="modal-avatar">P</div>
+          <div>
+            <div class="modal-handle-name" id="modal-author-handle">@usuario.bsky.social</div>
+            <div class="modal-handle-sub">Pulse Agent</div>
+          </div>
+        </div>
+        <div class="modal-post-content" id="modal-content">
+          Aqui estará o conteúdo do post.
+        </div>
+      </div>
+      <div id="modal-error-box" class="error-container hidden">
+        <span class="error-title">Erro ocorrido:</span>
+        <p id="modal-error-message" class="error-text">Mensagem de erro detalhada.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Admin User Audit Logs Modal -->
+<div id="user-logs-modal" class="modal-overlay hidden">
+  <div class="modal-card" style="max-width: 700px; width: 100%;">
+    <div class="modal-header">
+      <h3 id="user-logs-modal-title">Logs de Auditoria de Usuário</h3>
+      <button id="btn-close-user-logs-modal" class="btn-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="library-wrapper" style="max-height: 400px; overflow-y: auto;">
+        <table class="library-table" style="font-size: 0.75rem;">
+          <thead>
+            <tr>
+              <th>Data/Hora</th>
+              <th>Ação</th>
+              <th>Detalhes</th>
+            </tr>
+          </thead>
+          <tbody id="modal-user-activities-tbody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Change Password Modal for Authenticated User -->
+<div id="change-password-modal" class="modal-overlay hidden">
+  <div class="modal-card" style="max-width: 400px; width: 100%;">
+    <div class="modal-header">
+      <h3>Alterar Senha</h3>
+      <button id="btn-close-password-modal" class="btn-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="user-change-password-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div class="form-group">
+          <label for="user-current-password" class="input-label">Senha Atual</label>
+          <input type="password" id="user-current-password" required placeholder="Digite sua senha atual" class="clean-input">
+        </div>
+        <div class="form-group">
+          <label for="user-new-password" class="input-label">Nova Senha</label>
+          <input type="password" id="user-new-password" required placeholder="Mínimo 6 caracteres" class="clean-input" minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="user-confirm-password" class="input-label">Confirmar Nova Senha</label>
+          <input type="password" id="user-confirm-password" required placeholder="Repita a nova senha" class="clean-input" minlength="6">
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top: 0.5rem; width: 100%;">Atualizar Senha</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bluesky Tutorial Modal -->
+<div id="bsky-tutorial-modal" class="modal-overlay hidden">
+  <div class="modal-card" style="max-width: 500px; width: 100%;">
+    <div class="modal-header">
+      <h3>Como obter credenciais do Bluesky</h3>
+      <button id="btn-close-bsky-tutorial" class="btn-close">&times;</button>
+    </div>
+    <div class="modal-body" style="padding-top: 0.5rem;">
+      <!-- Step contents -->
+      <div id="bsky-step-1" class="tutorial-step">
+        <h4 style="color: var(--color-ai); font-size: 1rem; margin-bottom: 0.5rem;">Passo 1 de 4: O que é o Handle?</h4>
+        <p style="font-size: 0.825rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1rem;">
+          O seu <strong>Handle</strong> é o seu identificador público no Bluesky (ex: <code>@usuario.bsky.social</code>). Ele é o nome que as pessoas usam para te marcar ou visitar seu perfil.
+        </p>
+        <p style="font-size: 0.825rem; line-height: 1.5; color: var(--text-secondary);">
+          ⚠️ Se você usa um domínio próprio personalizado no seu perfil (ex: <code>@seunome.com</code>), o seu handle será esse domínio. Certifique-se de digitar com o <code>@</code> na tela de conexões!
+        </p>
+      </div>
+
+      <div id="bsky-step-2" class="tutorial-step hidden">
+        <h4 style="color: var(--color-ai); font-size: 1rem; margin-bottom: 0.5rem;">Passo 2 de 4: Acesse as Configurações</h4>
+        <p style="font-size: 0.825rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1rem;">
+          1. Acesse o site do <a href="https://bsky.app" target="_blank" style="color: var(--color-accent); text-decoration: underline;">Bluesky</a> e faça login na sua conta.<br>
+          2. No menu lateral esquerdo, clique na opção <strong>Configurações (Settings)</strong>.<br>
+          3. Role a página até a seção <strong>Privacidade e Segurança</strong> e clique em <strong>Senhas de aplicativo (App passwords)</strong>.
+        </p>
+      </div>
+
+      <div id="bsky-step-3" class="tutorial-step hidden">
+        <h4 style="color: var(--color-ai); font-size: 1rem; margin-bottom: 0.5rem;">Passo 3 de 4: Crie a Senha de Aplicativo</h4>
+        <p style="font-size: 0.825rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1rem;">
+          1. Clique em <strong>Adicionar senha de aplicativo (Add app password)</strong>.<br>
+          2. Dê um nome para identificar a senha (ex: <code>Pulse Editor</code>) para que você saiba a qual aplicativo ela pertence.<br>
+          3. Clique em <strong>Criar senha</strong>.
+        </p>
+        <p style="font-size: 0.825rem; line-height: 1.5; color: var(--text-secondary); background: rgba(244, 63, 94, 0.05); padding: 0.5rem; border-radius: var(--radius-sm); border-left: 3px solid var(--color-failed);">
+          🔒 <strong>Segurança:</strong> As senhas de aplicativo protegem sua conta! Caso queira revogar o acesso do Pulse no futuro, basta deletar esta senha no Bluesky.
+        </p>
+      </div>
+
+      <div id="bsky-step-4" class="tutorial-step hidden">
+        <h4 style="color: var(--color-ai); font-size: 1rem; margin-bottom: 0.5rem;">Passo 4 de 4: Copie e Conecte no Pulse</h4>
+        <p style="font-size: 0.825rem; line-height: 1.5; color: var(--text-secondary); margin-bottom: 1rem;">
+          1. O Bluesky exibirá uma senha no formato <code>xxxx-xxxx-xxxx-xxxx</code>.<br>
+          2. <strong>Copie este código imediatamente</strong> (ele só aparece uma vez!).<br>
+          3. Cole-o no campo de Senha de Aplicativo no formulário do Pulse e preencha seu Usuário e Handle. Prontinho!
+        </p>
+      </div>
+
+      <!-- Navigation buttons -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+        <button id="btn-bsky-prev" class="btn-secondary" style="font-size: 0.75rem; padding: 0.4rem 0.80rem;">Anterior</button>
+        <div style="display: flex; gap: 0.35rem;">
+          <span class="step-dot active" data-step="1" style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-ai); display: inline-block;"></span>
+          <span class="step-dot" data-step="2" style="width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); display: inline-block;"></span>
+          <span class="step-dot" data-step="3" style="width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); display: inline-block;"></span>
+          <span class="step-dot" data-step="4" style="width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); display: inline-block;"></span>
+        </div>
+        <button id="btn-bsky-next" class="btn-primary" style="font-size: 0.75rem; padding: 0.4rem 0.80rem; background-color: var(--color-ai); border-color: var(--color-ai);">Próximo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Ollama Installer & Hardware Diagnostic Modal -->
+<div id="ollama-installer-modal" class="modal-overlay hidden">
+  <div class="modal-card" style="max-width: 550px; width: 100%;">
+    <div class="modal-header">
+      <h3 style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem;">
+        <span>📦</span> Setup Automático do Ollama Local
+      </h3>
+      <button id="btn-close-ollama-installer" class="btn-close">&times;</button>
+    </div>
+    <div class="modal-body" style="padding-top: 0.5rem;">
+      
+      <!-- Screen 1: Diagnostic and Matrix -->
+      <div id="ollama-install-screen-diagnostic">
+        <h4 style="margin: 0 0 0.5rem 0; font-size: 0.875rem; font-weight: 600; color: var(--text-primary);">
+          1. Diagnóstico do seu Hardware
+        </h4>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Analisamos os recursos da sua máquina para indicar a performance esperada de IA local.
+        </p>
+
+        <!-- Technical Report Table -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.75rem; margin-bottom: 1.25rem;">
+          <div style="display: grid; grid-template-columns: 1.2fr 1.8fr; gap: 0.5rem; font-size: 0.75rem; line-height: 1.6;">
+            <div style="color: var(--text-secondary); font-weight: 600;">Memória RAM Total:</div>
+            <div id="diag-ram-val" style="color: var(--text-primary); font-weight: 500;">Carregando...</div>
+
+            <div style="color: var(--text-secondary); font-weight: 600;">Processador (CPU):</div>
+            <div id="diag-cpu-val" style="color: var(--text-primary); font-weight: 500;">Carregando...</div>
+
+            <div style="color: var(--text-secondary); font-weight: 600;">Aceleração Gráfica:</div>
+            <div id="diag-gpu-val" style="color: var(--text-primary); font-weight: 500;">Carregando...</div>
+
+            <div style="color: var(--text-secondary); font-weight: 600;">Espaço em Disco:</div>
+            <div id="diag-disk-val" style="color: var(--text-primary); font-weight: 500;">Carregando...</div>
+
+            <div style="color: var(--text-secondary); font-weight: 600;">Classificação do Setup:</div>
+            <div id="diag-tier-val" style="color: var(--color-ai); font-weight: 700;">Carregando...</div>
+          </div>
+        </div>
+
+        <!-- Highlighted Recommended Model Card -->
+        <div id="diag-recommendation-card" style="border: 1px solid var(--color-success); background: rgba(16, 185, 129, 0.03); border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1.25rem; display: flex; gap: 0.75rem; align-items: flex-start;">
+          <span style="font-size: 1.5rem; line-height: 1;">💡</span>
+          <div>
+            <h5 style="margin: 0; font-size: 0.8rem; font-weight: 700; color: var(--color-success);">Modelo Recomendado: <span id="diag-rec-model-name" style="text-decoration: underline;">Phi-3 (3.8B)</span></h5>
+            <p id="diag-rec-reason" style="margin: 0.25rem 0 0 0; font-size: 0.725rem; color: var(--text-secondary); line-height: 1.3;">Detectando...</p>
+          </div>
+        </div>
+
+        <!-- Detailed Model Matrix List -->
+        <h4 style="margin: 0 0 0.5rem 0; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">
+          Tabela de Compatibilidade de Modelos
+        </h4>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem;" id="diag-models-list">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+          <button type="button" id="btn-cancel-ollama-install" class="btn-secondary" style="font-size: 0.75rem;">Cancelar</button>
+          <button type="button" id="btn-proceed-ollama-install" class="btn-primary" style="font-size: 0.75rem; background-color: var(--color-ai); border-color: var(--color-ai);">
+            Iniciar Download Automático
+          </button>
+        </div>
+      </div>
+
+      <!-- Screen 2: Install Progress Bar -->
+      <div id="ollama-install-screen-progress" class="hidden">
+        <h4 style="margin: 0 0 0.5rem 0; font-size: 0.875rem; font-weight: 600; color: var(--text-primary);" id="ollama-progress-title">
+          Baixando Engine do Ollama...
+        </h4>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem;" id="ollama-progress-subtitle">
+          Por favor, aguarde enquanto o Pulse transfere e descompacta os arquivos necessários.
+        </p>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; height: 16px; width: 100%; position: relative; overflow: hidden; margin-bottom: 0.5rem;">
+          <div id="ollama-install-progress-bar" style="background: var(--color-ai); height: 100%; width: 0%; transition: width 0.2s linear;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          <span id="ollama-install-progress-bytes">0 / 0 MB</span>
+          <span id="ollama-install-progress-percent" style="font-weight: 600; color: var(--color-ai);">0%</span>
+        </div>
+
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.75rem; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 1.5rem; max-height: 100px; overflow-y: auto; font-family: monospace;" id="ollama-install-status-console">
+          Iniciando transferência da rede...
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; border-top: 1px solid var(--border-color); padding-top: 1rem;" id="ollama-install-actions">
+          <button type="button" id="btn-retry-ollama-install" class="btn-primary hidden" style="font-size: 0.75rem;">Tentar Novamente</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Ollama Model Manager Modal -->
+<div id="ollama-models-modal" class="modal-overlay hidden">
+  <div class="modal-card" style="max-width: 500px; width: 100%;">
+    <div class="modal-header">
+      <h3 style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem;">
+        <span>📦</span> Modelos no Servidor Ollama
+      </h3>
+      <button id="btn-close-ollama-models" class="btn-close">&times;</button>
+    </div>
+    <div class="modal-body" style="padding-top: 0.5rem;">
+      <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; word-break: break-all;">
+        Host Conectado: <code id="ollama-models-host" style="background: var(--bg-surface); padding: 0.1rem 0.35rem; border-radius: 3px; font-weight: 600;">http://localhost:11434</code>
+      </div>
+
+      <!-- Part 1: Downloaded Models List -->
+      <h4 style="margin: 0 0 0.5rem 0; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">
+        Modelos Baixados e Prontos
+      </h4>
+      <div id="ollama-local-models-list" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto; margin-bottom: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.5rem; background: var(--bg-surface);">
+        <!-- Populated via JS -->
+      </div>
+
+      <!-- Part 2: Pull New Model Form -->
+      <h4 style="margin: 0 0 0.5rem 0; font-size: 0.8rem; font-weight: 600; color: var(--text-primary);">
+        Baixar Novo Modelo de IA
+      </h4>
+      <form id="ollama-pull-model-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div class="form-group">
+          <label for="ollama-model-library-select" class="input-label">Selecionar da Biblioteca</label>
+          <div class="select-wrapper">
+            <select id="ollama-model-library-select" class="clean-select">
+              <option value="phi3:3.8b" selected>Phi 3 (3.8B - Leve & Excelente, ~2.2GB)</option>
+              <option value="qwen2:1.5b">Qwen 2 (1.5B - Ultraleve para computadores modestos, ~900MB)</option>
+              <option value="llama3:latest">Llama 3 (8B - Modelo robusto inteligente, ~4.7GB)</option>
+              <option value="gemma2:latest">Gemma 2 (9B - Excelente para redações longas, ~5.5GB)</option>
+              <option value="deepseek-coder:latest">DeepSeek Coder (Excelente para tecnologia/programação)</option>
+              <option value="custom">Outro Modelo (Digitar ID personalizado)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group hidden" id="ollama-custom-model-group">
+          <label for="ollama-custom-model-input" class="input-label">Model ID do Ollama Library</label>
+          <input type="text" id="ollama-custom-model-input" placeholder="Ex: mistral, qwen2:7b" class="clean-input">
+        </div>
+
+        <button type="submit" id="btn-ollama-pull-submit" class="btn-primary" style="width: 100%; font-size: 0.75rem; background-color: var(--color-ai); border-color: var(--color-ai);">
+          Baixar Modelo para o Servidor ⚡
+        </button>
+      </form>
+
+      <!-- Part 3: Pull Model Progress Bar -->
+      <div id="ollama-pull-progress-container" class="hidden" style="margin-top: 1.25rem; border-top: 1px dashed var(--border-color); padding-top: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+          <span style="font-size: 0.75rem; font-weight: 600; color: var(--color-ai);" id="ollama-pull-status-text">Baixando Llama 3...</span>
+          <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-ai);" id="ollama-pull-percent-text">0%</span>
+        </div>
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 6px; height: 10px; width: 100%; position: relative; overflow: hidden;">
+          <div id="ollama-pull-progress-bar" style="background: var(--color-ai); height: 100%; width: 0%; transition: width 0.2s linear;"></div>
+        </div>
+        <p style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.3;">
+          ⚠️ O download é gerenciado pelo próprio daemon do Ollama. Você pode fechar este modal se desejar; a transferência continuará rodando no servidor.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

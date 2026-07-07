@@ -1,0 +1,54 @@
+    <!-- Main SaaS Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <span class="logo-pulse">Pulse</span>
+        <span class="brand-divider">|</span>
+        <span class="brand-subtitle">Agente de IA para publicação social automatizada</span>
+      </div>
+
+      <!-- Channels & API Connection Badges -->
+      <div class="header-widgets">
+        <div class="channels-widget">
+          <div class="active-channel" title="Canal ativo">
+            <!-- Bluesky butterfly SVG logo -->
+            <svg viewBox="0 0 512 512" class="icon-bsky-svg"><path fill="currentColor" d="M111.8 42.2C188.4 98.9 237.4 179.6 256 211.5c18.6-31.9 67.6-112.6 144.2-169.3C449.6 5.8 512-16.3 512 25.2c0 9.1-4.7 93.9-8.4 135.9c-8.9 101.4-53.8 128.2-96.1 134.4c65.5 9.7 75.8 62.8 41 113.3c-42.3 61.4-150.3 35.8-192.5 12.3c-42.2 23.5-150.2 49.1-192.5-12.3c-34.8-50.5-24.5-103.6 41-113.3c-42.3-6.2-87.2-33-96.1-134.4C4.7 119.1 0 34.3 0 25.2C0-16.3 62.4 5.8 111.8 42.2z"/></svg>
+            <span class="channel-name">Bluesky</span>
+            <span class="channel-badge">Disponível</span>
+          </div>
+          <div class="active-channel" title="Canal ativo" style="border-left: 1px solid var(--border-color); padding-left: 0.5rem; margin-left: 0.25rem;">
+            <!-- Twitter X SVG logo -->
+            <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: currentColor; color: var(--color-accent); margin-right: 0.15rem;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span class="channel-name">Twitter / X</span>
+            <span class="channel-badge">Disponível</span>
+          </div>
+          <div class="channel-placeholder" title="Futura expansão">+ Futuras redes</div>
+        </div>
+
+        <div class="api-status-group">
+          <div id="status-gemini" class="api-badge badge-loading">
+            <span class="api-dot"></span>
+            <span>Gemini AI</span>
+          </div>
+          <div id="status-bsky" class="api-badge badge-loading">
+            <span class="api-dot"></span>
+            <span>Bluesky API</span>
+          </div>
+          <div id="status-twitter" class="api-badge badge-loading">
+            <span class="api-dot"></span>
+            <span>Twitter API</span>
+          </div>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button type="button" id="btn-theme-toggle" class="btn-theme-toggle" title="Alternar tema">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <!-- User Info & Logout -->
+        <div class="user-badge-widget" id="user-info-widget" style="display: flex; align-items: center; gap: 0.75rem; border-left: 1px solid var(--border-color); padding-left: 0.75rem; margin-left: 0.25rem;">
+          <span id="header-user-email" class="user-email-text" style="font-size: 0.75rem; font-weight: 500; color: var(--text-muted);">...</span>
+          <button type="button" id="btn-logout" class="btn-logout" title="Sair da conta" style="background: none; border: 1px solid var(--border-color); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer; color: var(--text-muted); font-weight: 500; transition: all 0.2s;">Sair</button>
+        </div>
+      </div>
+    </header>
