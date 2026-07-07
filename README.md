@@ -8,12 +8,16 @@ Suporta **Ollama local** (100% privado e gratuito), **Google Gemini** e APIs com
 
 ## 📸 Visual do Projeto
 
-*(Adicione screenshots do painel ao repositório)*
+### 🌐 Landing Page & Login
+![Landing Page](docs/screenshots/landing.png)
+![Login Form](docs/screenshots/login.png)
 
-* **Landing Page**: `docs/images/landing_page.png`
-* **Calendário Editorial (Mural)**: `docs/images/calendar_view.png`
-* **Editor com IA Helper**: `docs/images/editor_view.png`
-* **Painel Admin & Cotas**: `docs/images/admin_panel.png`
+### 📅 Painel Principal (Overview & Calendário)
+![Visão Geral](docs/screenshots/overview.png)
+![Calendário Editorial](docs/screenshots/calendar.png)
+
+### ⚙️ Configurações (Modelos de IA & Contas)
+![Configurações](docs/screenshots/settings.png)
 
 ---
 
@@ -64,7 +68,7 @@ Suporta **Ollama local** (100% privado e gratuito), **Google Gemini** e APIs com
 ### Opção A: Setup Rápido (Recomendado)
 
 ```bash
-git clone https://github.com/seu-usuario/pulse.git
+git clone https://github.com/Iquitim/pulse.git
 cd pulse
 python start.py
 ```
@@ -90,7 +94,7 @@ O script cria o ambiente virtual, instala dependências, gera chaves de seguran�
 ### Opção C: Manual
 
 ```bash
-git clone https://github.com/seu-usuario/pulse.git
+git clone https://github.com/Iquitim/pulse.git
 cd pulse
 python3 -m venv venv
 source venv/bin/activate
