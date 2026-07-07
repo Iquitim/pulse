@@ -15,12 +15,16 @@
   gap: 0.75rem;
 }
 
-.logo-pulse {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.5px;
+.logo-container {
+  transition: transform var(--transition-fast) ease;
+}
+
+.logo-container:hover {
+  transform: scale(1.02);
+}
+
+.logo-container svg path {
+  transition: opacity var(--transition-fast) ease;
 }
 
 .brand-divider {
