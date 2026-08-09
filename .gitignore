@@ -16,6 +16,11 @@ pulse.db
 # Diretório de Exportação de Posts Gerados
 posts/
 
+# Uploads de Mídia do Usuário
+uploads/*
+!uploads/.gitkeep
+
+
 # Cache do Python
 __pycache__/
 *.py[cod]
