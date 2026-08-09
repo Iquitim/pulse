@@ -253,6 +253,22 @@ templates/
 
 ---
 
+## 🌿 Estratégia de Branches & Git Flow
+
+O projeto adota uma estrutura padrão baseada em **Git Flow**:
+
+| Branch | Função & Descrição |
+|---|---|
+| **`main`** | **Produção**: Código estável, testado e pronto para implantação. Atualizada via Pull Requests aprovados. |
+| **`develop`** | **Integração**: Ambiente de desenvolvimento contínuo onde novas funcionalidades são consolidadas. |
+| **`feature/*`** | **Funcionalidades**: Branches temporárias para criar novos recursos (ex: `feature/analytics-dashboard`). |
+| **`fix/*`** | **Correções**: Branches temporárias para resolução de bugs específicos (ex: `fix/oauth-token-refresh`). |
+
+#### CI/CD Automático
+Todas as alterações enviadas via `push` ou `pull_request` nas branches `main` e `develop` passam pela suíte automatizada de 32 testes do **Pytest** via **GitHub Actions**.
+
+---
+
 ## 🔌 Contribuições
 
 O Pulse é um projeto comunitário. Leia o [CONTRIBUTING.md](CONTRIBUTING.md) para entender as diretrizes de desenvolvimento e a estrutura de conectores em `app/social/`. Abra um Pull Request ou reporte problemas via Issue.
@@ -262,3 +278,4 @@ O Pulse é um projeto comunitário. Leia o [CONTRIBUTING.md](CONTRIBUTING.md) pa
 ## 📄 Licença
 
 Distribuído sob a **Licença MIT**. Consulte o arquivo [LICENSE](LICENSE) para detalhes.
+
