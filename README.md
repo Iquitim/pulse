@@ -259,13 +259,15 @@ O projeto adota uma estrutura padrão baseada em **Git Flow**:
 
 | Branch | Função & Descrição |
 |---|---|
-| **`main`** | **Produção**: Código estável, testado e pronto para implantação. Atualizada via Pull Requests aprovados. |
-| **`develop`** | **Integração**: Ambiente de desenvolvimento contínuo onde novas funcionalidades são consolidadas. |
+| **`main`** | **Produção**: Código 100% estável, testado e pronto para implantação final. |
+| **`staging`** | **Homologação**: Ambiente pré-produção para testes de validação finais antes do lançamento. |
+| **`develop`** | **Integração**: Ambiente de desenvolvimento contínuo onde novas funcionalidades são validadas. |
 | **`feature/*`** | **Funcionalidades**: Branches temporárias para criar novos recursos (ex: `feature/analytics-dashboard`). |
 | **`fix/*`** | **Correções**: Branches temporárias para resolução de bugs específicos (ex: `fix/oauth-token-refresh`). |
 
 #### CI/CD Automático
-Todas as alterações enviadas via `push` ou `pull_request` nas branches `main` e `develop` passam pela suíte automatizada de 32 testes do **Pytest** via **GitHub Actions**.
+Todas as alterações enviadas via `push` ou `pull_request` nas branches `main`, `staging` e `develop` passam pela suíte automatizada de 32 testes do **Pytest** via **GitHub Actions**.
+
 
 ---
 
