@@ -6,9 +6,10 @@ from app.database import get_db, User, InviteCode, AgentConfig, log_activity
 from app.routes.dependencies import get_current_user
 from app.routes.schemas import RegisterRequest, LoginRequest, ChangePasswordRequest
 
-router = APIRouter(prefix="/api/auth", tags=["auth"])
+router = APIRouter(prefix="/api/auth", tags=["🔐 Autenticação"])
 
-@router.post("/register")
+@router.post("/register", summary="Cadastrar Novo Usuário", description="Cria uma nova conta de usuário no Pulse com o plano de cota gratuito (ou através de um código de convite).")
+
 async def register(req: RegisterRequest, db: Session = Depends(get_db)):
     if not config.ALLOW_PUBLIC_REGISTRATION:
         raise HTTPException(
@@ -83,7 +84,7 @@ async def register(req: RegisterRequest, db: Session = Depends(get_db)):
 
     return {"status": "success", "message": "Conta criada com sucesso."}
 
-@router.post("/login")
+@router.post("/login", summary="Autenticar Usuário (Obter JWT Token)", description="Autentica o usuário com e-mail e senha, retornando o Bearer Token JWT para ser usado nas requisições autorizadas.")
 async def login(req: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == req.email).first()
     if not user or not security.verify_password(req.password, user.hashed_password):
@@ -105,7 +106,7 @@ async def login(req: LoginRequest, db: Session = Depends(get_db)):
         }
     }
 
-@router.get("/me")
+@router.get("/me", summary="Obter Perfil do Usuário Logado", description="Retorna os dados cadastrais, nível de plano e permissões do usuário atualmente autenticado.")
 async def get_me(current_user: User = Depends(get_current_user)):
     return {
         "email": current_user.email,
@@ -114,7 +115,7 @@ async def get_me(current_user: User = Depends(get_current_user)):
         "must_change_password": current_user.must_change_password
     }
 
-@router.post("/change-password")
+@router.post("/change-password", summary="Alterar Senha do Usuário", description="Permite ao usuário autenticado alterar sua senha atual. Obrigatório no primeiro acesso com senha temporária.")
 async def change_password(req: ChangePasswordRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     if not security.verify_password(req.current_password, current_user.hashed_password):
         raise HTTPException(status_code=400, detail="Senha atual incorreta.")

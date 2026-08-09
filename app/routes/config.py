@@ -10,9 +10,10 @@ from app.routes.schemas import ConfigModel, LLMServerCreate, LLMServerResponse, 
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter()
+router = APIRouter(tags=["🤖 Servidores LLM"])
 
-@router.get("/api/config")
+@router.get("/api/config", summary="Obter Configurações do Agente de IA", description="Retorna os temas ativos, tom de escrita, intervalo de disparo, prompt do sistema e persona do agente editorial.")
+
 async def get_config(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     config_data = db.query(AgentConfig).filter(AgentConfig.user_id == current_user.id).first()
     if not config_data:

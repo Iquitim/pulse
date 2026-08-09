@@ -11,9 +11,10 @@ from app.routes.schemas import EditorialItemCreate, EditorialItemResponse
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/calendar", tags=["calendar"])
+router = APIRouter(prefix="/api/calendar", tags=["📅 Calendário Editorial"])
 
-@router.get("", response_model=List[EditorialItemResponse])
+@router.get("", response_model=List[EditorialItemResponse], summary="Listar Mural do Calendário Editorial", description="Retorna todas as postagens agendadas do usuário ordenadas por data e hora.")
+
 async def get_calendar(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     items = db.query(EditorialItem).filter(EditorialItem.user_id == current_user.id).order_by(EditorialItem.scheduled_date.asc()).all()
     return items

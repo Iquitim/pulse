@@ -2,19 +2,34 @@ import os
 import logging
 from typing import Optional
 from fastapi import Request, HTTPException, Depends, Header, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from app.database import get_db, User
 from app import security
 
 logger = logging.getLogger(__name__)
 
-async def get_current_user(request: Request, authorization: Optional[str] = Header(None), db: Session = Depends(get_db)) -> User:
-    if not authorization or not authorization.startswith("Bearer "):
+security_scheme = HTTPBearer(auto_error=False)
+
+async def get_current_user(
+    request: Request,
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security_scheme),
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db)
+) -> User:
+    token = None
+    if credentials:
+        token = credentials.credentials
+    elif authorization and authorization.startswith("Bearer "):
+        token = authorization.split(" ")[1]
+
+    if not token:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Não autorizado. Token de acesso ausente ou inválido."
+            detail="Não autorizado. Token de acesso ausente ou inválido.",
+            headers={"WWW-Authenticate": "Bearer"}
         )
-    token = authorization.split(" ")[1]
+
     payload = security.verify_access_token(token)
     if not payload or "sub" not in payload:
         raise HTTPException(

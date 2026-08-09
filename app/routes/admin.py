@@ -10,11 +10,12 @@ from app import security
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter()
+router = APIRouter(tags=["⚡ Administração & Cotas"])
 
 # --- Audit Logs for Normal Users ---
 
-@router.get("/api/audit-logs")
+@router.get("/api/audit-logs", summary="Obter Logs de Auditoria do Usuário", description="Retorna os últimos 50 registros de auditoria e histórico de ações realizadas pelo usuário.")
+
 async def get_audit_logs(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     logs = db.query(AuditLog).filter(AuditLog.user_id == current_user.id).order_by(AuditLog.timestamp.desc()).limit(50).all()
     return [

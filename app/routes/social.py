@@ -14,9 +14,10 @@ from app.routes.schemas import ConnectAccountRequest
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter()
+router = APIRouter(tags=["🌐 Redes Sociais"])
 
-@router.get("/api/status")
+@router.get("/api/status", summary="Obter Status das Conexões e APIs", description="Retorna o estado operacional do servidor LLM ativo, das contas sociais conectadas e dos serviços de retaguarda.")
+
 async def get_status(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     from app.database import LLMServer
     active_server = db.query(LLMServer).filter(

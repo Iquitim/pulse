@@ -10,9 +10,10 @@ from app.routes.schemas import IdeaCreate, IdeaUpdate, IdeaResponse, AnalyzeQual
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter()
+router = APIRouter(tags=["💡 Banco de Ideias"])
 
-@router.get("/api/ideas", response_model=List[IdeaResponse])
+@router.get("/api/ideas", response_model=List[IdeaResponse], summary="Listar Banco de Ideias Brutas", description="Retorna todas as ideias não-lapidadas salvas pelo usuário com indicação de canal e status.")
+
 async def get_ideas(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     return db.query(Idea).filter(Idea.user_id == current_user.id).order_by(Idea.created_at.desc()).all()
 

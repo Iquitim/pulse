@@ -20,9 +20,10 @@ from app.routes.schemas import DraftRequest, PostDraftRequest, PostNowRequest
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter()
+router = APIRouter(tags=["📝 Postagens & Qualidade"])
 
-@router.get("/api/history")
+@router.get("/api/history", summary="Obter Histórico de Postagens", description="Retorna os últimos 100 posts gerados e publicados com status, engajamento e métricas de qualidade.")
+
 async def get_history(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     history_entries = db.query(PostHistory).filter(
         PostHistory.user_id == current_user.id
