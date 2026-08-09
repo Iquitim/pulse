@@ -53,6 +53,11 @@ Suporta **Ollama local** (100% privado e gratuito), **Google Gemini** e APIs com
 - **Cadastro Configurável**: Aberto, por convite ou desativado
 - **Gestão de Usuários**: Administrador pode alterar perfis, banir, deletar ou renovar cotas manualmente
 
+### 🧪 Suíte de Testes Automatizados & Documentação RESTful
+- **Suíte de Testes Pytest (32/32 Cobertura)**: Infraestrutura de testes automatizados com banco isolado em memória (`sqlite:///:memory:`), cobrindo segurança, geração de rascunhos, agendamentos e rotas da API.
+- **Documentação Swagger UI (`/docs`) e ReDoc (`/redoc`)**: Interface de documentação interativa com design minimalista, suporte nativo ao botão **Authorize (HTTPBearer)** e categorização em 8 grupos de rotas.
+- **Dicionário de Termos & Erros HTTP**: Glossário integrado definindo conceitos do ecossistema Pulse e mapeamento completo dos códigos de status HTTP (`200`, `400`, `401`, `403`, `404`, `422`, `500`).
+
 ### 🌐 Conectividade
 - **Bluesky (atproto)**: Conector ativo e funcional
 - **Twitter/X**: Integração real via OAuth 2.0 (popup seguro de autorização com refresh token persistido e rotacionado automaticamente no banco) ou Chaves de Desenvolvedor (cadastro manual pelo próprio usuário)
@@ -60,6 +65,7 @@ Suporta **Ollama local** (100% privado e gratuito), **Google Gemini** e APIs com
 
 ### 💬 UX e Feedback Visual
 - **Toast Notifications**: Notificações flutuantes com animações suaves e cores por tipo (sucesso, erro, alerta, info)
+
 
 ---
 
@@ -250,6 +256,10 @@ templates/
 | Biblioteca de Servidores LLM | ✅ Funcional |
 | Instalador Ollama Integrado | ✅ Funcional |
 | Diagnóstico de Hardware | ✅ Funcional |
+| Documentação Swagger UI / ReDoc & Dicionários | ✅ Funcional |
+| Suíte de Testes Automatizados (32/32 Pytest) | ✅ Funcional |
+| Pipeline de CI/CD (GitHub Actions) | ✅ Funcional |
+
 
 ---
 
