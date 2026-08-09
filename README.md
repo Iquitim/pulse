@@ -60,7 +60,8 @@ Suporta **Ollama local** (100% privado e gratuito), **Google Gemini** e APIs com
 - **Publicação Automática com Imagem**: Integração com conector ATProto do Bluesky (`upload_blob` e `AppBskyEmbedImages`) e suporte a mídia no Twitter/X
 
 ### 🧪 Suíte de Testes Automatizados & Documentação RESTful
-- **Suíte de Testes Pytest (38/38 Cobertura)**: Infraestrutura de testes automatizados com banco isolado em memória (`sqlite:///:memory:`), cobrindo segurança, mídias, geração de rascunhos, agendamentos e rotas da API.
+- **Suíte de 38 Testes Automatizados (100% de Aprovação)**: Infraestrutura de testes automatizados com banco isolado em memória (`sqlite:///:memory:`), cobrindo segurança, mídias, geração de rascunhos, agendamentos e rotas da API.
+
 - **Documentação Swagger UI (`/docs`) e ReDoc (`/redoc`)**: Interface de documentação interativa com design minimalista, suporte nativo ao botão **Authorize (HTTPBearer)** e categorização em 9 grupos de rotas (incluindo **Galeria de Mídias**).
 - **Dicionário de Termos & Erros HTTP**: Glossário integrado definindo conceitos do ecossistema Pulse e mapeamento completo dos códigos de status HTTP (`200`, `400`, `401`, `403`, `404`, `422`, `500`).
 
@@ -178,12 +179,13 @@ app/
 │   ├── posts.py             # Geração de rascunhos, histórico e publicação
 │   ├── calendar.py          # CRUD do calendário editorial
 │   ├── ideas.py             # Banco de ideias, score de qualidade e insights
+│   ├── media.py             # Upload, galeria e anexo de mídias
 │   ├── admin.py             # Moderação de usuários, convites e cotas
 │   ├── ollama.py            # Diagnóstico, instalação e gestão do Ollama
 │   └── main.py              # Agregador de todas as rotas
 ├── social/                  # Conectores de redes sociais
 │   ├── base.py              # Interface abstrata BaseSocialNetwork
-│   ├── bluesky.py           # Conector ativo (atproto)
+│   ├── bluesky.py           # Conector ativo (atproto com suporte a blobs/mídia)
 │   ├── twitter.py           # Conector ativo (OAuth 2.0 e Chaves Dev via Tweepy)
 │   ├── threads.py           # Mock estrutural (sob construção)
 │   └── registry.py          # Registro global e resolução de drivers
@@ -191,7 +193,8 @@ app/
 ├── database.py              # Modelos SQLAlchemy e controle transacional
 ├── scheduler.py             # Agendador (APScheduler)
 ├── security.py              # Hash de senhas e criptografia Fernet
-└── ollama_installer.py      # Diagnóstico de hardware e instalador portátil
+├── ollama_installer.py      # Diagnóstico de hardware e instalador portátil
+└── uploads/                 # Diretório de armazenamento de mídias por usuário
 ```
 
 ### Frontend (HTML / CSS / JS)
@@ -207,6 +210,7 @@ static/
 │   │   ├── posts.js         # Rascunhos, histórico e métricas
 │   │   ├── calendar.js      # Agendamento editorial
 │   │   ├── ideas.js         # Ideias e avaliação de qualidade
+│   │   ├── media.js         # Upload e galeria de mídias
 │   │   ├── admin.js         # Cotas de uso, logs e administração
 │   │   └── ollama.js        # Instalação e modelos Ollama
 │   ├── ui/                  # Componentes visuais modulares (Renders)
@@ -223,10 +227,12 @@ static/
 │   │   ├── editor.js        # Rascunhos, atalhos IA e contagem
 │   │   ├── library.js       # Banco de ideias e tabela de histórico
 │   │   ├── calendar.js      # Clique na grade, presets e agendamento
+│   │   ├── media.js         # Upload drag-and-drop e seleção de mídias
 │   │   ├── config.js        # Temas, intervalos e LLM servidores
 │   │   ├── admin.js         # Gestão de usuários, cotas e convites
 │   │   ├── ollama.js        # Instalador local e pull de modelos
 │   │   └── tutorial.js      # Passos e ações do modal do tutorial
+
 │   ├── state.js             # Estado global da aplicação
 │   ├── logger.js            # Console virtual e toast notifications
 │   ├── ui.js                # Re-exportação centralizada (Barrel)
@@ -265,7 +271,7 @@ templates/
 | Diagnóstico de Hardware | ✅ Funcional |
 | Galeria de Mídias e Uploads | ✅ Funcional |
 | Documentação Swagger UI / ReDoc & Dicionários | ✅ Funcional |
-| Suíte de Testes Automatizados (38/38 Pytest) | ✅ Funcional |
+| Suíte de 38 Testes Automatizados (Pytest) | ✅ Funcional |
 | Pipeline de CI/CD (GitHub Actions) | ✅ Funcional |
 
 
@@ -285,7 +291,7 @@ O projeto adota uma estrutura padrão baseada em **Git Flow**:
 | **`fix/*`** | **Correções**: Branches temporárias para resolução de bugs específicos (ex: `fix/oauth-token-refresh`). |
 
 #### CI/CD Automático
-Todas as alterações enviadas via `push` ou `pull_request` nas branches `main`, `staging` e `develop` passam pela suíte automatizada de 32 testes do **Pytest** via **GitHub Actions**.
+Todas as alterações enviadas via `push` ou `pull_request` nas branches `main`, `staging` e `develop` passam pela suíte automatizada de 38 testes do **Pytest** via **GitHub Actions**.
 
 
 ---
