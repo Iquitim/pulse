@@ -6,7 +6,7 @@ from app.database import get_db, User, InviteCode, AgentConfig, log_activity
 from app.routes.dependencies import get_current_user
 from app.routes.schemas import RegisterRequest, LoginRequest, ChangePasswordRequest
 
-router = APIRouter(prefix="/api/auth", tags=["🔐 Autenticação"])
+router = APIRouter(prefix="/api/auth", tags=["Autenticação"])
 
 @router.post("/register", summary="Cadastrar Novo Usuário", description="Cria uma nova conta de usuário no Pulse com o plano de cota gratuito (ou através de um código de convite).")
 

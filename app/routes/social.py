@@ -14,7 +14,7 @@ from app.routes.schemas import ConnectAccountRequest
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["🌐 Redes Sociais"])
+router = APIRouter(tags=["Redes Sociais"])
 
 @router.get("/api/status", summary="Obter Status das Conexões e APIs", description="Retorna o estado operacional do servidor LLM ativo, das contas sociais conectadas e dos serviços de retaguarda.")
 

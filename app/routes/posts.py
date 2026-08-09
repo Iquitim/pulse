@@ -20,7 +20,7 @@ from app.routes.schemas import DraftRequest, PostDraftRequest, PostNowRequest
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["📝 Postagens & Qualidade"])
+router = APIRouter(tags=["Postagens e Qualidade"])
 
 @router.get("/api/history", summary="Obter Histórico de Postagens", description="Retorna os últimos 100 posts gerados e publicados com status, engajamento e métricas de qualidade.")
 

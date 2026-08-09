@@ -10,7 +10,7 @@ from app.routes.schemas import IdeaCreate, IdeaUpdate, IdeaResponse, AnalyzeQual
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["💡 Banco de Ideias"])
+router = APIRouter(tags=["Banco de Ideias"])
 
 @router.get("/api/ideas", response_model=List[IdeaResponse], summary="Listar Banco de Ideias Brutas", description="Retorna todas as ideias não-lapidadas salvas pelo usuário com indicação de canal e status.")
 

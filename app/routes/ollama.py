@@ -11,7 +11,7 @@ from app.database import get_db, User, LLMServer, log_activity
 from app.routes.dependencies import get_current_user
 
 logger = logging.getLogger(__name__)
-router = APIRouter(tags=["🦙 Gerenciamento Ollama"])
+router = APIRouter(tags=["Gerenciamento Ollama"])
 
 # Global pull progress storage
 # key: (host, model) -> dict

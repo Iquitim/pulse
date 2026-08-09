@@ -10,7 +10,7 @@ from app import security
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["⚡ Administração & Cotas"])
+router = APIRouter(tags=["Administração e Cotas"])
 
 # --- Audit Logs for Normal Users ---
 

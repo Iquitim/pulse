@@ -10,7 +10,7 @@ from app.routes.schemas import ConfigModel, LLMServerCreate, LLMServerResponse, 
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["🤖 Servidores LLM"])
+router = APIRouter(tags=["Servidores LLM"])
 
 @router.get("/api/config", summary="Obter Configurações do Agente de IA", description="Retorna os temas ativos, tom de escrita, intervalo de disparo, prompt do sistema e persona do agente editorial.")
 
