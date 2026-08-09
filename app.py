@@ -1,7 +1,11 @@
+import os
 import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 from app import config
 from app import database
 from app.routes import router as api_router
@@ -197,6 +201,10 @@ openapi_tags = [
         "description": "Download, status e diagnósticos de hardware para o Ollama local."
     },
     {
+        "name": "Galeria de Mídias",
+        "description": "Upload, listagem e exclusão de arquivos de mídia (imagens/vídeos) e anexo em postagens do calendário."
+    },
+    {
         "name": "Administração e Cotas",
         "description": "Controle de usuários, planos de cotas, códigos de convite e logs de auditoria."
     }
@@ -223,11 +231,16 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Mount static folder
+# Mount static folders
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+uploads_dir = os.path.join(BASE_DIR, "uploads")
+os.makedirs(uploads_dir, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # Include the routes from the routes module
 app.include_router(api_router)
+
 
 if __name__ == "__main__":
     import uvicorn

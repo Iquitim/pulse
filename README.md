@@ -53,6 +53,18 @@ Suporta **Ollama local** (100% privado e gratuito), **Google Gemini** e APIs com
 - **Cadastro Configurável**: Aberto, por convite ou desativado
 - **Gestão de Usuários**: Administrador pode alterar perfis, banir, deletar ou renovar cotas manualmente
 
+### 🖼️ Galeria de Mídias e Agendamento com Upload
+- **Upload Seguro de Mídias**: Suporte exclusivo a envio de arquivos locais (imagens JPG, PNG, GIF, WebP até 10MB ou vídeos MP4 até 50MB) com salvamento isolado em `uploads/user_<id>/` e nomes sanitizados (UUID v4)
+- **Anexo Opcional em Agendamentos**: Mídia 100% opcional anexável no ato do agendamento ou inserida em posts já existentes no calendário
+- **Galeria Interativa**: Modal de biblioteca visual para navegar por thumbnails, consultar tamanho/formato e realizar a exclusão de mídias salvas
+- **Publicação Automática com Imagem**: Integração com conector ATProto do Bluesky (`upload_blob` e `AppBskyEmbedImages`) e suporte a mídia no Twitter/X
+
+### 🧪 Suíte de Testes Automatizados & Documentação RESTful
+- **Suíte de Testes Pytest (38/38 Cobertura)**: Infraestrutura de testes automatizados com banco isolado em memória (`sqlite:///:memory:`), cobrindo segurança, mídias, geração de rascunhos, agendamentos e rotas da API.
+- **Documentação Swagger UI (`/docs`) e ReDoc (`/redoc`)**: Interface de documentação interativa com design minimalista, suporte nativo ao botão **Authorize (HTTPBearer)** e categorização em 9 grupos de rotas (incluindo **Galeria de Mídias**).
+- **Dicionário de Termos & Erros HTTP**: Glossário integrado definindo conceitos do ecossistema Pulse e mapeamento completo dos códigos de status HTTP (`200`, `400`, `401`, `403`, `404`, `422`, `500`).
+
+
 ### 🌐 Conectividade
 - **Bluesky (atproto)**: Conector ativo e funcional
 - **Twitter/X**: Integração real via OAuth 2.0 (popup seguro de autorização com refresh token persistido e rotacionado automaticamente no banco) ou Chaves de Desenvolvedor (cadastro manual pelo próprio usuário)
@@ -60,6 +72,7 @@ Suporta **Ollama local** (100% privado e gratuito), **Google Gemini** e APIs com
 
 ### 💬 UX e Feedback Visual
 - **Toast Notifications**: Notificações flutuantes com animações suaves e cores por tipo (sucesso, erro, alerta, info)
+
 
 ---
 
@@ -250,6 +263,12 @@ templates/
 | Biblioteca de Servidores LLM | ✅ Funcional |
 | Instalador Ollama Integrado | ✅ Funcional |
 | Diagnóstico de Hardware | ✅ Funcional |
+| Galeria de Mídias e Uploads | ✅ Funcional |
+| Documentação Swagger UI / ReDoc & Dicionários | ✅ Funcional |
+| Suíte de Testes Automatizados (38/38 Pytest) | ✅ Funcional |
+| Pipeline de CI/CD (GitHub Actions) | ✅ Funcional |
+
+
 
 ---
 

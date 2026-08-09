@@ -2,6 +2,8 @@ import { state } from '../state.js';
 import * as api from '../api.js';
 import * as ui from '../ui.js';
 
+import { setCalendarSelectedMedia } from './media.js';
+
 export function setupCalendarEvents() {
   const btnOpenCalendarForm = document.getElementById('btn-open-calendar-form');
   const btnCloseCalendarForm = document.getElementById('btn-close-calendar-form');
@@ -75,6 +77,7 @@ export function setupCalendarEvents() {
         ui.syncVisualSelector('calendar-channel', 'calendar-channel-selector');
       }
       document.getElementById('calendar-item-id').value = '';
+      setCalendarSelectedMedia(null);
       if (calendarFormTitle) calendarFormTitle.textContent = "Agendar Nova Postagem";
       if (calendarFormSubmitText) calendarFormSubmitText.textContent = "Salvar Agendamento";
 
@@ -136,23 +139,26 @@ export function setupCalendarEvents() {
       const objective = isManual ? "" : document.getElementById('calendar-objective').value.trim();
       const cta = isManual ? "" : document.getElementById('calendar-cta').value.trim();
       const manualContent = isManual ? manualTextarea.value.trim() : "";
+      const mediaId = document.getElementById('calendar-media-id')?.value || null;
       
       const localDate = new Date(`${dateVal}T${timeVal}`);
       const isoDate = localDate.toISOString();
       
       let success = false;
       if (id) {
-        success = await api.updateCalendarItem(id, theme, isoDate, objective, cta, channel, isManual, manualContent);
+        success = await api.updateCalendarItem(id, theme, isoDate, objective, cta, channel, isManual, manualContent, mediaId);
       } else {
-        success = await api.createCalendarItem(theme, isoDate, objective, cta, channel, isManual, manualContent);
+        success = await api.createCalendarItem(theme, isoDate, objective, cta, channel, isManual, manualContent, mediaId);
       }
       
       if (success) {
         calendarFormModal.classList.add('hidden');
         calendarItemForm.reset();
+        setCalendarSelectedMedia(null);
       }
     });
   }
+
   
   const calendarTimeline = document.getElementById('calendar-timeline');
   if (calendarTimeline) {
@@ -192,6 +198,8 @@ export function setupCalendarEvents() {
         document.getElementById('calendar-theme').value = item.is_manual ? '' : item.theme;
         document.getElementById('calendar-objective').value = item.is_manual ? '' : (item.objective || '');
         document.getElementById('calendar-cta').value = item.is_manual ? '' : (item.cta || '');
+        setCalendarSelectedMedia(item.media || null);
+
         
         if (manualSwitch) {
           manualSwitch.checked = !!item.is_manual;

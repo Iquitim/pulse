@@ -88,6 +88,8 @@ class User(Base):
     audit_logs = relationship("AuditLog", back_populates="user", cascade="all, delete-orphan")
     ideas = relationship("Idea", back_populates="user", cascade="all, delete-orphan")
     llm_servers = relationship("LLMServer", back_populates="user", cascade="all, delete-orphan")
+    media_assets = relationship("MediaAsset", back_populates="user", cascade="all, delete-orphan")
+
 
 class InviteCode(Base):
     __tablename__ = "invite_codes"
@@ -128,6 +130,7 @@ class PostHistory(Base):
     uri = Column(String, nullable=True)
     cid = Column(String, nullable=True)
     error_message = Column(Text, nullable=True)
+    media_id = Column(Integer, ForeignKey("media_assets.id"), nullable=True)
     
     likes = Column(Integer, default=0)
     reposts = Column(Integer, default=0)
@@ -136,6 +139,21 @@ class PostHistory(Base):
     
     user = relationship("User", back_populates="posts_history")
     social_account = relationship("SocialAccount", back_populates="posts_history")
+    media = relationship("MediaAsset")
+
+class MediaAsset(Base):
+    __tablename__ = "media_assets"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    filename = Column(String, nullable=False)
+    original_name = Column(String, nullable=False)
+    mime_type = Column(String, nullable=False)
+    file_size = Column(Integer, nullable=False)
+    storage_path = Column(String, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    user = relationship("User", back_populates="media_assets")
 
 class AgentConfig(Base):
     __tablename__ = "agent_configs"
@@ -166,6 +184,7 @@ class EditorialItem(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     post_history_id = Column(Integer, ForeignKey("posts_history.id"), nullable=True)
+    media_id = Column(Integer, ForeignKey("media_assets.id"), nullable=True)
     theme = Column(String, nullable=False)
     scheduled_date = Column(DateTime, nullable=False)
     status = Column(String, default="planejado")  # "planejado", "publicado", "falhou"
@@ -178,6 +197,8 @@ class EditorialItem(Base):
     
     user = relationship("User", back_populates="editorial_items")
     post_history = relationship("PostHistory", backref="editorial_item", uselist=False)
+    media = relationship("MediaAsset")
+
 
 class TierConfig(Base):
     __tablename__ = "tier_configs"
@@ -321,7 +342,24 @@ def init_db():
     except Exception:
         pass
 
+    # Manual schema migration to add media_id to editorial_calendar if not present
+    try:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE editorial_calendar ADD COLUMN media_id INTEGER REFERENCES media_assets(id);"))
+            logger.info("Coluna 'media_id' adicionada com sucesso à tabela editorial_calendar.")
+    except Exception:
+        pass
+
+    # Manual schema migration to add media_id to posts_history if not present
+    try:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE posts_history ADD COLUMN media_id INTEGER REFERENCES media_assets(id);"))
+            logger.info("Coluna 'media_id' adicionada com sucesso à tabela posts_history.")
+    except Exception:
+        pass
+
     # Manual schema migration to add channel if not present
+
     try:
         with engine.begin() as conn:
             conn.execute(text("ALTER TABLE agent_configs ADD COLUMN channel VARCHAR DEFAULT 'bluesky';"))

@@ -8,6 +8,7 @@ from app.routes.calendar import router as calendar_router
 from app.routes.ideas import router as ideas_router
 from app.routes.admin import router as admin_router
 from app.routes.ollama import router as ollama_router
+from app.routes.media import router as media_router
 
 router = APIRouter()
 
@@ -21,3 +22,5 @@ router.include_router(calendar_router)
 router.include_router(ideas_router)
 router.include_router(admin_router)
 router.include_router(ollama_router)
+router.include_router(media_router)
+

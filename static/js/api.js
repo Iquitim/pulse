@@ -7,3 +7,5 @@ export { fetchHistory, triggerPostNow, runAIHelper, generateDraft, publishDraft,
 export { fetchCalendarItems, createCalendarItem, updateCalendarItem, deleteCalendarItem } from './api/calendar.js';
 export { fetchIdeas, createIdea, updateIdeaStatus, deleteIdea, analyzePostQuality, fetchMetricsInsights } from './api/ideas.js';
 export { fetchHardwareDiagnostic, fetchOllamaStatus, installOllama, fetchInstallProgress, startOllama, stopOllama, fetchOllamaModels, pullModel, fetchPullProgress } from './api/ollama.js';
+export { uploadMediaAPI, getUserMediaAPI, deleteMediaAPI, attachMediaToCalendarItemAPI } from './api/media.js';
+

@@ -31,13 +31,28 @@ class BlueskyNetwork(BaseSocialNetwork):
             if not connected or not self.client:
                 raise ValueError("Cliente Bluesky não autenticado.")
         
+    def publish_with_media(self, content: str, media_path: str, mime_type: str = "image/png") -> dict:
+        if not self.client:
+            connected = self.connect()
+            if not connected or not self.client:
+                raise ValueError("Cliente Bluesky não autenticado.")
+        
         try:
-            result = self.client.send_post(text=content)
+            with open(media_path, "rb") as f:
+                media_bytes = f.read()
+
+            upload = self.client.upload_blob(media_bytes)
+            from atproto import models
+            embed = models.AppBskyEmbedImages.Main(
+                images=[models.AppBskyEmbedImages.Image(alt="", image=upload.blob)]
+            )
+            result = self.client.send_post(text=content, embed=embed)
             return {
                 "status": "success",
                 "uri": getattr(result, "uri", None),
                 "cid": getattr(result, "cid", None)
             }
         except Exception as e:
-            logger.error(f"Erro ao publicar no Bluesky ({self.handle}): {e}")
-            raise e
+            logger.error(f"Erro ao publicar no Bluesky com mídia ({self.handle}): {e}")
+            return self.publish(content)
+

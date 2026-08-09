@@ -14,7 +14,7 @@ export async function fetchCalendarItems() {
   }
 }
 
-export async function createCalendarItem(theme, scheduledDate, objective, cta, channel, isManual = false, manualContent = null) {
+export async function createCalendarItem(theme, scheduledDate, objective, cta, channel, isManual = false, manualContent = null, mediaId = null) {
   try {
     const res = await request('/api/calendar', {
       method: 'POST',
@@ -26,7 +26,8 @@ export async function createCalendarItem(theme, scheduledDate, objective, cta, c
         cta,
         channel,
         is_manual: isManual,
-        manual_content: manualContent
+        manual_content: manualContent,
+        media_id: mediaId ? parseInt(mediaId, 10) : null
       })
     });
     if (!res.ok) {
@@ -42,7 +43,7 @@ export async function createCalendarItem(theme, scheduledDate, objective, cta, c
   }
 }
 
-export async function updateCalendarItem(id, theme, scheduledDate, objective, cta, channel, isManual = false, manualContent = null) {
+export async function updateCalendarItem(id, theme, scheduledDate, objective, cta, channel, isManual = false, manualContent = null, mediaId = null) {
   try {
     const res = await request(`/api/calendar/${id}`, {
       method: 'PUT',
@@ -54,9 +55,11 @@ export async function updateCalendarItem(id, theme, scheduledDate, objective, ct
         cta,
         channel,
         is_manual: isManual,
-        manual_content: manualContent
+        manual_content: manualContent,
+        media_id: mediaId ? parseInt(mediaId, 10) : null
       })
     });
+
     if (!res.ok) {
       const result = await res.json();
       throw new Error(result.detail || 'Erro ao atualizar item.');
