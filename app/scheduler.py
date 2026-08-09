@@ -218,7 +218,15 @@ def check_due_editorial_posts():
                     for account in social_accounts:
                         try:
                             client = get_social_network_client(account.platform, account.encrypted_credentials)
-                            resp = client.publish(content)
+                            if item.media:
+                                abs_media_path = os.path.join(BASE_DIR, item.media.storage_path)
+                                if os.path.exists(abs_media_path) and hasattr(client, "publish_with_media"):
+                                    resp = client.publish_with_media(content, abs_media_path, item.media.mime_type)
+                                else:
+                                    resp = client.publish(content)
+                            else:
+                                resp = client.publish(content)
+
                             
                             new_post = PostHistory(
                                 user_id=user.id,

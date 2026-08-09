@@ -51,7 +51,8 @@ async def create_calendar_item(req: EditorialItemCreate, current_user: User = De
         cta=req.cta,
         channel=req.channel,
         is_manual=req.is_manual,
-        manual_content=req.manual_content
+        manual_content=req.manual_content,
+        media_id=req.media_id
     )
     db.add(new_item)
     db.commit()
@@ -90,9 +91,11 @@ async def update_calendar_item(item_id: int, req: EditorialItemCreate, current_u
     item.channel = req.channel
     item.is_manual = req.is_manual
     item.manual_content = req.manual_content
+    item.media_id = req.media_id
     
     db.commit()
     db.refresh(item)
+
     log_activity(db, current_user.id, "update_calendar_item", f"Item do calendário ID {item_id} atualizado. Tema anterior={old_theme}, Novo Tema={req.theme}, Canal={req.channel}, Data={req.scheduled_date.isoformat()}, Manual={req.is_manual}")
     return item
 

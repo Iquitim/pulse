@@ -104,6 +104,22 @@ class ChangePasswordRequest(BaseModel):
     current_password: str
     new_password: str
 
+class MediaAssetResponse(BaseModel):
+    id: int
+    filename: str
+    original_name: str
+    mime_type: str
+    file_size: int
+    storage_path: str
+    url: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class AttachMediaRequest(BaseModel):
+    media_id: Optional[int] = None
+
 class EditorialItemCreate(BaseModel):
     theme: Optional[str] = "Uso Manual"
     scheduled_date: datetime
@@ -112,6 +128,7 @@ class EditorialItemCreate(BaseModel):
     channel: str = "bluesky"
     is_manual: bool = False
     manual_content: Optional[str] = None
+    media_id: Optional[int] = None
 
 class EditorialItemResponse(BaseModel):
     id: int
@@ -124,10 +141,13 @@ class EditorialItemResponse(BaseModel):
     is_manual: bool = False
     manual_content: Optional[str] = None
     post_history_id: Optional[int] = None
+    media_id: Optional[int] = None
+    media: Optional[MediaAssetResponse] = None
     created_at: datetime
 
     class Config:
         from_attributes = True
+
 
 class InviteCodeCreate(BaseModel):
     code: str

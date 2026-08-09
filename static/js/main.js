@@ -11,8 +11,10 @@ import { setupConfigEvents } from './events/config.js';
 import { setupAdminEvents } from './events/admin.js';
 import { setupOllamaEvents } from './events/ollama.js';
 import { setupTutorialEvents } from './events/tutorial.js';
+import { setupMediaEvents } from './events/media.js';
 
 // --- Background Timer & Countdown ---
+
 function startTimerCountdown() {
   const countdownTimer = document.getElementById('countdown-timer');
   const countdownSubtext = document.getElementById('countdown-subtext');
@@ -54,8 +56,10 @@ function setupEventListeners() {
   setupAdminEvents();
   setupOllamaEvents();
   setupTutorialEvents();
+  setupMediaEvents();
 
   // Sync the visual selectors for the editor and idea capture screens initially
+
   ui.syncVisualSelector('draft-channel', 'draft-channel-selector');
   ui.syncVisualSelector('idea-channel', 'idea-channel-selector');
 }
