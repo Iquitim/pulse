@@ -134,9 +134,12 @@ export function setupLibraryEvents() {
       
       if (subtab === 'ideas') {
         api.fetchIdeas();
+      } else if (subtab === 'media') {
+        import('./media.js').then(m => m.renderMediaLibraryGrid('tab-media-library-grid'));
       }
     });
   });
+
 
   // --- Create New Idea Form ---
   const formNewIdea = document.getElementById('form-new-idea');

@@ -342,7 +342,24 @@ def init_db():
     except Exception:
         pass
 
+    # Manual schema migration to add media_id to editorial_calendar if not present
+    try:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE editorial_calendar ADD COLUMN media_id INTEGER REFERENCES media_assets(id);"))
+            logger.info("Coluna 'media_id' adicionada com sucesso à tabela editorial_calendar.")
+    except Exception:
+        pass
+
+    # Manual schema migration to add media_id to posts_history if not present
+    try:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE posts_history ADD COLUMN media_id INTEGER REFERENCES media_assets(id);"))
+            logger.info("Coluna 'media_id' adicionada com sucesso à tabela posts_history.")
+    except Exception:
+        pass
+
     # Manual schema migration to add channel if not present
+
     try:
         with engine.begin() as conn:
             conn.execute(text("ALTER TABLE agent_configs ADD COLUMN channel VARCHAR DEFAULT 'bluesky';"))
