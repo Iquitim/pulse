@@ -48,7 +48,10 @@ export async function connectAccount(platform, accountHandle, credentials) {
       if (keyInput) keyInput.value = "";
       if (secretInput) secretInput.value = "";
     } else if (platform === "threads") {
-      // Threads uses no input fields to reset
+      const tokenInput = document.getElementById("threads-token-input");
+      const userIdInput = document.getElementById("threads-userid-input");
+      if (tokenInput) tokenInput.value = "";
+      if (userIdInput) userIdInput.value = "";
     }
     
     await fetchConnectedAccounts();
@@ -83,11 +86,13 @@ export async function fetchStatus() {
     
     state.connectionStatus = {
       gemini: statusData.gemini.connected ? 'online' : 'offline',
-      gemini_msg: statusData.gemini.connected ? `Ativo (${statusData.gemini.name})` : 'Não configurado',
+      gemini_msg: statusData.gemini.connected ? statusData.gemini.name : 'Desconectado',
       bsky: statusData.bsky.connected ? 'online' : 'offline',
-      bsky_msg: statusData.bsky.connected ? `Conectado (@${statusData.bsky.handle})` : 'Desconectado',
+      bsky_msg: statusData.bsky.connected ? `Bluesky: @${statusData.bsky.handle}` : 'Bluesky',
       twitter: statusData.twitter.connected ? 'online' : 'offline',
-      twitter_msg: statusData.twitter.connected ? `Conectado (@${statusData.twitter.handle})` : 'Desconectado',
+      twitter_msg: statusData.twitter.connected ? `Twitter: @${statusData.twitter.handle}` : 'Twitter',
+      threads: statusData.threads?.connected ? 'online' : 'offline',
+      threads_msg: statusData.threads?.connected ? `Threads: ${statusData.threads.handle}` : 'Threads',
       scheduler: statusData.scheduler.active ? 'online' : 'offline',
       scheduler_msg: statusData.scheduler.active ? 'Scheduler: Ativo' : 'Scheduler: Inativo'
     };
@@ -99,8 +104,9 @@ export async function fetchStatus() {
     }
     
     ui.updateConnectionBadge('status-gemini', state.connectionStatus.gemini, `IA: ${state.connectionStatus.gemini_msg}`);
-    ui.updateConnectionBadge('status-bsky', state.connectionStatus.bsky, `Bluesky: ${state.connectionStatus.bsky_msg}`);
-    ui.updateConnectionBadge('status-twitter', state.connectionStatus.twitter, `Twitter: ${state.connectionStatus.twitter_msg}`);
+    ui.updateConnectionBadge('status-bsky', state.connectionStatus.bsky, state.connectionStatus.bsky_msg);
+    ui.updateConnectionBadge('status-twitter', state.connectionStatus.twitter, state.connectionStatus.twitter_msg);
+    ui.updateConnectionBadge('status-threads', state.connectionStatus.threads, state.connectionStatus.threads_msg);
     
     const previewHandle = document.getElementById('preview-handle');
     if (previewHandle) {
@@ -114,9 +120,11 @@ export async function fetchStatus() {
     ui.updateMetrics();
     ui.updateQueueList();
   } catch (error) {
-    ui.updateConnectionBadge('status-gemini', 'offline', 'IA: Erro de API');
-    ui.updateConnectionBadge('status-bsky', 'offline', 'Bluesky: Erro de API');
-    ui.updateConnectionBadge('status-twitter', 'offline', 'Twitter: Erro de API');
+    ui.updateConnectionBadge('status-gemini', 'offline', 'IA: Offline');
+    ui.updateConnectionBadge('status-bsky', 'offline', 'Bluesky');
+    ui.updateConnectionBadge('status-twitter', 'offline', 'Twitter');
+    ui.updateConnectionBadge('status-threads', 'offline', 'Threads');
     addConsoleLog(`Falha na sincronização de status: ${error.message}`, 'erro');
   }
 }
+

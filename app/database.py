@@ -4,10 +4,29 @@ from datetime import datetime
 from typing import Optional, List
 from contextlib import contextmanager
 
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime, ForeignKey, Text, text
-from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 
 from app import config
+
+# Re-export all models from app.models for seamless backward compatibility
+from app.models import (
+    Base,
+    User,
+    InviteCode,
+    AuditLog,
+    SocialAccount,
+    MediaAsset,
+    PostHistory,
+    EditorialItem,
+    Idea,
+    AgentConfig,
+    LLMServer,
+    TierConfig,
+    SystemSetting,
+    DEFAULT_SYSTEM_PROMPT,
+    DEFAULT_PERSONA_DESCRIPTION
+)
 
 logger = logging.getLogger(__name__)
 
@@ -24,238 +43,6 @@ if DATABASE_URL.startswith("sqlite"):
 
 engine = create_engine(DATABASE_URL, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
-
-# Default prompt and persona constants
-DEFAULT_SYSTEM_PROMPT = """Você é o Pulse, um assistente editorial inteligente que escreve posts curtos para redes sociais (como o Bluesky).
-
-Você deve escrever incorporando a Persona fornecida.
-
-Tarefa:
-Escreva um post para o Bluesky sobre: {theme}
-
-Tom do post:
-{tone}
-
-Regras Gerais de Escrita:
-* Máximo de 280 caracteres.
-* Sem hashtags.
-* Sem aspas no início/fim.
-* Sem introduções ou explicações ("aqui está um post...", "olá pessoal").
-* Sem threads.
-* Sem prometer resultados milagrosos.
-* Sem inventar dados ou notícias.
-* Sem exagero publicitário.
-* No máximo 1 emoji, apenas se for natural.
-* Use português brasileiro.
-* Escreva de forma curta, fluida e com personalidade.
-
-Estilo desejado:
-* Uma reflexão curta.
-* Uma observação prática.
-* Um aprendizado de bastidor.
-* Uma provocação leve.
-* Uma pergunta que convide conversa.
-* Uma frase que pareça escrita por uma pessoa real, não por uma marca.
-
-Retorne apenas o post final, pronto para ser publicado."""
-
-DEFAULT_PERSONA_DESCRIPTION = """Nome: Persona de Exemplo
-Voz e Atitude:
-* Especialista na sua área de atuação (ex: tecnologia, marketing, design).
-* Gosta de falar sobre tópicos práticos do dia a dia, compartilhando aprendizados reais.
-* Prefere um tom honesto, simples e útil, sem promessas milagrosas.
-* Evita clichês corporativos, autoridade forçada ou linguagem artificial.
-* Fala de forma natural, como uma pessoa real conversando com um colega."""
-
-# Models
-class User(Base):
-    __tablename__ = "users"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    role = Column(String, default="user")  # "admin" or "user"
-    is_active = Column(Boolean, default=True)
-    plan_tier = Column(String, default="free")  # "free", "pro", "desk"
-    must_change_password = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    social_accounts = relationship("SocialAccount", back_populates="user", cascade="all, delete-orphan")
-    agent_config = relationship("AgentConfig", back_populates="user", uselist=False, cascade="all, delete-orphan")
-    posts_history = relationship("PostHistory", back_populates="user", cascade="all, delete-orphan")
-    editorial_items = relationship("EditorialItem", back_populates="user", cascade="all, delete-orphan")
-    audit_logs = relationship("AuditLog", back_populates="user", cascade="all, delete-orphan")
-    ideas = relationship("Idea", back_populates="user", cascade="all, delete-orphan")
-    llm_servers = relationship("LLMServer", back_populates="user", cascade="all, delete-orphan")
-    media_assets = relationship("MediaAsset", back_populates="user", cascade="all, delete-orphan")
-
-
-class InviteCode(Base):
-    __tablename__ = "invite_codes"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    code = Column(String, unique=True, index=True, nullable=False)
-    plan_tier = Column(String, default="free")
-    max_uses = Column(Integer, default=1)
-    uses_count = Column(Integer, default=0)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    revoked_at = Column(DateTime, nullable=True)
-
-class SocialAccount(Base):
-    __tablename__ = "social_accounts"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    platform = Column(String, nullable=False)  # "bluesky", "twitter", "threads"
-    account_handle = Column(String, nullable=False)  # e.g. @silvano.bsky.social
-    encrypted_credentials = Column(Text, nullable=False)  # encrypted credentials
-    is_connected = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    user = relationship("User", back_populates="social_accounts")
-    posts_history = relationship("PostHistory", back_populates="social_account")
-
-class PostHistory(Base):
-    __tablename__ = "posts_history"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    social_account_id = Column(Integer, ForeignKey("social_accounts.id"), nullable=True)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-    status = Column(String, nullable=False)  # "success", "failed", "draft"
-    theme = Column(String, nullable=False)
-    tone = Column(String, nullable=False)
-    content = Column(Text, nullable=False)
-    uri = Column(String, nullable=True)
-    cid = Column(String, nullable=True)
-    error_message = Column(Text, nullable=True)
-    media_id = Column(Integer, ForeignKey("media_assets.id"), nullable=True)
-    
-    likes = Column(Integer, default=0)
-    reposts = Column(Integer, default=0)
-    replies = Column(Integer, default=0)
-    quality_score = Column(Integer, nullable=True)
-    
-    user = relationship("User", back_populates="posts_history")
-    social_account = relationship("SocialAccount", back_populates="posts_history")
-    media = relationship("MediaAsset")
-
-class MediaAsset(Base):
-    __tablename__ = "media_assets"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    filename = Column(String, nullable=False)
-    original_name = Column(String, nullable=False)
-    mime_type = Column(String, nullable=False)
-    file_size = Column(Integer, nullable=False)
-    storage_path = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    user = relationship("User", back_populates="media_assets")
-
-class AgentConfig(Base):
-    __tablename__ = "agent_configs"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), unique=True, nullable=False)
-    is_active = Column(Boolean, default=False)
-    requires_approval = Column(Boolean, default=False)
-    interval_hours = Column(Integer, default=6)
-    tone = Column(String, default="informativo")
-    themes_csv = Column(Text, default="Tecnologia,Inteligência Artificial,Programação")
-    system_prompt = Column(Text, default=DEFAULT_SYSTEM_PROMPT)
-    persona_description = Column(Text, default=DEFAULT_PERSONA_DESCRIPTION)
-    scheduling_mode = Column(String, default="recorrente")  # "recorrente" or "personalizado"
-    channel = Column(String, default="bluesky")
-    
-    # LLM Settings
-    llm_provider = Column(String, default="gemini") # "gemini", "ollama", "openai_compatible"
-    llm_model = Column(String, default="gemini-2.5-flash-lite")
-    llm_base_url = Column(String, nullable=True)
-    llm_api_key_encrypted = Column(Text, nullable=True)
-    
-    user = relationship("User", back_populates="agent_config")
-
-class EditorialItem(Base):
-    __tablename__ = "editorial_calendar"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    post_history_id = Column(Integer, ForeignKey("posts_history.id"), nullable=True)
-    media_id = Column(Integer, ForeignKey("media_assets.id"), nullable=True)
-    theme = Column(String, nullable=False)
-    scheduled_date = Column(DateTime, nullable=False)
-    status = Column(String, default="planejado")  # "planejado", "publicado", "falhou"
-    objective = Column(Text, nullable=True)
-    cta = Column(String, nullable=True)
-    channel = Column(String, default="bluesky")  # "bluesky", "twitter", "threads"
-    is_manual = Column(Boolean, default=False)
-    manual_content = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    user = relationship("User", back_populates="editorial_items")
-    post_history = relationship("PostHistory", backref="editorial_item", uselist=False)
-    media = relationship("MediaAsset")
-
-
-class TierConfig(Base):
-    __tablename__ = "tier_configs"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    tier_name = Column(String, unique=True, nullable=False)  # "free", "pro", "desk"
-    max_themes = Column(Integer, default=5)
-    max_accounts = Column(Integer, default=1)
-    max_calendar_items = Column(Integer, default=10)
-    daily_post_limit = Column(Integer, default=3)
-
-class SystemSetting(Base):
-    __tablename__ = "system_settings"
-    
-    key = Column(String, primary_key=True, index=True)
-    value = Column(Text, nullable=True)
-
-class AuditLog(Base):
-    __tablename__ = "audit_logs"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    action = Column(String, nullable=False)
-    details = Column(String, nullable=True)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-    
-    user = relationship("User", back_populates="audit_logs")
-
-class Idea(Base):
-    __tablename__ = "ideas"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    title = Column(String, nullable=False)
-    description = Column(Text, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    status = Column(String, default="pending")  # "pending", "converted"
-    channel = Column(String, default="bluesky")
-    
-    user = relationship("User", back_populates="ideas")
-
-class LLMServer(Base):
-    __tablename__ = "llm_servers"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    name = Column(String, nullable=False)
-    provider = Column(String, nullable=False)  # "gemini", "ollama", "openai_compatible"
-    model = Column(String, nullable=False)
-    base_url = Column(String, nullable=True)
-    api_key_encrypted = Column(Text, nullable=True)
-    is_active = Column(Boolean, default=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    user = relationship("User", back_populates="llm_servers")
-
-
 
 # Context manager for DB sessions
 @contextmanager
@@ -278,9 +65,10 @@ def get_db():
     finally:
         db.close()
 
-# Helper function to initialize database tables
+# Helper function to initialize database tables and apply schema migrations
 def init_db():
     Base.metadata.create_all(bind=engine)
+    
     # Manual schema migration to add scheduling_mode if not present
     try:
         with engine.begin() as conn:
@@ -359,7 +147,6 @@ def init_db():
         pass
 
     # Manual schema migration to add channel if not present
-
     try:
         with engine.begin() as conn:
             conn.execute(text("ALTER TABLE agent_configs ADD COLUMN channel VARCHAR DEFAULT 'bluesky';"))
@@ -421,8 +208,6 @@ def save_post_to_markdown(content: str, theme: str, tone: str, user_id: Optional
         active_model = "Desconhecido"
         if user_id:
             try:
-                # Local import to prevent circular dependencies
-                from app.database import get_db_session, LLMServer
                 with get_db_session() as db_sess:
                     active_server = db_sess.query(LLMServer).filter(
                         LLMServer.user_id == user_id,
@@ -455,7 +240,7 @@ def save_post_to_markdown(content: str, theme: str, tone: str, user_id: Optional
     except Exception as e:
         logger.error(f"Erro ao salvar post em markdown: {e}")
 
-# Helper log functions to replace legacy ones
+# Helper activity and audit log functions
 def log_activity(db, user_id: int, action: str, details: Optional[str] = None):
     try:
         new_log = AuditLog(
@@ -533,7 +318,6 @@ def check_daily_post_limit(db, user_id: int) -> bool:
     ).count()
     return posts_last_24h < limit
 
-
 def get_system_setting(db, key: str, env_name: str = None, default: str = None) -> str:
     try:
         setting = db.query(SystemSetting).filter(SystemSetting.key == key).first()
@@ -549,6 +333,3 @@ def get_system_setting(db, key: str, env_name: str = None, default: str = None) 
         import os
         return os.getenv(env_name, default)
     return default
-
-
-

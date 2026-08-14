@@ -1,8 +1,8 @@
     <!-- Main SaaS Header -->
     <header class="app-header">
       <div class="brand-section">
-        <div class="logo-container" style="display: flex; align-items: center; margin-right: 0.25rem;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="170" height="42" style="display: block;">
+        <div class="logo-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="140" height="34" style="display: block;">
             <defs>
               <linearGradient id="pulse-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#4facfe" />
@@ -17,7 +17,6 @@
               </filter>
             </defs>
             <g transform="translate(2, 2)">
-              <!-- Letra P Externa -->
               <path d="M 14 38 L 14 12 C 14 6.5, 19.5 2, 26 2 C 32.5 2, 38 6.5, 38 12 C 38 17.5, 32.5 23, 26 23 L 14 23" 
                     fill="none" 
                     stroke="url(#pulse-grad)" 
@@ -25,7 +24,6 @@
                     stroke-linecap="round" 
                     stroke-linejoin="round"
                     filter="url(#neon-glow)" />
-              <!-- Letra P Interna -->
               <path d="M 20 38 L 20 16 C 20 13, 22.5 10.5, 26 10.5 C 29.5 10.5, 32 13, 32 16 C 32 19, 29.5 21.5, 26 21.5 L 20 21.5" 
                     fill="none" 
                     stroke="url(#pulse-grad)" 
@@ -33,21 +31,18 @@
                     stroke-linecap="round" 
                     stroke-linejoin="round"
                     opacity="0.8" />
-              <!-- Senoide Principal -->
               <path d="M 38 23 C 42 23, 44 4, 49 4 C 54 4, 56 42, 61 42 C 66 42, 68 10, 73 10 C 78 10, 80 34, 85 34 C 90 34, 92 18, 97 18 L 108 23" 
                     fill="none" 
                     stroke="url(#pulse-grad)" 
                     stroke-width="2.5" 
                     stroke-linecap="round"
                     filter="url(#neon-glow)" />
-              <!-- Onda de Interferência Secundária -->
-              <path d="M 38 23 C 42 23, 45 12, 49 12 C 53 12, 57 32, 61 32 C 65 32, 69 16, 73 16 C 77 16, 81 28, 85 28 L 95 23" 
+              <path d="M 38 23 C 42 23, 45 12, 49 12 C 53 12, 57 32, 61 32 C 66 32, 69 16, 73 16 C 77 16, 81 28, 85 28 L 95 23" 
                     fill="none" 
                     stroke="url(#pulse-grad)" 
                     stroke-width="1" 
                     stroke-linecap="round"
                     opacity="0.4" />
-              <!-- Pontos de Frequência -->
               <circle cx="49" cy="4" r="1.5" fill="#00f2fe" filter="url(#neon-glow)" />
               <circle cx="61" cy="42" r="1.2" fill="#00f2fe" />
               <circle cx="73" cy="10" r="1" fill="#00f2fe" />
@@ -55,59 +50,52 @@
             <text x="115" y="32" fill="var(--text-primary)" font-family="var(--font-sans)" font-size="20" font-weight="900" letter-spacing="1">PULSE</text>
           </svg>
         </div>
-        <span class="brand-divider">|</span>
-        <span class="brand-subtitle">Agente de IA para publicação social automatizada</span>
+        <span class="brand-divider">/</span>
+        <span class="brand-subtitle">Plataforma Editorial</span>
       </div>
 
-      <!-- Channels & API Connection Badges -->
+      <!-- Controls on Right -->
       <div class="header-widgets">
-        <div class="channels-widget">
-          <div class="active-channel" title="Canal ativo">
-            <!-- Bluesky butterfly SVG logo -->
-            <svg viewBox="0 0 512 512" class="icon-bsky-svg"><path fill="currentColor" d="M111.8 42.2C188.4 98.9 237.4 179.6 256 211.5c18.6-31.9 67.6-112.6 144.2-169.3C449.6 5.8 512-16.3 512 25.2c0 9.1-4.7 93.9-8.4 135.9c-8.9 101.4-53.8 128.2-96.1 134.4c65.5 9.7 75.8 62.8 41 113.3c-42.3 61.4-150.3 35.8-192.5 12.3c-42.2 23.5-150.2 49.1-192.5-12.3c-34.8-50.5-24.5-103.6 41-113.3c-42.3-6.2-87.2-33-96.1-134.4C4.7 119.1 0 34.3 0 25.2C0-16.3 62.4 5.8 111.8 42.2z"/></svg>
-            <span class="channel-name">Bluesky</span>
-            <span class="channel-badge">Disponível</span>
+        <!-- Status Badges Group -->
+        <div class="header-status-group">
+          <div id="status-gemini" class="header-status-badge badge-loading" title="Servidor de IA">
+            <span class="status-icon-indicator"></span>
+            <span class="status-label">IA: Conectando...</span>
           </div>
-          <div class="active-channel" title="Canal ativo" style="border-left: 1px solid var(--border-color); padding-left: 0.5rem; margin-left: 0.25rem;">
-            <!-- Twitter X SVG logo -->
-            <svg viewBox="0 0 24 24" style="width: 12px; height: 12px; fill: currentColor; color: var(--color-accent); margin-right: 0.15rem;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            <span class="channel-name">Twitter / X</span>
-            <span class="channel-badge">Disponível</span>
+          <div id="status-bsky" class="header-status-badge badge-loading" title="Bluesky">
+            <span class="status-icon-indicator"></span>
+            <span class="status-label">Bluesky</span>
           </div>
-          <div class="channel-placeholder" title="Futura expansão">+ Futuras redes</div>
-        </div>
-
-        <div class="api-status-group">
-          <div id="status-gemini" class="api-badge badge-loading">
-            <span class="api-dot"></span>
-            <span>Gemini AI</span>
+          <div id="status-twitter" class="header-status-badge badge-loading" title="Twitter / X">
+            <span class="status-icon-indicator"></span>
+            <span class="status-label">Twitter</span>
           </div>
-          <div id="status-bsky" class="api-badge badge-loading">
-            <span class="api-dot"></span>
-            <span>Bluesky API</span>
-          </div>
-          <div id="status-twitter" class="api-badge badge-loading">
-            <span class="api-dot"></span>
-            <span>Twitter API</span>
+          <div id="status-threads" class="header-status-badge badge-loading" title="Threads">
+            <span class="status-icon-indicator"></span>
+            <span class="status-label">Threads</span>
           </div>
         </div>
 
-        <!-- Theme Toggle Button -->
-        <button type="button" id="btn-theme-toggle" class="btn-theme-toggle" title="Alternar tema">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-        </button>
+        <div class="header-sep"></div>
 
-        <!-- Media Gallery Quick Access Button -->
-        <button type="button" id="btn-open-media-gallery-header" class="btn-theme-toggle" title="Galeria de Mídias" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; color: var(--color-accent);">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-        </button>
+        <!-- Action Buttons -->
+        <div class="header-actions-group">
+          <button type="button" id="btn-theme-toggle" class="header-action-btn" title="Alternar tema claro/escuro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
 
+          <button type="button" id="btn-open-media-gallery-header" class="header-action-btn" title="Galeria de Mídias">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          </button>
+        </div>
+
+        <div class="header-sep"></div>
 
         <!-- User Info & Logout -->
-        <div class="user-badge-widget" id="user-info-widget" style="display: flex; align-items: center; gap: 0.75rem; border-left: 1px solid var(--border-color); padding-left: 0.75rem; margin-left: 0.25rem;">
-          <span id="header-user-email" class="user-email-text" style="font-size: 0.75rem; font-weight: 500; color: var(--text-muted);">...</span>
-          <button type="button" id="btn-logout" class="btn-logout" title="Sair da conta" style="background: none; border: 1px solid var(--border-color); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; cursor: pointer; color: var(--text-muted); font-weight: 500; transition: all 0.2s;">Sair</button>
+        <div class="header-user-group" id="user-info-widget">
+          <span id="header-user-email" class="header-user-email">...</span>
+          <button type="button" id="btn-logout" class="btn-logout-clean" title="Encerrar sessão">Sair</button>
         </div>
       </div>
     </header>
