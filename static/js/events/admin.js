@@ -15,17 +15,37 @@ async function loadGlobalSettingsUI() {
   if (state.user && state.user.role === 'admin') {
     const settings = await api.fetchGlobalSettings();
     if (settings) {
+      // Twitter / X
       const clientIdInput = document.getElementById('global-twitter-client-id');
       const clientSecretInput = document.getElementById('global-twitter-client-secret');
+      const redirectUriInput = document.getElementById('global-twitter-redirect-uri');
       
       if (clientIdInput) clientIdInput.value = settings.twitter_client_id || '';
+      if (redirectUriInput) redirectUriInput.value = settings.twitter_redirect_uri || '';
       if (clientSecretInput) {
         if (settings.twitter_client_secret_configured) {
           clientSecretInput.value = '__UNCHANGED__';
           clientSecretInput.placeholder = '•••••••••••••••• (Configurado)';
         } else {
           clientSecretInput.value = '';
-          clientSecretInput.placeholder = 'Client Secret OAuth 2.0';
+          clientSecretInput.placeholder = 'Client Secret';
+        }
+      }
+
+      // Meta Threads
+      const threadsAppIdInput = document.getElementById('global-threads-app-id');
+      const threadsAppSecretInput = document.getElementById('global-threads-app-secret');
+      const threadsRedirectUriInput = document.getElementById('global-threads-redirect-uri');
+
+      if (threadsAppIdInput) threadsAppIdInput.value = settings.threads_app_id || '';
+      if (threadsRedirectUriInput) threadsRedirectUriInput.value = settings.threads_redirect_uri || '';
+      if (threadsAppSecretInput) {
+        if (settings.threads_app_secret_configured) {
+          threadsAppSecretInput.value = '__UNCHANGED__';
+          threadsAppSecretInput.placeholder = '•••••••••••••••• (Configurado)';
+        } else {
+          threadsAppSecretInput.value = '';
+          threadsAppSecretInput.placeholder = 'App Secret Meta';
         }
       }
     }
@@ -158,10 +178,19 @@ export function setupAdminEvents() {
       e.preventDefault();
       const twitter_client_id = document.getElementById('global-twitter-client-id').value.trim();
       const twitter_client_secret = document.getElementById('global-twitter-client-secret').value.trim();
+      const twitter_redirect_uri = document.getElementById('global-twitter-redirect-uri') ? document.getElementById('global-twitter-redirect-uri').value.trim() : '';
+
+      const threads_app_id = document.getElementById('global-threads-app-id') ? document.getElementById('global-threads-app-id').value.trim() : '';
+      const threads_app_secret = document.getElementById('global-threads-app-secret') ? document.getElementById('global-threads-app-secret').value.trim() : '';
+      const threads_redirect_uri = document.getElementById('global-threads-redirect-uri') ? document.getElementById('global-threads-redirect-uri').value.trim() : '';
       
       const success = await api.updateGlobalSettings({
         twitter_client_id,
-        twitter_client_secret
+        twitter_client_secret,
+        twitter_redirect_uri,
+        threads_app_id,
+        threads_app_secret,
+        threads_redirect_uri
       });
       
       if (success) {

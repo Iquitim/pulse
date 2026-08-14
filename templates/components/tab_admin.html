@@ -94,23 +94,49 @@
       <!-- Seção Integrações (Configurações Globais) -->
       <section class="panel-section">
         <div class="panel-header">
-          <h3>Integração X / Twitter (OAuth 2.0)</h3>
+          <h3>Integrações Sociais Globais (OAuth 2.0)</h3>
         </div>
         
         <div class="panel-form">
-          <form id="global-settings-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
-            <div class="form-group">
-              <label for="global-twitter-client-id" class="input-label">Twitter Client ID</label>
-              <input type="text" id="global-twitter-client-id" placeholder="Ex: eFRLM2h... (Client ID OAuth 2.0)" class="clean-input">
+          <form id="global-settings-form" style="display: flex; flex-direction: column; gap: 1rem;">
+            <!-- X / Twitter -->
+            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem; display: flex; flex-direction: column; gap: 0.6rem;">
+              <h4 style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin: 0;">Twitter / X</h4>
+              <div class="form-group">
+                <label for="global-twitter-client-id" class="input-label">Client ID</label>
+                <input type="text" id="global-twitter-client-id" placeholder="Ex: eFRLM2h... (Client ID)" class="clean-input">
+              </div>
+              <div class="form-group">
+                <label for="global-twitter-client-secret" class="input-label">Client Secret</label>
+                <input type="password" id="global-twitter-client-secret" placeholder="Client Secret" class="clean-input">
+              </div>
+              <div class="form-group">
+                <label for="global-twitter-redirect-uri" class="input-label">Redirect URI (Opcional)</label>
+                <input type="text" id="global-twitter-redirect-uri" placeholder="Ex: http://127.0.0.1:8000/api/social/twitter/callback" class="clean-input">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="global-twitter-client-secret" class="input-label">Twitter Client Secret</label>
-              <input type="password" id="global-twitter-client-secret" placeholder="Client Secret OAuth 2.0" class="clean-input">
+
+            <!-- Meta Threads -->
+            <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <h4 style="font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin: 0;">Meta Threads</h4>
+              <div class="form-group">
+                <label for="global-threads-app-id" class="input-label">Threads App ID</label>
+                <input type="text" id="global-threads-app-id" placeholder="Ex: 1234567890 (App ID Meta)" class="clean-input">
+              </div>
+              <div class="form-group">
+                <label for="global-threads-app-secret" class="input-label">Threads App Secret</label>
+                <input type="password" id="global-threads-app-secret" placeholder="App Secret Meta" class="clean-input">
+              </div>
+              <div class="form-group">
+                <label for="global-threads-redirect-uri" class="input-label">Redirect URI (Opcional)</label>
+                <input type="text" id="global-threads-redirect-uri" placeholder="Ex: http://127.0.0.1:8000/api/social/threads/callback" class="clean-input">
+              </div>
             </div>
+
             <p style="font-size: 0.7rem; color: var(--text-muted); margin: 0; line-height: 1.4;">
-              Essas chaves são usadas para habilitar a conexão por botão/redirecionamento de qualquer usuário da instância.
+              Essas chaves habilitam o botão de autorização direta com 1 clique para todos os usuários da instância.
             </p>
-            <button type="submit" class="btn-primary">Salvar Integração</button>
+            <button type="submit" class="btn-primary">Salvar Integrações Globais</button>
           </form>
         </div>
       </section>

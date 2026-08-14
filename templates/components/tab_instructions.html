@@ -17,6 +17,9 @@
         <button type="button" class="doc-menu-btn" data-target="section-twitter" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
           Conectar ao X / Twitter
         </button>
+        <button type="button" class="doc-menu-btn" data-target="section-threads" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
+          Conectar ao Threads
+        </button>
         <button type="button" class="doc-menu-btn" data-target="section-ollama" style="display: flex; align-items: center; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); color: var(--text-secondary); background: none; border: none; text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 0.875rem; font-weight: 500; transition: all 0.2s;">
           Setup do Ollama Local
         </button>
@@ -106,17 +109,17 @@
         </div>
         <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
           <p>
-            O Pulse oferece duas maneiras flexíveis de se integrar ao X/Twitter: por meio de <strong>OAuth 2.0 (recomendado para instâncias públicas/multiusuários)</strong> ou via <strong>Chaves de Desenvolvedor (ideal para desenvolvedores e instâncias de uso único local)</strong>.
+            O Pulse oferece duas maneiras de se integrar ao X/Twitter: por meio de <strong>OAuth 2.0 (recomendado para instâncias multiusuários)</strong> ou via <strong>Chaves de Desenvolvedor (recomendado para desenvolvimento local rápido ou contas únicas)</strong>.
           </p>
           
-          <h4 style="margin: 0.5rem 0 0.25rem 0; color: var(--text-primary); font-size: 0.9rem;">A. Usando Chaves de Desenvolvedor (Uso Local / Rápido)</h4>
+          <h4 style="margin: 0.5rem 0 0.25rem 0; color: var(--text-primary); font-size: 0.9rem;">A. Usando Chaves de Desenvolvedor (Uso Local / Direto)</h4>
           <p style="margin: 0;">
-            Se você já tem uma conta no X Developer Portal, pode gerar as chaves e conectar seu Pulse imediatamente sem precisar configurar redirecionamentos de servidor:
+            Se você possui uma conta no X Developer Portal, pode gerar as chaves e conectar o Pulse diretamente, sem necessidade de configurar rotas de redirecionamento OAuth:
           </p>
           <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.5rem;">
-            <div>1. Acesse o <a href="https://developer.x.com" target="_blank" style="color: var(--color-accent); text-decoration: underline;">X Developer Portal</a> e crie um aplicativo.</div>
-            <div>2. Nas configurações do seu aplicativo, em <strong>User Authentication Settings</strong>, ative a autenticação <strong>OAuth 1.0a</strong> e defina o nível de acesso para <strong>Read and Write (Ler e Gravar)</strong>.</div>
-            <div>3. Na aba <strong>Keys and Tokens</strong>, gere e copie as seguintes 4 chaves/tokens:
+            <div>1. Acesse o <a href="https://developer.x.com" target="_blank" style="color: var(--color-accent); text-decoration: underline;">X Developer Portal</a> e abra o seu projeto/aplicativo.</div>
+            <div>2. Em <strong>User Authentication Settings</strong>, ative a autenticação e defina as permissões como <strong>Read and write (Ler e Gravar)</strong>.</div>
+            <div>3. Na aba <strong>Keys and Tokens</strong>, gere e copie as seguintes 4 credenciais:
               <ul style="padding-left: 1.25rem; margin-top: 0.25rem; display: flex; flex-direction: column; gap: 0.15rem; font-size: 0.8rem; color: var(--text-muted);">
                 <li>Consumer Key (API Key)</li>
                 <li>Consumer Secret (API Secret)</li>
@@ -124,23 +127,73 @@
                 <li>Access Token Secret</li>
               </ul>
             </div>
-            <div>4. No Pulse, selecione a aba <strong>Configurações</strong>, altere o Tipo de Conexão do Twitter para <strong>Chaves de Desenvolvedor (Manual)</strong>, preencha o handle (ex: <code>@seu_usuario</code>) e os quatro campos. Clique em <strong>Vincular Conta</strong>.</div>
+            <div>4. No Pulse, selecione a aba <strong>Configurações</strong>, selecione o Tipo de Conexão do Twitter como <strong>Chaves de Desenvolvedor (Manual)</strong>, informe o identificador da conta (ex: <code>@seu_usuario</code>) e preencha as 4 chaves. Clique em <strong>Vincular Conta</strong>.</div>
           </div>
 
-          <h4 style="margin: 0.75rem 0 0.25rem 0; color: var(--text-primary); font-size: 0.9rem;">B. Usando OAuth 2.0 (Uso Global / Multiusuário)</h4>
+          <h4 style="margin: 0.75rem 0 0.25rem 0; color: var(--text-primary); font-size: 0.9rem;">B. Usando OAuth 2.0 (Multiusuário e Produção)</h4>
           <p style="margin: 0; margin-bottom: 0.5rem;">
-            Permite conexões com um clique sem que cada usuário precise criar chaves. Exige que o administrador do Pulse registre as credenciais globais na aba <strong>Admin</strong> da aplicação. 
-            <span style="display: block; font-size: 0.8rem; margin-top: 0.25rem; color: var(--color-ai);">
-              💡 <strong>Nota:</strong> Estas credenciais são <strong>compartilhadas entre todos os administradores</strong> da instância (qualquer admin poderá visualizá-las e editá-las) e se aplicam globalmente para todos os usuários do sistema.
-            </span>
+            Permite que qualquer usuário conecte sua conta do X com um clique via tela de consentimento oficial do X.
           </p>
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.6rem;">
+            <div>1. No <a href="https://developer.x.com" target="_blank" style="color: var(--color-accent); text-decoration: underline;">X Developer Portal</a>, edite as <strong>User Authentication Settings</strong> do aplicativo.</div>
+            <div>2. Configure o <strong>Type of App</strong> como: <strong>Web App, Automated App or Bot</strong> (Confidential Client).</div>
+            <div>3. Configure as <strong>App Permissions</strong> como: <strong>Read and write</strong>.</div>
+            <div>
+              4. No campo <strong>Callback URI / Redirect URL</strong>, cadastre as URLs exatas utilizadas para acessar a aplicação. O X exige correspondência estrita (byte a byte). Recomenda-se registrar ambas as linhas para desenvolvimento local:
+              <pre style="background: var(--bg-surface); padding: 0.5rem; border-radius: var(--radius-sm); margin: 0.35rem 0; font-size: 0.75rem; color: var(--color-accent); overflow-x: auto;">http://127.0.0.1:8000/api/social/twitter/callback
+http://localhost:8000/api/social/twitter/callback</pre>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">
+                Para produção ou domínios com túnel (ngrok, Cloudflare, etc.), cadastre a URL pública (ex: <code>https://seu-dominio.com/api/social/twitter/callback</code>).
+              </span>
+            </div>
+            <div>5. Preencha o <strong>Website URL</strong> (ex: <code>http://127.0.0.1:8000</code> ou o endereço do seu site).</div>
+            <div>6. Salve e copie o <strong>Client ID</strong> e o <strong>Client Secret</strong> gerados.</div>
+            <div>7. No Pulse, acesse a aba <strong>Admin</strong> e, na seção <strong>Integração X / Twitter (OAuth 2.0)</strong>, informe o Client ID e Client Secret. Opcionalmente, fixe o <strong>Redirect URI</strong> se você estiver usando um domínio ou proxy específico.</div>
+            <div>8. Os usuários podem conectar suas contas em <strong>Configurações > Vincular Nova Conta > Autorizar no Twitter / X</strong>.</div>
+          </div>
+
+          <div style="background: var(--bg-surface); border-left: 3px solid var(--color-accent); padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.8rem;">
+            <strong>Observação sobre Validação do Localhost pelo X / Twitter:</strong>
+            <p style="margin: 0.25rem 0 0 0; color: var(--text-secondary); line-height: 1.45;">
+              A API do X / Twitter exige correspondência estrita entre a Redirect URI configurada no portal e a URL requisitada pelo navegador. Se o formulário do portal rejeitar <code>localhost</code>, utilize <code>http://127.0.0.1:8000/api/social/twitter/callback</code> e acesse o Pulse pelo endereço <code>http://127.0.0.1:8000</code>, ou mapeie um host local no arquivo <code>/etc/hosts</code> (ex: <code>127.0.0.1 pulse.local</code>) e registre <code>http://pulse.local:8000/api/social/twitter/callback</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Meta Threads -->
+      <section id="section-threads" class="panel-section doc-card">
+        <div class="panel-header">
+          <h3>Como Conectar ao Meta Threads (OAuth 2.0 ou Manual)</h3>
+        </div>
+        <div style="font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.75rem;">
+          <p>
+            O <strong>Meta Threads</strong> é suportado através da API Oficial de Threads da Meta (Graph API). Você pode conectar sua conta através de um clique com OAuth 2.0 seguro ou utilizando um Token de Acesso de Longa Duração gerado no portal de desenvolvedores da Meta.
+          </p>
+
           <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.5rem;">
-            <div>1. No <a href="https://developer.x.com" target="_blank" style="color: var(--color-accent); text-decoration: underline;">X Developer Portal</a>, edite as <strong>User Authentication Settings</strong> do seu aplicativo e ative a autenticação <strong>OAuth 2.0</strong> como <strong>Web App / Automated</strong>.</div>
-            <div>2. Defina o <strong>Callback URL / Redirect URI</strong> para: <code style="color: var(--color-accent);">http://localhost:8000/api/social/twitter/callback</code> (se rodando localmente) ou substitua pelo seu domínio oficial. Defina Website URL como a URL da sua aplicação.</div>
-            <div>3. Salve e copie o <strong>Client ID</strong> e o <strong>Client Secret</strong> fornecidos pelo X.</div>
-            <div>4. Acesse a plataforma com uma conta administradora e navegue até a aba <strong>Admin</strong>.</div>
-            <div>5. Na seção <strong>Integração X / Twitter (OAuth 2.0)</strong>, insira o Client ID e Client Secret copiados e clique em <strong>Salvar Integração</strong>.</div>
-            <div>6. A partir de agora, qualquer usuário poderá conectar o X/Twitter clicando em <strong>Autorizar no Twitter / X 🔗</strong> na aba <strong>Configurações</strong>.</div>
+            <div style="font-weight: 600; color: var(--text-primary);">Passo a Passo para o Administrador da Instância (OAuth 2.0 Global):</div>
+            <div>1. Acesse o <a href="https://developers.facebook.com/" target="_blank" style="color: var(--color-accent); text-decoration: underline;">Meta for Developers</a> e crie ou selecione um aplicativo do tipo <strong>Other / Outro</strong> com o produto <strong>Threads API</strong>.</div>
+            <div>2. Em <strong>Threads API > Configurações</strong>, adicione as permissões <code>threads_basic</code> e <code>threads_content_publish</code>.</div>
+            <div>3. Configure a <strong>Redirect Callback URL</strong> no portal da Meta:
+              <pre style="background: var(--bg-surface); padding: 0.5rem; border-radius: var(--radius-sm); margin: 0.35rem 0; font-size: 0.75rem; color: var(--color-accent); overflow-x: auto;">http://127.0.0.1:8000/api/social/threads/callback
+http://localhost:8000/api/social/threads/callback</pre>
+            </div>
+            <div>4. Copie o <strong>Threads App ID</strong> e o <strong>Threads App Secret</strong>.</div>
+            <div>5. No Pulse, acesse a aba <strong>Admin</strong> e cole as credenciais na seção <strong>Meta Threads</strong>.</div>
+          </div>
+
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 0.5rem;">
+            <div style="font-weight: 600; color: var(--text-primary);">Como os Usuários Conectam suas Contas:</div>
+            <div>• <strong>Modo OAuth 2.0 (Recomendado):</strong> Em <em>Configurações > Redes Sociais</em>, selecione <strong>Threads</strong>, informe o seu identificador e clique em <strong>Autorizar no Threads</strong>. Uma janela oficial da Meta será aberta para você confirmar a permissão.</div>
+            <div>• <strong>Modo Manual / Token:</strong> Se preferir, selecione <em>Token de Acesso Manual</em> e insira seu Access Token gerado no portal da Meta.</div>
+          </div>
+
+          <div style="background: var(--bg-surface); border-left: 3px solid var(--color-accent); padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.8rem;">
+            <strong>Renovação Automática de Tokens:</strong>
+            <p style="margin: 0.25rem 0 0 0; color: var(--text-secondary); line-height: 1.45;">
+              O Pulse realiza automaticamente a troca de tokens temporários por <strong>Long-Lived Tokens (60 dias)</strong> da Meta e executa a auto-renovação de credenciais antes da expiração.
+            </p>
           </div>
         </div>
       </section>

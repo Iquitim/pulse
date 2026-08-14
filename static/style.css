@@ -1,16 +1,16 @@
 /* --- Pulse CSS Main Entry Point --- */
-@import url('./css/base.css?v=pulse-v18');
-@import url('./css/header.css?v=pulse-v18');
-@import url('./css/metrics.css?v=pulse-v18');
-@import url('./css/panels.css?v=pulse-v18');
-@import url('./css/tabs.css?v=pulse-v18');
-@import url('./css/mockup.css?v=pulse-v18');
-@import url('./css/terminal.css?v=pulse-v18');
-@import url('./css/library.css?v=pulse-v18');
-@import url('./css/themes.css?v=pulse-v18');
-@import url('./css/auth.css?v=pulse-v18');
-@import url('./css/calendar.css?v=pulse-v18');
-@import url('./css/landing.css?v=pulse-v18');
+@import url('./css/base.css?v=pulse-v20');
+@import url('./css/header.css?v=pulse-v20');
+@import url('./css/metrics.css?v=pulse-v20');
+@import url('./css/panels.css?v=pulse-v20');
+@import url('./css/tabs.css?v=pulse-v20');
+@import url('./css/mockup.css?v=pulse-v20');
+@import url('./css/terminal.css?v=pulse-v20');
+@import url('./css/library.css?v=pulse-v20');
+@import url('./css/themes.css?v=pulse-v20');
+@import url('./css/auth.css?v=pulse-v20');
+@import url('./css/calendar.css?v=pulse-v20');
+@import url('./css/landing.css?v=pulse-v20');
 
 /* --- Toast Notifications --- */
 .toast-container {

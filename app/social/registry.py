@@ -41,8 +41,6 @@ def get_social_network_client(platform: str, encrypted_credentials_str: str) -> 
     elif platform == "twitter":
         return cls(credentials=credentials)
     elif platform == "threads":
-        return cls(
-            access_token=credentials.get("access_token", "")
-        )
+        return cls(credentials=credentials)
     else:
         raise ValueError(f"Instanciação não configurada para a plataforma: {platform}")
