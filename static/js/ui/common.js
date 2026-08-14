@@ -3,8 +3,12 @@ import { showToast } from '../logger.js';
 export function updateConnectionBadge(elementId, status, label) {
   const element = document.getElementById(elementId);
   if (!element) return;
-  element.className = `api-badge badge-${status}`;
-  element.querySelector('span:last-child').textContent = label;
+  
+  element.className = `header-status-badge badge-${status}`;
+  element.title = label;
+  
+  const indicator = status === 'online' ? '✓' : (status === 'loading' ? '⚡' : '○');
+  element.innerHTML = `<span class="status-icon-indicator">${indicator}</span><span class="status-label">${label}</span>`;
 }
 
 export function formatCountdown(ms) {

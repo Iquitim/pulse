@@ -86,8 +86,8 @@ class TwitterNetwork(BaseSocialNetwork):
         logger.info(f"Atualizando token do Twitter para: {self.account_handle}")
         
         with get_db_session() as db:
-            client_id = get_system_setting(db, "twitter_client_id")
-            client_secret = get_system_setting(db, "twitter_client_secret")
+            client_id = get_system_setting(db, "twitter_client_id") or config.TWITTER_CLIENT_ID
+            client_secret = get_system_setting(db, "twitter_client_secret") or config.TWITTER_CLIENT_SECRET
             
             if not client_id:
                 raise Exception("Cannot refresh Twitter token: Client ID is not configured.")

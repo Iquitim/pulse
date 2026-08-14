@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db, User, TierConfig, AuditLog, InviteCode, log_activity, SystemSetting
 from app.routes.dependencies import get_current_user, get_admin_user
 from app.routes.schemas import UpdatePlanRequest, TierConfigUpdate, InviteCodeCreate
-from app import security
+from app import security, config
 
 logger = logging.getLogger(__name__)
 
@@ -172,10 +172,27 @@ async def admin_revoke_invite_code(id: int, admin: User = Depends(get_admin_user
 async def admin_get_global_settings(admin: User = Depends(get_admin_user), db: Session = Depends(get_db)):
     client_id_setting = db.query(SystemSetting).filter(SystemSetting.key == "twitter_client_id").first()
     client_secret_setting = db.query(SystemSetting).filter(SystemSetting.key == "twitter_client_secret").first()
+    redirect_uri_setting = db.query(SystemSetting).filter(SystemSetting.key == "twitter_redirect_uri").first()
+    
+    threads_app_id_setting = db.query(SystemSetting).filter(SystemSetting.key == "threads_app_id").first()
+    threads_app_secret_setting = db.query(SystemSetting).filter(SystemSetting.key == "threads_app_secret").first()
+    threads_redirect_uri_setting = db.query(SystemSetting).filter(SystemSetting.key == "threads_redirect_uri").first()
+    
+    client_id_val = client_id_setting.value if client_id_setting else (config.TWITTER_CLIENT_ID or "")
+    secret_configured = bool((client_secret_setting and client_secret_setting.value) or config.TWITTER_CLIENT_SECRET)
+    redirect_uri_val = redirect_uri_setting.value if redirect_uri_setting else (config.TWITTER_REDIRECT_URI or "")
+
+    threads_app_id_val = threads_app_id_setting.value if threads_app_id_setting else (config.THREADS_APP_ID or "")
+    threads_secret_configured = bool((threads_app_secret_setting and threads_app_secret_setting.value) or config.THREADS_APP_SECRET)
+    threads_redirect_uri_val = threads_redirect_uri_setting.value if threads_redirect_uri_setting else (config.THREADS_REDIRECT_URI or "")
     
     return {
-        "twitter_client_id": client_id_setting.value if client_id_setting else "",
-        "twitter_client_secret_configured": bool(client_secret_setting and client_secret_setting.value)
+        "twitter_client_id": client_id_val,
+        "twitter_client_secret_configured": secret_configured,
+        "twitter_redirect_uri": redirect_uri_val,
+        "threads_app_id": threads_app_id_val,
+        "threads_app_secret_configured": threads_secret_configured,
+        "threads_redirect_uri": threads_redirect_uri_val
     }
 
 @router.put("/api/admin/global-settings")
@@ -186,7 +203,13 @@ async def admin_update_global_settings(
 ):
     twitter_client_id = req.get("twitter_client_id", "").strip()
     twitter_client_secret = req.get("twitter_client_secret", "").strip()
+    twitter_redirect_uri = req.get("twitter_redirect_uri", "").strip()
+
+    threads_app_id = req.get("threads_app_id", "").strip()
+    threads_app_secret = req.get("threads_app_secret", "").strip()
+    threads_redirect_uri = req.get("threads_redirect_uri", "").strip()
     
+    # Twitter / X
     id_setting = db.query(SystemSetting).filter(SystemSetting.key == "twitter_client_id").first()
     if not id_setting:
         id_setting = SystemSetting(key="twitter_client_id", value=twitter_client_id)
@@ -203,6 +226,38 @@ async def admin_update_global_settings(
         else:
             secret_setting.value = encrypted_secret
             
+    uri_setting = db.query(SystemSetting).filter(SystemSetting.key == "twitter_redirect_uri").first()
+    if not uri_setting:
+        uri_setting = SystemSetting(key="twitter_redirect_uri", value=twitter_redirect_uri)
+        db.add(uri_setting)
+    else:
+        uri_setting.value = twitter_redirect_uri
+
+    # Meta Threads
+    th_id_setting = db.query(SystemSetting).filter(SystemSetting.key == "threads_app_id").first()
+    if not th_id_setting:
+        th_id_setting = SystemSetting(key="threads_app_id", value=threads_app_id)
+        db.add(th_id_setting)
+    else:
+        th_id_setting.value = threads_app_id
+
+    if threads_app_secret and threads_app_secret != "__UNCHANGED__":
+        encrypted_th_secret = security.encrypt_value(threads_app_secret)
+        th_secret_setting = db.query(SystemSetting).filter(SystemSetting.key == "threads_app_secret").first()
+        if not th_secret_setting:
+            th_secret_setting = SystemSetting(key="threads_app_secret", value=encrypted_th_secret)
+            db.add(th_secret_setting)
+        else:
+            th_secret_setting.value = encrypted_th_secret
+
+    th_uri_setting = db.query(SystemSetting).filter(SystemSetting.key == "threads_redirect_uri").first()
+    if not th_uri_setting:
+        th_uri_setting = SystemSetting(key="threads_redirect_uri", value=threads_redirect_uri)
+        db.add(th_uri_setting)
+    else:
+        th_uri_setting.value = threads_redirect_uri
+            
     db.commit()
-    log_activity(db, admin.id, "admin_update_global_settings", "Admin atualizou as credenciais globais da API do Twitter.")
+    log_activity(db, admin.id, "admin_update_global_settings", "Admin atualizou as credenciais e configurações globais das APIs sociais.")
     return {"status": "success", "message": "Configurações globais atualizadas com sucesso."}
+

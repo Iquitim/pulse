@@ -132,7 +132,7 @@ async def lifespan(app: FastAPI):
 API_DESCRIPTION = """
 ## Pulse API — Agente Editorial Autônomo & Multiusuário
 
-Documentação oficial da API RESTful do **Pulse**. O sistema gerencia a criação, revisão, agendamento e publicação automatizada de conteúdo multiplataforma (Bluesky e Twitter/X) utilizando modelos de Inteligência Artificial (Ollama local, Google Gemini e APIs compatíveis com OpenAI).
+Documentação oficial da API RESTful do **Pulse**. O sistema gerencia a criação, revisão, agendamento e publicação automatizada de conteúdo multiplataforma (**Bluesky**, **Twitter/X** e **Meta Threads**) utilizando modelos de Inteligência Artificial (**Ollama local**, **Google Gemini** e APIs compatíveis com **OpenAI**).
 
 ---
 
@@ -177,6 +177,22 @@ openapi_tags = [
         "description": "Endpoints para login, registro de usuários, dados da sessão (/me) e alteração de senha."
     },
     {
+        "name": "Status",
+        "description": "Diagnóstico e telemetria em tempo real do estado de conexão dos modelos de IA, agendador e canais sociais."
+    },
+    {
+        "name": "Contas Sociais",
+        "description": "CRUD de contas sociais vinculadas do usuário (Bluesky, Twitter/X e Threads) com validação de credenciais."
+    },
+    {
+        "name": "OAuth Twitter",
+        "description": "Fluxo de autorização OAuth 2.0 PKCE do Twitter / X (login e processamento de callback)."
+    },
+    {
+        "name": "OAuth Threads",
+        "description": "Fluxo de autorização OAuth 2.0 do Meta Threads com troca de Short-Lived por Long-Lived Token (60 dias)."
+    },
+    {
         "name": "Servidores LLM",
         "description": "Configurações de agentes de IA, Prompts, Personas e CRUD de servidores de IA."
     },
@@ -193,10 +209,6 @@ openapi_tags = [
         "description": "Captura de ideias brutas, conversão em rascunhos e insights analíticos."
     },
     {
-        "name": "Redes Sociais",
-        "description": "Vinculação de contas do Bluesky (ATProto), Twitter/X e Threads."
-    },
-    {
         "name": "Gerenciamento Ollama",
         "description": "Download, status e diagnósticos de hardware para o Ollama local."
     },
@@ -206,7 +218,7 @@ openapi_tags = [
     },
     {
         "name": "Administração e Cotas",
-        "description": "Controle de usuários, planos de cotas, códigos de convite e logs de auditoria."
+        "description": "Controle de usuários, planos de cotas, códigos de convite, credenciais globais e logs de auditoria."
     }
 ]
 

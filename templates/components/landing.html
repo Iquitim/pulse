@@ -2,7 +2,7 @@
   <!-- Header -->
   <header class="landing-header">
     <div class="landing-logo" style="display: flex; align-items: center; gap: 0.5rem;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="170" height="42" style="display: block;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="160" height="40" style="display: block;">
         <defs>
           <linearGradient id="pulse-grad-landing" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#4facfe" />
@@ -17,7 +17,6 @@
           </filter>
         </defs>
         <g transform="translate(2, 2)">
-          <!-- Letra P Externa -->
           <path d="M 14 38 L 14 12 C 14 6.5, 19.5 2, 26 2 C 32.5 2, 38 6.5, 38 12 C 38 17.5, 32.5 23, 26 23 L 14 23" 
                 fill="none" 
                 stroke="url(#pulse-grad-landing)" 
@@ -25,7 +24,6 @@
                 stroke-linecap="round" 
                 stroke-linejoin="round"
                 filter="url(#neon-glow-landing)" />
-          <!-- Letra P Interna -->
           <path d="M 20 38 L 20 16 C 20 13, 22.5 10.5, 26 10.5 C 29.5 10.5, 32 13, 32 16 C 32 19, 29.5 21.5, 26 21.5 L 20 21.5" 
                 fill="none" 
                 stroke="url(#pulse-grad-landing)" 
@@ -33,21 +31,18 @@
                 stroke-linecap="round" 
                 stroke-linejoin="round"
                 opacity="0.8" />
-          <!-- Senoide Principal -->
           <path d="M 38 23 C 42 23, 44 4, 49 4 C 54 4, 56 42, 61 42 C 66 42, 68 10, 73 10 C 78 10, 80 34, 85 34 C 90 34, 92 18, 97 18 L 108 23" 
                 fill="none" 
                 stroke="url(#pulse-grad-landing)" 
                 stroke-width="2.5" 
-                stroke-linecap="round"
+                stroke-linecap="round" 
                 filter="url(#neon-glow-landing)" />
-          <!-- Onda de Interferência Secundária -->
-          <path d="M 38 23 C 42 23, 45 12, 49 12 C 53 12, 57 32, 61 32 C 65 32, 69 16, 73 16 C 77 16, 81 28, 85 28 L 95 23" 
+          <path d="M 38 23 C 42 23, 45 12, 49 12 C 53 12, 57 32, 61 32 C 66 32, 69 16, 73 16 C 77 16, 81 28, 85 28 L 95 23" 
                 fill="none" 
                 stroke="url(#pulse-grad-landing)" 
                 stroke-width="1" 
-                stroke-linecap="round"
+                stroke-linecap="round" 
                 opacity="0.4" />
-          <!-- Pontos de Frequência -->
           <circle cx="49" cy="4" r="1.5" fill="#00f2fe" filter="url(#neon-glow-landing)" />
           <circle cx="61" cy="42" r="1.2" fill="#00f2fe" />
           <circle cx="73" cy="10" r="1" fill="#00f2fe" />
@@ -65,7 +60,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
         </svg>
       </button>
-      <a href="https://github.com/Iquitim/pulse" target="_blank" class="btn-github-link" title="Acessar Código-Fonte" style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary); hover: var(--text-primary); transition: color 0.2s;">
+      <a href="https://github.com/Iquitim/pulse" target="_blank" class="btn-github-link" title="Acessar Código-Fonte" style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: color 0.2s;">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
           <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
         </svg>
@@ -78,9 +73,9 @@
   <!-- Hero Section -->
   <section class="landing-hero">
     <div class="hero-badge">Agente Editorial Open-Source & Self-Hosted</div>
-    <h1>Agende e Publique no Bluesky e Twitter/X de forma <span>Inteligente</span></h1>
+    <h1>Agende e Publique no Bluesky, Twitter/X e Threads de forma <span>Inteligente</span></h1>
     <p class="hero-subtitle">
-      Ferramenta autônoma de código aberto que combina IA (Ollama local, Gemini, OpenAI) com calendário editorial e controle de cotas para organizar sua presença digital.
+      Plataforma autônoma de código aberto que combina IA (Ollama local, Gemini, OpenAI) com calendário editorial interativo, galeria de mídia e publicação multicanal para transformar sua presença digital.
     </p>
     <div class="hero-cta-group">
       <button class="btn-hero-primary" id="btn-hero-start">Iniciar Agora</button>
@@ -96,8 +91,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
         </svg>
       </div>
-      <h3>Calendário Editorial</h3>
-      <p>Planeje posts visualmente em um mural interativo estilo post-its. Organize por temas, datas e horários.</p>
+      <h3>Calendário Editorial de 42 Dias</h3>
+      <p>Planeje posts visualmente em uma matriz contínua. Alterne entre geração autônoma por IA e redação manual com anexos.</p>
     </div>
     <div class="feature-card feature-ai">
       <div class="feature-icon">
@@ -106,7 +101,16 @@
         </svg>
       </div>
       <h3>Múltiplos Provedores de IA</h3>
-      <p>Alterne entre Ollama local, Google Gemini e APIs compatíveis com OpenAI (DeepSeek, Groq) com um clique.</p>
+      <p>Alterne entre Ollama local (100% privado), Google Gemini e endpoints compatíveis com OpenAI (Groq, DeepSeek, OpenRouter).</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+        </svg>
+      </div>
+      <h3>Publicação Multicanal</h3>
+      <p>Publique simultaneamente no Bluesky, Twitter/X e Meta Threads com formatação adaptada e suporte a canais seletivos.</p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">
@@ -115,7 +119,7 @@
         </svg>
       </div>
       <h3>Galeria de Mídias</h3>
-      <p>Envio seguro de imagens e vídeos por upload para enriquecer seus agendamentos manuais e postagens.</p>
+      <p>Armazenamento local seguro e upload de imagens e vídeos para enriquecer agendamentos e publicações instantâneas.</p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">
@@ -123,9 +127,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751A11.959 11.959 0 0 1 12 2.714Z" />
         </svg>
       </div>
-      <h3>Suíte de 38 Testes & CI/CD</h3>
-
-      <p>Testes automatizados via Pytest cobrindo segurança, mídias e APIs com integração contínua no GitHub Actions.</p>
+      <h3>Suíte de 47 Testes & CI/CD</h3>
+      <p>Testes automatizados cobrindo segurança, conectores sociais (Bluesky, X, Threads) e rotas com CI/CD no GitHub Actions.</p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">
@@ -134,10 +137,9 @@
         </svg>
       </div>
       <h3>Documentação Swagger UI</h3>
-      <p>Interface RESTful interativa em <code>/docs</code> com suporte a autorização JWT e glossário de erros.</p>
+      <p>Interface RESTful interativa em <code>/docs</code> e ReDoc com suporte a autorização JWT e descrições detalhadas.</p>
     </div>
   </section>
-
 
   <!-- Manual Section -->
   <section class="landing-manual" id="manual-section">
@@ -151,7 +153,7 @@
         <div class="manual-content">
           <h3>Conexão Segura</h3>
           <p>
-            Em <strong>Configurações</strong>, conecte suas contas do Bluesky e Twitter/X (via OAuth 2.0 ou Chaves de Desenvolvedor). Credenciais criptografadas localmente via Fernet.
+            Em <strong>Configurações</strong>, conecte suas contas do <strong>Bluesky</strong>, <strong>Twitter/X</strong> e <strong>Threads</strong> (via OAuth 2.0 PKCE ou Tokens Seguros). Credenciais criptografadas localmente via Fernet.
           </p>
         </div>
       </div>
@@ -162,7 +164,7 @@
         <div class="manual-content">
           <h3>Servidores de IA</h3>
           <p>
-            Cadastre seus provedores de IA na biblioteca. Defina o <strong>Tom de Voz</strong>, a <strong>Persona do Usuário</strong> e as <strong>Instruções Gerais de Escrita</strong>, selecione o servidor ativo e comece a gerar posts.
+            Cadastre seus provedores de IA na biblioteca. Defina o <strong>Tom de Voz</strong>, a <strong>Persona</strong> e as <strong>Instruções Gerais de Escrita</strong>, selecione o servidor ativo e comece a produzir.
           </p>
         </div>
       </div>
@@ -173,7 +175,7 @@
         <div class="manual-content">
           <h3>Banco de Ideias</h3>
           <p>
-            Salve rascunhos livres no <strong>Banco de Ideias</strong>. Ao criar um post a partir de uma ideia, a IA foca no seu texto original com a tag <em>"💡 Ideia do Usuário"</em>.
+            Salve rascunhos e pensamentos rápidos no <strong>Banco de Ideias</strong>. Ao gerar um post a partir de uma ideia, a IA preserva a sua linha de raciocínio original.
           </p>
         </div>
       </div>
@@ -182,13 +184,13 @@
       <div class="manual-card">
         <div class="manual-num">04</div>
         <div class="manual-content">
-          <h3>Agendamento</h3>
+          <h3>Agendamento & Calendário</h3>
           <p>
             Escolha o modo de publicação na aba <strong>Calendário</strong>:
           </p>
           <ul class="manual-list">
-            <li><strong>Recorrente</strong>: Publica automaticamente a cada X horas com tema aleatório.</li>
-            <li><strong>Personalizado</strong>: Planeje posts para datas e horas específicas no mural interativo, com opção de alternar entre <strong>Modo IA</strong> e <strong>Uso Manual</strong> (escreva o texto exato diretamente).</li>
+            <li><strong>Recorrente</strong>: Publica automaticamente a cada X horas com base nos seus temas prioritários.</li>
+            <li><strong>Personalizado</strong>: Planeje posts para datas e horas específicas na matriz contínua, escolhendo canais de destino e alternando entre <strong>Modo IA</strong> e <strong>Uso Manual</strong>.</li>
           </ul>
         </div>
       </div>
@@ -199,7 +201,7 @@
         <div class="manual-content">
           <h3>Score de Qualidade</h3>
           <p>
-            Antes de publicar, avalie o post com a IA. O sistema analisa clareza, gancho, especificidade e detecta clichês de IA automaticamente, com sugestões de melhoria.
+            Antes de publicar, avalie a redação com a IA. O avaliador analisa gancho, clareza, especificidade e detecta clichês automaticamente, sugerindo melhorias.
           </p>
         </div>
       </div>
@@ -208,9 +210,9 @@
       <div class="manual-card">
         <div class="manual-num">06</div>
         <div class="manual-content">
-          <h3>Insights de Métricas</h3>
+          <h3>Insights & Métricas</h3>
           <p>
-            Na <strong>Visão Geral</strong>, a IA analisa curtidas, reposts e respostas do seu histórico e recomenda variações de posts com melhor potencial de engajamento.
+            Acompanhe o histórico de postagens, taxas de conclusão de publicação e status de conexões em tempo real diretamente pelo painel.
           </p>
         </div>
       </div>
@@ -219,9 +221,9 @@
       <div class="manual-card">
         <div class="manual-num">07</div>
         <div class="manual-content">
-          <h3>Cotas e Auditoria</h3>
+          <h3>Cotas, Convites e Auditoria</h3>
           <p>
-            O administrador gerencia perfis de cotas (limites de posts, temas e conexões) para controlar custos de API. Todas as ações ficam registradas nos logs de auditoria.
+            Gerencie perfis de cotas (limites de posts diários, temas e conexões), crie convites para novos usuários e acompanhe todas as operações nos logs de auditoria.
           </p>
         </div>
       </div>
@@ -231,7 +233,7 @@
   <!-- Quotas & Resource Section -->
   <section id="pricing-section" class="landing-pricing">
     <h2>Níveis de Uso & Limites de Cotas</h2>
-    <p class="pricing-subtitle">Como um projeto open-source e auto-hospedado, o Pulse gerencia recursos por cotas para controle de consumo de APIs e custos de infraestrutura local.</p>
+    <p class="pricing-subtitle">Como um projeto open-source e auto-hospedado, o Pulse gerencia recursos por cotas para controle de consumo de APIs e custos de infraestrutura.</p>
     
     <div class="pricing-grid">
       <!-- Pessoal -->
